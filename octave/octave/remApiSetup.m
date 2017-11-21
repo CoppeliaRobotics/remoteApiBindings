@@ -1,6 +1,6 @@
 function [vrep] = remApiSetup()
     % Scene object types
-    vrep.sim_object_shape_type           =0;    
+    vrep.sim_object_shape_type           =0;
     vrep.sim_object_joint_type           =1;
     vrep.sim_object_graph_type           =2;
     vrep.sim_object_camera_type          =3;
@@ -43,12 +43,12 @@ function [vrep] = remApiSetup()
     vrep.sim_ik_gamma_constraint     =16;
     vrep.sim_ik_avoidance_constraint =64;
 
-    % Ik calculation results 
+    % Ik calculation results
     vrep.sim_ikresult_not_performed  =0;
     vrep.sim_ikresult_success        =1;
     vrep.sim_ikresult_fail           =2;
 
-    % Scene object sub-types 
+    % Scene object sub-types
     vrep.sim_light_omnidirectional_subtype   =1;
     vrep.sim_light_spot_subtype              =2;
     vrep.sim_light_directional_subtype       =3;
@@ -93,82 +93,82 @@ function [vrep] = remApiSetup()
     vrep.sim_modelproperty_not_visible                  =256;
     vrep.sim_modelproperty_not_model                        =61440;
 
-    % Check the documentation instead of comments below!! 
-    vrep.sim_message_ui_button_state_change  =0;    
-    vrep.sim_message_reserved9               =1;    
+    % Check the documentation instead of comments below!!
+    vrep.sim_message_ui_button_state_change  =0;
+    vrep.sim_message_reserved9               =1;
     vrep.sim_message_object_selection_changed=2;
-    vrep.sim_message_reserved10             =3; 
+    vrep.sim_message_reserved10             =3;
     vrep.sim_message_model_loaded            =4;
-    vrep.sim_message_reserved11             =5; 
-    vrep.sim_message_keypress               =6; 
-    vrep.sim_message_bannerclicked          =7; 
-    vrep.sim_message_for_c_api_only_start        =256;      
-    vrep.sim_message_reserved1                   =257;      
-    vrep.sim_message_reserved2                  =258;   
-    vrep.sim_message_reserved3                  =259;   
-    vrep.sim_message_eventcallback_scenesave        =260;       
-    vrep.sim_message_eventcallback_modelsave        =261;      
-    vrep.sim_message_eventcallback_moduleopen   =262;       
-    vrep.sim_message_eventcallback_modulehandle =263;       
-    vrep.sim_message_eventcallback_moduleclose  =264;       
-    vrep.sim_message_reserved4                  =265;      
-    vrep.sim_message_reserved5                  =266;       
-    vrep.sim_message_reserved6                  =267;       
-    vrep.sim_message_reserved7                  =268;       
-    vrep.sim_message_eventcallback_instancepass =269;       
+    vrep.sim_message_reserved11             =5;
+    vrep.sim_message_keypress               =6;
+    vrep.sim_message_bannerclicked          =7;
+    vrep.sim_message_for_c_api_only_start        =256;
+    vrep.sim_message_reserved1                   =257;
+    vrep.sim_message_reserved2                  =258;
+    vrep.sim_message_reserved3                  =259;
+    vrep.sim_message_eventcallback_scenesave        =260;
+    vrep.sim_message_eventcallback_modelsave        =261;
+    vrep.sim_message_eventcallback_moduleopen   =262;
+    vrep.sim_message_eventcallback_modulehandle =263;
+    vrep.sim_message_eventcallback_moduleclose  =264;
+    vrep.sim_message_reserved4                  =265;
+    vrep.sim_message_reserved5                  =266;
+    vrep.sim_message_reserved6                  =267;
+    vrep.sim_message_reserved7                  =268;
+    vrep.sim_message_eventcallback_instancepass =269;
     vrep.sim_message_eventcallback_broadcast     =270;
     vrep.sim_message_eventcallback_imagefilter_enumreset =271;
     vrep.sim_message_eventcallback_imagefilter_enumerate      =272;
     vrep.sim_message_eventcallback_imagefilter_adjustparams   =273;
     vrep.sim_message_eventcallback_imagefilter_reserved       =274;
     vrep.sim_message_eventcallback_imagefilter_process        =275;
-    vrep.sim_message_eventcallback_reserved1                  =276;  
-    vrep.sim_message_eventcallback_reserved2                  =277;   
-    vrep.sim_message_eventcallback_reserved3                  =278;   
-    vrep.sim_message_eventcallback_reserved4                  =279;   
-    vrep.sim_message_eventcallback_abouttoundo               =280;   
-    vrep.sim_message_eventcallback_undoperformed                 =281;   
-    vrep.sim_message_eventcallback_abouttoredo               =282;   
-    vrep.sim_message_eventcallback_redoperformed                 =283;   
-    vrep.sim_message_eventcallback_scripticondblclick         =284;   
+    vrep.sim_message_eventcallback_reserved1                  =276;
+    vrep.sim_message_eventcallback_reserved2                  =277;
+    vrep.sim_message_eventcallback_reserved3                  =278;
+    vrep.sim_message_eventcallback_reserved4                  =279;
+    vrep.sim_message_eventcallback_abouttoundo               =280;
+    vrep.sim_message_eventcallback_undoperformed                 =281;
+    vrep.sim_message_eventcallback_abouttoredo               =282;
+    vrep.sim_message_eventcallback_redoperformed                 =283;
+    vrep.sim_message_eventcallback_scripticondblclick         =284;
     vrep.sim_message_eventcallback_simulationabouttostart     =285;
     vrep.sim_message_eventcallback_simulationended            =286;
-    vrep.sim_message_eventcallback_reserved5                     =287;   
-    vrep.sim_message_eventcallback_keypress                  =288;   
-    vrep.sim_message_eventcallback_modulehandleinsensingpart  =289;   
-    vrep.sim_message_eventcallback_renderingpass              =290;   
-    vrep.sim_message_eventcallback_bannerclicked              =291;   
-    vrep.sim_message_eventcallback_menuitemselected           =292;   
-    vrep.sim_message_eventcallback_refreshdialogs             =293;   
+    vrep.sim_message_eventcallback_reserved5                     =287;
+    vrep.sim_message_eventcallback_keypress                  =288;
+    vrep.sim_message_eventcallback_modulehandleinsensingpart  =289;
+    vrep.sim_message_eventcallback_renderingpass              =290;
+    vrep.sim_message_eventcallback_bannerclicked              =291;
+    vrep.sim_message_eventcallback_menuitemselected           =292;
+    vrep.sim_message_eventcallback_refreshdialogs             =293;
     vrep.sim_message_eventcallback_sceneloaded                =294;
     vrep.sim_message_eventcallback_modelloaded                =295;
     vrep.sim_message_eventcallback_instanceswitch             =296;
     vrep.sim_message_eventcallback_guipass                    =297;
     vrep.sim_message_eventcallback_mainscriptabouttobecalled  =298;
-    vrep.sim_message_eventcallback_rmlposition                =299;   
+    vrep.sim_message_eventcallback_rmlposition                =299;
     vrep.sim_message_eventcallback_rmlvelocity                =300;
-           
+
     vrep.sim_message_simulation_start_resume_request          =4096;
     vrep.sim_message_simulation_pause_request                 =4097;
     vrep.sim_message_simulation_stop_request                  =4098;
 
-    % Scene object properties 
+    % Scene object properties
     vrep.sim_objectproperty_collapsed               =16;
     vrep.sim_objectproperty_selectable              =32;
     vrep.sim_objectproperty_reserved7               =64;
     vrep.sim_objectproperty_selectmodelbaseinstead  =128;
     vrep.sim_objectproperty_dontshowasinsidemodel   =256;
 
-    % type of arguments (input and output) for custom lua commands 
+    % type of arguments (input and output) for custom lua commands
     vrep.sim_lua_arg_nil     =0;
-    vrep.sim_lua_arg_bool   =1; 
+    vrep.sim_lua_arg_bool   =1;
     vrep.sim_lua_arg_int     =2;
     vrep.sim_lua_arg_float   =3;
     vrep.sim_lua_arg_string  =4;
     vrep.sim_lua_arg_invalid =5;
     vrep.sim_lua_arg_table   =8;
 
-    % custom user interface properties 
+    % custom user interface properties
     vrep.sim_ui_property_visible                        =1;
     vrep.sim_ui_property_visibleduringsimulationonly    =2;
     vrep.sim_ui_property_moveable                   =4;
@@ -181,7 +181,7 @@ function [vrep] = remApiSetup()
     vrep.sim_ui_property_selectassociatedobject     =512;
     vrep.sim_ui_property_visiblewhenobjectselected  =1024;
 
-    % button properties 
+    % button properties
     vrep.sim_buttonproperty_button              =0;
     vrep.sim_buttonproperty_label               =1;
     vrep.sim_buttonproperty_slider              =2;
@@ -199,18 +199,18 @@ function [vrep] = remApiSetup()
     vrep.sim_buttonproperty_verticallycentered  =8192;
     vrep.sim_buttonproperty_downupevent         =16384;
 
-    % Simulation status 
-    vrep.sim_simulation_stopped                     =0;                             
-    vrep.sim_simulation_paused                      =8;                             
-    vrep.sim_simulation_advancing                   =16;                                
-    vrep.sim_simulation_advancing_firstafterstop        =16;        
-    vrep.sim_simulation_advancing_running           =17;        
-    vrep.sim_simulation_advancing_lastbeforepause   =19;        
-    vrep.sim_simulation_advancing_firstafterpause   =20;        
-    vrep.sim_simulation_advancing_abouttostop       =21;        
-    vrep.sim_simulation_advancing_lastbeforestop        =22;        
+    % Simulation status
+    vrep.sim_simulation_stopped                     =0;
+    vrep.sim_simulation_paused                      =8;
+    vrep.sim_simulation_advancing                   =16;
+    vrep.sim_simulation_advancing_firstafterstop        =16;
+    vrep.sim_simulation_advancing_running           =17;
+    vrep.sim_simulation_advancing_lastbeforepause   =19;
+    vrep.sim_simulation_advancing_firstafterpause   =20;
+    vrep.sim_simulation_advancing_abouttostop       =21;
+    vrep.sim_simulation_advancing_lastbeforestop        =22;
 
-    % Script execution result (first return value) 
+    % Script execution result (first return value)
     vrep.sim_script_no_error                    =0;
     vrep.sim_script_main_script_nonexistent =1;
     vrep.sim_script_main_script_not_called  =2;
@@ -218,7 +218,7 @@ function [vrep] = remApiSetup()
     vrep.sim_script_lua_error               =8;
     vrep.sim_script_call_error              =16;
 
-    % Script types 
+    % Script types
     vrep.sim_scripttype_mainscript   =0;
     vrep.sim_scripttype_childscript  =1;
     vrep.sim_scripttype_jointctrlcallback  =4;
@@ -226,12 +226,12 @@ function [vrep] = remApiSetup()
     vrep.sim_scripttype_customizationscript  =6;
     vrep.sim_scripttype_generalcallback  =7;
 
-    % API call error messages 
-    vrep.sim_api_errormessage_ignore    =0; 
-    vrep.sim_api_errormessage_report    =1; 
-    vrep.sim_api_errormessage_output    =2;  
+    % API call error messages
+    vrep.sim_api_errormessage_ignore    =0;
+    vrep.sim_api_errormessage_report    =1;
+    vrep.sim_api_errormessage_output    =2;
 
-    % special argument of some functions 
+    % special argument of some functions
     vrep.sim_handle_all                     =-2;
     vrep.sim_handle_all_except_explicit     =-3;
     vrep.sim_handle_self                        =-4;
@@ -246,8 +246,8 @@ function [vrep] = remApiSetup()
     % special handle flags
     vrep.sim_handleflag_assembly                =4194304;
     vrep.sim_handleflag_model               =8388608;
-    
-    % distance calculation methods 
+
+    % distance calculation methods
     vrep.sim_distcalcmethod_dl               =0;
     vrep.sim_distcalcmethod_dac              =1;
     vrep.sim_distcalcmethod_max_dl_dac       =2;
@@ -256,7 +256,7 @@ function [vrep] = remApiSetup()
     vrep.sim_distcalcmethod_dl_if_nonzero    =5;
     vrep.sim_distcalcmethod_dac_if_nonzero   =6;
 
-    % Generic dialog styles 
+    % Generic dialog styles
     vrep.sim_dlgstyle_message       =0;
     vrep.sim_dlgstyle_input          =1;
     vrep.sim_dlgstyle_ok             =2;
@@ -264,14 +264,14 @@ function [vrep] = remApiSetup()
     vrep.sim_dlgstyle_yes_no         =4;
     vrep.sim_dlgstyle_dont_center   =32;
 
-    % Generic dialog return values 
+    % Generic dialog return values
     vrep.sim_dlgret_still_open   =0;
     vrep.sim_dlgret_ok           =1;
     vrep.sim_dlgret_cancel       =2;
     vrep.sim_dlgret_yes          =3;
     vrep.sim_dlgret_no           =4;
 
-    % Path properties 
+    % Path properties
     vrep.sim_pathproperty_show_line                         =1;
     vrep.sim_pathproperty_show_orientation                  =2;
     vrep.sim_pathproperty_closed_path                       =4;
@@ -285,73 +285,73 @@ function [vrep] = remApiSetup()
     vrep.sim_pathproperty_endpoints_at_zero                 =1024;
     vrep.sim_pathproperty_keep_x_up                         =2048;
 
-    % drawing objects 
-    vrep.sim_drawing_points          =0;        
-    vrep.sim_drawing_lines          =1;         
-    vrep.sim_drawing_triangles      =2;         
-    vrep.sim_drawing_trianglepoints =3;         
-    vrep.sim_drawing_quadpoints     =4;         
-    vrep.sim_drawing_discpoints     =5;         
-    vrep.sim_drawing_cubepoints     =6;         
-    vrep.sim_drawing_spherepoints   =7;         
+    % drawing objects
+    vrep.sim_drawing_points          =0;
+    vrep.sim_drawing_lines          =1;
+    vrep.sim_drawing_triangles      =2;
+    vrep.sim_drawing_trianglepoints =3;
+    vrep.sim_drawing_quadpoints     =4;
+    vrep.sim_drawing_discpoints     =5;
+    vrep.sim_drawing_cubepoints     =6;
+    vrep.sim_drawing_spherepoints   =7;
 
-    vrep.sim_drawing_itemcolors             =32; 
-    vrep.sim_drawing_vertexcolors           =64; 
-    vrep.sim_drawing_itemsizes              =128; 
-    vrep.sim_drawing_backfaceculling            =256; 
-    vrep.sim_drawing_wireframe              =512; 
-    vrep.sim_drawing_painttag               =1024; 
-    vrep.sim_drawing_followparentvisibility =2048; 
-    vrep.sim_drawing_cyclic                 =4096; 
-    vrep.sim_drawing_50percenttransparency  =8192; 
-    vrep.sim_drawing_25percenttransparency  =16384; 
-    vrep.sim_drawing_12percenttransparency  =32768; 
-    vrep.sim_drawing_emissioncolor          =65536; 
-    vrep.sim_drawing_facingcamera           =131072; 
-    vrep.sim_drawing_overlay                    =262144; 
-    vrep.sim_drawing_itemtransparency       =524288;  
+    vrep.sim_drawing_itemcolors             =32;
+    vrep.sim_drawing_vertexcolors           =64;
+    vrep.sim_drawing_itemsizes              =128;
+    vrep.sim_drawing_backfaceculling            =256;
+    vrep.sim_drawing_wireframe              =512;
+    vrep.sim_drawing_painttag               =1024;
+    vrep.sim_drawing_followparentvisibility =2048;
+    vrep.sim_drawing_cyclic                 =4096;
+    vrep.sim_drawing_50percenttransparency  =8192;
+    vrep.sim_drawing_25percenttransparency  =16384;
+    vrep.sim_drawing_12percenttransparency  =32768;
+    vrep.sim_drawing_emissioncolor          =65536;
+    vrep.sim_drawing_facingcamera           =131072;
+    vrep.sim_drawing_overlay                    =262144;
+    vrep.sim_drawing_itemtransparency       =524288;
 
-    % banner values 
-    vrep.sim_banner_left                        =1; 
-    vrep.sim_banner_right                   =2; 
-    vrep.sim_banner_nobackground                =4; 
-    vrep.sim_banner_overlay                 =8; 
-    vrep.sim_banner_followparentvisibility  =16; 
-    vrep.sim_banner_clickselectsparent      =32; 
-    vrep.sim_banner_clicktriggersevent      =64; 
-    vrep.sim_banner_facingcamera                =128; 
-    vrep.sim_banner_fullyfacingcamera       =256; 
-    vrep.sim_banner_backfaceculling         =512; 
-    vrep.sim_banner_keepsamesize                =1024; 
-    vrep.sim_banner_bitmapfont              =2048; 
+    % banner values
+    vrep.sim_banner_left                        =1;
+    vrep.sim_banner_right                   =2;
+    vrep.sim_banner_nobackground                =4;
+    vrep.sim_banner_overlay                 =8;
+    vrep.sim_banner_followparentvisibility  =16;
+    vrep.sim_banner_clickselectsparent      =32;
+    vrep.sim_banner_clicktriggersevent      =64;
+    vrep.sim_banner_facingcamera                =128;
+    vrep.sim_banner_fullyfacingcamera       =256;
+    vrep.sim_banner_backfaceculling         =512;
+    vrep.sim_banner_keepsamesize                =1024;
+    vrep.sim_banner_bitmapfont              =2048;
 
-    % particle objects 
-    vrep.sim_particle_points1        =0;  
-    vrep.sim_particle_points2       =1; 
-    vrep.sim_particle_points4       =2; 
-    vrep.sim_particle_roughspheres  =3; 
-    vrep.sim_particle_spheres       =4; 
+    % particle objects
+    vrep.sim_particle_points1        =0;
+    vrep.sim_particle_points2       =1;
+    vrep.sim_particle_points4       =2;
+    vrep.sim_particle_roughspheres  =3;
+    vrep.sim_particle_spheres       =4;
 
-    vrep.sim_particle_respondable1to4       =32; 
-    vrep.sim_particle_respondable5to8       =64; 
-    vrep.sim_particle_particlerespondable   =128; 
-    vrep.sim_particle_ignoresgravity            =256; 
-    vrep.sim_particle_invisible             =512; 
-    vrep.sim_particle_itemsizes             =1024; 
-    vrep.sim_particle_itemdensities         =2048; 
-    vrep.sim_particle_itemcolors                =4096; 
-    vrep.sim_particle_cyclic                    =8192; 
-    vrep.sim_particle_emissioncolor         =16384; 
-    vrep.sim_particle_water                 =32768; 
-    vrep.sim_particle_painttag              =65536; 
+    vrep.sim_particle_respondable1to4       =32;
+    vrep.sim_particle_respondable5to8       =64;
+    vrep.sim_particle_particlerespondable   =128;
+    vrep.sim_particle_ignoresgravity            =256;
+    vrep.sim_particle_invisible             =512;
+    vrep.sim_particle_itemsizes             =1024;
+    vrep.sim_particle_itemdensities         =2048;
+    vrep.sim_particle_itemcolors                =4096;
+    vrep.sim_particle_cyclic                    =8192;
+    vrep.sim_particle_emissioncolor         =16384;
+    vrep.sim_particle_water                 =32768;
+    vrep.sim_particle_painttag              =65536;
 
-    % custom user interface menu attributes 
+    % custom user interface menu attributes
     vrep.sim_ui_menu_title      =1;
     vrep.sim_ui_menu_minimize   =2;
     vrep.sim_ui_menu_close      =4;
     vrep.sim_ui_menu_systemblock =8;
 
-    % Boolean parameters 
+    % Boolean parameters
     vrep.sim_boolparam_hierarchy_visible                 =0;
     vrep.sim_boolparam_console_visible                   =1;
     vrep.sim_boolparam_collision_handling_enabled        =2;
@@ -396,54 +396,54 @@ function [vrep] = remApiSetup()
     vrep.sim_boolparam_stop_toolbarbutton_enabled       =44;
     vrep.sim_boolparam_waiting_for_trigger              =45;
 
-    % Integer parameters 
-    vrep.sim_intparam_error_report_mode      =0;  
-    vrep.sim_intparam_program_version        =1;  
-    vrep.sim_intparam_instance_count         =2;  
-    vrep.sim_intparam_custom_cmd_start_id    =3;  
-    vrep.sim_intparam_compilation_version    =4;  
+    % Integer parameters
+    vrep.sim_intparam_error_report_mode      =0;
+    vrep.sim_intparam_program_version        =1;
+    vrep.sim_intparam_instance_count         =2;
+    vrep.sim_intparam_custom_cmd_start_id    =3;
+    vrep.sim_intparam_compilation_version    =4;
     vrep.sim_intparam_current_page           =5;
-    vrep.sim_intparam_flymode_camera_handle  =6;  
-    vrep.sim_intparam_dynamic_step_divider   =7;  
-    vrep.sim_intparam_dynamic_engine         =8;  
-    vrep.sim_intparam_server_port_start      =9;  
-    vrep.sim_intparam_server_port_range      =10; 
+    vrep.sim_intparam_flymode_camera_handle  =6;
+    vrep.sim_intparam_dynamic_step_divider   =7;
+    vrep.sim_intparam_dynamic_engine         =8;
+    vrep.sim_intparam_server_port_start      =9;
+    vrep.sim_intparam_server_port_range      =10;
     vrep.sim_intparam_visible_layers         =11;
     vrep.sim_intparam_infotext_style         =12;
     vrep.sim_intparam_settings               =13;
     vrep.sim_intparam_edit_mode_type         =14;
-    vrep.sim_intparam_server_port_next       =15; 
-    vrep.sim_intparam_qt_version             =16; 
-    vrep.sim_intparam_event_flags_read       =17; 
-    vrep.sim_intparam_event_flags_read_clear =18; 
-    vrep.sim_intparam_platform               =19; 
-    vrep.sim_intparam_scene_unique_id        =20; 
-    vrep.sim_intparam_work_thread_count      =21; 
-    vrep.sim_intparam_mouse_x                =22; 
-    vrep.sim_intparam_mouse_y                =23; 
-    vrep.sim_intparam_core_count             =24; 
-    vrep.sim_intparam_work_thread_calc_time_ms =25; 
-    vrep.sim_intparam_idle_fps               =26; 
-    vrep.sim_intparam_prox_sensor_select_down =27; 
-    vrep.sim_intparam_prox_sensor_select_up  =28; 
-    vrep.sim_intparam_stop_request_counter   =29; 
-    vrep.sim_intparam_program_revision       =30; 
-    vrep.sim_intparam_mouse_buttons          =31; 
-    vrep.sim_intparam_dynamic_warning_disabled_mask =32; 
-    vrep.sim_intparam_simulation_warning_disabled_mask =33; 
-    vrep.sim_intparam_scene_index            =34; 
+    vrep.sim_intparam_server_port_next       =15;
+    vrep.sim_intparam_qt_version             =16;
+    vrep.sim_intparam_event_flags_read       =17;
+    vrep.sim_intparam_event_flags_read_clear =18;
+    vrep.sim_intparam_platform               =19;
+    vrep.sim_intparam_scene_unique_id        =20;
+    vrep.sim_intparam_work_thread_count      =21;
+    vrep.sim_intparam_mouse_x                =22;
+    vrep.sim_intparam_mouse_y                =23;
+    vrep.sim_intparam_core_count             =24;
+    vrep.sim_intparam_work_thread_calc_time_ms =25;
+    vrep.sim_intparam_idle_fps               =26;
+    vrep.sim_intparam_prox_sensor_select_down =27;
+    vrep.sim_intparam_prox_sensor_select_up  =28;
+    vrep.sim_intparam_stop_request_counter   =29;
+    vrep.sim_intparam_program_revision       =30;
+    vrep.sim_intparam_mouse_buttons          =31;
+    vrep.sim_intparam_dynamic_warning_disabled_mask =32;
+    vrep.sim_intparam_simulation_warning_disabled_mask =33;
+    vrep.sim_intparam_scene_index            =34;
     vrep.sim_intparam_motionplanning_seed   =35;
     vrep.sim_intparam_speedmodifier         =36;
 
-    
-    % Float parameters 
+
+    % Float parameters
     vrep.sim_floatparam_rand=0;
-    vrep.sim_floatparam_simulation_time_step=1; 
+    vrep.sim_floatparam_simulation_time_step=1;
     vrep.sim_floatparam_stereo_distance     =2;
 
-    % String parameters 
-    vrep.sim_stringparam_application_path=0; 
-    vrep.sim_stringparam_video_filename=1; 
+    % String parameters
+    vrep.sim_stringparam_application_path=0;
+    vrep.sim_stringparam_video_filename=1;
     vrep.sim_stringparam_app_arg1           =2;
     vrep.sim_stringparam_app_arg2           =3;
     vrep.sim_stringparam_app_arg3           =4;
@@ -455,7 +455,7 @@ function [vrep] = remApiSetup()
     vrep.sim_stringparam_app_arg9           =10;
     vrep.sim_stringparam_scene_path_and_name    =13;
 
-    % Array parameters 
+    % Array parameters
     vrep.sim_arrayparam_gravity          =0;
     vrep.sim_arrayparam_fog              =1;
     vrep.sim_arrayparam_fog_color        =2;
@@ -612,7 +612,7 @@ function [vrep] = remApiSetup()
     vrep.sim_mplanintparam_prepare_nodes= 25001;
     vrep.sim_mplanintparam_clear_nodes= 25002;
 
-    % User interface elements 
+    % User interface elements
     vrep.sim_gui_menubar                        =1;
     vrep.sim_gui_popups                     =2;
     vrep.sim_gui_toolbar1                   =4;
@@ -626,7 +626,7 @@ function [vrep] = remApiSetup()
     vrep.sim_gui_browser                        =1024;
     vrep.sim_gui_all                            =65535;
 
-    % Joint modes 
+    % Joint modes
     vrep.sim_jointmode_passive       =0;
     vrep.sim_jointmode_motion        =1;
     vrep.sim_jointmode_ik            =2;
@@ -649,7 +649,7 @@ function [vrep] = remApiSetup()
     vrep.sim_navigation_jointpathtest           =11;
     vrep.sim_navigation_ikmanip                 =12;
     vrep.sim_navigation_objectmultipleselection =13;
-        
+
     vrep.sim_navigation_reserved4               =256;
     vrep.sim_navigation_clickselection          =512;
     vrep.sim_navigation_ctrlselection           =1024;
@@ -657,63 +657,63 @@ function [vrep] = remApiSetup()
     vrep.sim_navigation_camerazoomwheel         =4096;
     vrep.sim_navigation_camerarotaterightbutton =8192;
 
-    % Remote API message header structure 
-    vrep.simx_headeroffset_crc           =0;    
-    vrep.simx_headeroffset_version       =2;    
-    vrep.simx_headeroffset_message_id    =3;    
-    vrep.simx_headeroffset_client_time   =7;    
-    vrep.simx_headeroffset_server_time   =11;   
+    % Remote API message header structure
+    vrep.simx_headeroffset_crc           =0;
+    vrep.simx_headeroffset_version       =2;
+    vrep.simx_headeroffset_message_id    =3;
+    vrep.simx_headeroffset_client_time   =7;
+    vrep.simx_headeroffset_server_time   =11;
     vrep.simx_headeroffset_scene_id      =15;
-    vrep.simx_headeroffset_server_state  =17;   
+    vrep.simx_headeroffset_server_state  =17;
 
-    % Remote API command header 
-    vrep.simx_cmdheaderoffset_mem_size       =0;    
-    vrep.simx_cmdheaderoffset_full_mem_size  =4;    
-    vrep.simx_cmdheaderoffset_pdata_offset0  =8;    
-    vrep.simx_cmdheaderoffset_pdata_offset1  =10;   
+    % Remote API command header
+    vrep.simx_cmdheaderoffset_mem_size       =0;
+    vrep.simx_cmdheaderoffset_full_mem_size  =4;
+    vrep.simx_cmdheaderoffset_pdata_offset0  =8;
+    vrep.simx_cmdheaderoffset_pdata_offset1  =10;
     vrep.simx_cmdheaderoffset_cmd           =14;
-    vrep.simx_cmdheaderoffset_delay_or_split =18;   
-    vrep.simx_cmdheaderoffset_sim_time       =20;   
-    vrep.simx_cmdheaderoffset_status         =24;   
-    vrep.simx_cmdheaderoffset_reserved       =25;   
+    vrep.simx_cmdheaderoffset_delay_or_split =18;
+    vrep.simx_cmdheaderoffset_sim_time       =20;
+    vrep.simx_cmdheaderoffset_status         =24;
+    vrep.simx_cmdheaderoffset_reserved       =25;
 
-    % Regular operation modes 
-    vrep.simx_opmode_oneshot                =0; 
+    % Regular operation modes
+    vrep.simx_opmode_oneshot                =0;
     vrep.simx_opmode_blocking           =65536;
     vrep.simx_opmode_oneshot_wait       =65536;
-    vrep.simx_opmode_continuous         =131072;  
-    vrep.simx_opmode_streaming          =131072; 
+    vrep.simx_opmode_continuous         =131072;
+    vrep.simx_opmode_streaming          =131072;
 
-    % Operation modes for heavy data 
-    vrep.simx_opmode_oneshot_split      =196608;   
+    % Operation modes for heavy data
+    vrep.simx_opmode_oneshot_split      =196608;
     vrep.simx_opmode_continuous_split   =262144;
-    vrep.simx_opmode_streaming_split        =262144;    
+    vrep.simx_opmode_streaming_split        =262144;
 
-    % Special operation modes 
-    vrep.simx_opmode_discontinue            =327680;    
-    vrep.simx_opmode_buffer             =393216;    
-    vrep.simx_opmode_remove             =458752;    
+    % Special operation modes
+    vrep.simx_opmode_discontinue            =327680;
+    vrep.simx_opmode_buffer             =393216;
+    vrep.simx_opmode_remove             =458752;
 
-    % Command return codes 
+    % Command return codes
     vrep.simx_return_ok                     =0;
-    vrep.simx_return_novalue_flag           =1;     
-    vrep.simx_return_timeout_flag           =2;     
-    vrep.simx_return_illegal_opmode_flag    =4;     
-    vrep.simx_return_remote_error_flag      =8;     
-    vrep.simx_return_split_progress_flag    =16;        
-    vrep.simx_return_local_error_flag       =32;        
-    vrep.simx_return_initialize_error_flag  =64;        
+    vrep.simx_return_novalue_flag           =1;
+    vrep.simx_return_timeout_flag           =2;
+    vrep.simx_return_illegal_opmode_flag    =4;
+    vrep.simx_return_remote_error_flag      =8;
+    vrep.simx_return_split_progress_flag    =16;
+    vrep.simx_return_local_error_flag       =32;
+    vrep.simx_return_initialize_error_flag  =64;
 
-    % Following for backward compatibility (same as above) 
+    % Following for backward compatibility (same as above)
     vrep.simx_error_noerror                 =0;
-    vrep.simx_error_novalue_flag            =1;     
-    vrep.simx_error_timeout_flag            =2;     
-    vrep.simx_error_illegal_opmode_flag     =4;     
-    vrep.simx_error_remote_error_flag       =8;     
-    vrep.simx_error_split_progress_flag     =16;        
-    vrep.simx_error_local_error_flag        =32;        
-    vrep.simx_error_initialize_error_flag   =64;        
-    
+    vrep.simx_error_novalue_flag            =1;
+    vrep.simx_error_timeout_flag            =2;
+    vrep.simx_error_illegal_opmode_flag     =4;
+    vrep.simx_error_remote_error_flag       =8;
+    vrep.simx_error_split_progress_flag     =16;
+    vrep.simx_error_local_error_flag        =32;
+    vrep.simx_error_initialize_error_flag   =64;
+
     %load functions
     octfile = strcat(pwd,"//remApi.oct");
     autoload("simxStart",octfile);
@@ -763,6 +763,7 @@ function [vrep] = remApiSetup()
     autoload("simxGetObjectHandle",octfile);
     autoload("simxGetObjectIntParameter",octfile);
     autoload("simxGetObjectOrientation",octfile);
+    autoload("simxGetObjectQuaternion",octfile);
     autoload("simxGetObjectParent",octfile);
     autoload("simxGetObjectPosition",octfile);
     autoload("simxGetObjects",octfile);
@@ -809,6 +810,7 @@ function [vrep] = remApiSetup()
     autoload("simxSetObjectFloatParameter",octfile);
     autoload("simxSetObjectIntParameter",octfile);
     autoload("simxSetObjectOrientation",octfile);
+    autoload("simxSetObjectQuaternion",octfile);
     autoload("simxSetObjectParent",octfile);
     autoload("simxSetObjectPosition",octfile);
     autoload("simxSetObjectSelection",octfile);

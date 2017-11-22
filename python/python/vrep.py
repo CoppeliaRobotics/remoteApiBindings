@@ -27,7 +27,7 @@ except:
     print ('----------------------------------------------------')
     print ('')
 
-#ctypes wrapper prototypes 
+#ctypes wrapper prototypes
 c_GetJointPosition          = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.POINTER(ct.c_float), ct.c_int32)(("simxGetJointPosition", libsimx))
 c_SetJointPosition          = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_float, ct.c_int32)(("simxSetJointPosition", libsimx))
 c_GetJointMatrix            = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.POINTER(ct.c_float), ct.c_int32)(("simxGetJointMatrix", libsimx))
@@ -64,8 +64,10 @@ c_AuxiliaryConsoleClose     = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct
 c_AuxiliaryConsolePrint     = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.POINTER(ct.c_char), ct.c_int32)(("simxAuxiliaryConsolePrint", libsimx))
 c_AuxiliaryConsoleShow      = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_ubyte, ct.c_int32)(("simxAuxiliaryConsoleShow", libsimx))
 c_GetObjectOrientation      = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_int32, ct.POINTER(ct.c_float), ct.c_int32)(("simxGetObjectOrientation", libsimx))
+c_GetObjectQuaternion       = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_int32, ct.POINTER(ct.c_float), ct.c_int32)(("simxGetObjectQuaternion", libsimx))
 c_GetObjectPosition         = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_int32, ct.POINTER(ct.c_float), ct.c_int32)(("simxGetObjectPosition", libsimx))
 c_SetObjectOrientation      = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_int32, ct.POINTER(ct.c_float), ct.c_int32)(("simxSetObjectOrientation", libsimx))
+c_SetObjectQuaternion       = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_int32, ct.POINTER(ct.c_float), ct.c_int32)(("simxSetObjectQuaternion", libsimx))
 c_SetObjectPosition         = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_int32, ct.POINTER(ct.c_float), ct.c_int32)(("simxSetObjectPosition", libsimx))
 c_SetObjectParent           = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_int32, ct.c_ubyte, ct.c_int32)(("simxSetObjectParent", libsimx))
 c_SetUIButtonLabel          = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_int32, ct.POINTER(ct.c_char), ct.POINTER(ct.c_char), ct.c_int32)(("simxSetUIButtonLabel", libsimx))
@@ -220,7 +222,7 @@ def simxReadForceSensor(clientID, forceSensorHandle, operationMode):
     #    state=state.value
     #else:
     #    state=ord(state.value)
-    return ret, state.value, arr1, arr2 
+    return ret, state.value, arr1, arr2
 
 def simxBreakForceSensor(clientID, forceSensorHandle, operationMode):
     '''
@@ -237,7 +239,7 @@ def simxReadVisionSensor(clientID, sensorHandle, operationMode):
     auxValues      = ct.POINTER(ct.c_float)()
     auxValuesCount = ct.POINTER(ct.c_int)()
     ret = c_ReadVisionSensor(clientID, sensorHandle, ct.byref(detectionState), ct.byref(auxValues), ct.byref(auxValuesCount), operationMode)
-    
+
     auxValues2 = []
     if ret == 0:
         s = 0
@@ -249,7 +251,7 @@ def simxReadVisionSensor(clientID, sensorHandle, operationMode):
         c_ReleaseBuffer(auxValues)
         c_ReleaseBuffer(auxValuesCount)
 
-    return ret, bool(detectionState.value!=0), auxValues2 
+    return ret, bool(detectionState.value!=0), auxValues2
 
 def simxGetObjectHandle(clientID, objectName, operationMode):
     '''
@@ -359,7 +361,7 @@ def simxLoadUI(clientID, uiPathAndName, options, operationMode):
     if (sys.version_info[0] == 3) and (type(uiPathAndName) is str):
         uiPathAndName=uiPathAndName.encode('utf-8')
     ret = c_LoadUI(clientID, uiPathAndName, options, ct.byref(count), ct.byref(uiHandles), operationMode)
-    
+
     handles = []
     if ret == 0:
         for i in range(count.value):
@@ -449,7 +451,7 @@ def simxSetUIButtonProperty(clientID, uiHandle, uiButtonID, prop, operationMode)
     '''
     Please have a look at the function description/documentation in the V-REP user manual
     '''
-    
+
     return c_SetUIButtonProperty(clientID, uiHandle, uiButtonID, prop, operationMode)
 
 def simxAddStatusbarMessage(clientID, message, operationMode):
@@ -521,6 +523,17 @@ def simxGetObjectOrientation(clientID, objectHandle, relativeToObjectHandle, ope
         arr.append(eulerAngles[i])
     return ret, arr
 
+def simxGetObjectQuaternion(clientID, objectHandle, relativeToObjectHandle, operationMode):
+    '''
+    Please have a look at the function description/documentation in the V-REP user manual
+    '''
+    quaternion = (ct.c_float*4)()
+    ret = c_GetObjectQuaternion(clientID, objectHandle, relativeToObjectHandle, quaternion, operationMode)
+    arr = []
+    for i in range(4):
+        arr.append(quaternion[i])
+    return ret, arr
+
 def simxGetObjectPosition(clientID, objectHandle, relativeToObjectHandle, operationMode):
     '''
     Please have a look at the function description/documentation in the V-REP user manual
@@ -539,6 +552,14 @@ def simxSetObjectOrientation(clientID, objectHandle, relativeToObjectHandle, eul
 
     angles = (ct.c_float*3)(*eulerAngles)
     return c_SetObjectOrientation(clientID, objectHandle, relativeToObjectHandle, angles, operationMode)
+
+def simxSetObjectQuaternion(clientID, objectHandle, relativeToObjectHandle, quaternion, operationMode):
+    '''
+    Please have a look at the function description/documentation in the V-REP user manual
+    '''
+
+    quat = (ct.c_float*4)(*quaternion)
+    return c_SetObjectQuaternion(clientID, objectHandle, relativeToObjectHandle, quat, operationMode)
 
 def simxSetObjectPosition(clientID, objectHandle, relativeToObjectHandle, position, operationMode):
     '''
@@ -663,7 +684,7 @@ def simxGetStringParameter(clientID, paramIdentifier, operationMode):
     '''
     paramValue = ct.POINTER(ct.c_char)()
     ret = c_GetStringParameter(clientID, paramIdentifier, ct.byref(paramValue), operationMode)
-    
+
     a = bytearray()
     if ret == 0:
         i = 0
@@ -806,7 +827,7 @@ def simxGetDialogInput(clientID, dialogHandle, operationMode):
     '''
     inputText = ct.POINTER(ct.c_char)()
     ret = c_GetDialogInput(clientID, dialogHandle, ct.byref(inputText), operationMode)
-    
+
     a = bytearray()
     if ret == 0:
         i = 0
@@ -1072,9 +1093,9 @@ def simxGetObjectFloatParameter(clientID, objectHandle, parameterID, operationMo
     '''
     Please have a look at the function description/documentation in the V-REP user manual
     '''
-    
+
     parameterValue = ct.c_float()
-    return c_GetObjectFloatParameter(clientID, objectHandle, parameterID, ct.byref(parameterValue), operationMode), parameterValue.value 
+    return c_GetObjectFloatParameter(clientID, objectHandle, parameterID, ct.byref(parameterValue), operationMode), parameterValue.value
 
 def simxSetObjectFloatParameter(clientID, objectHandle, parameterID, parameterValue, operationMode):
     '''
@@ -1088,7 +1109,7 @@ def simxGetObjectIntParameter(clientID, objectHandle, parameterID, operationMode
     Please have a look at the function description/documentation in the V-REP user manual
     '''
 
-    parameterValue = ct.c_int() 
+    parameterValue = ct.c_int()
     return c_GetObjectIntParameter(clientID, objectHandle, parameterID, ct.byref(parameterValue), operationMode), parameterValue.value
 
 def simxSetObjectIntParameter(clientID, objectHandle, parameterID, parameterValue, operationMode):
@@ -1284,7 +1305,7 @@ def simxGetObjectGroupData(clientID, objectType, dataType, operationMode):
     stringDataC = ct.c_int()
     stringDataP = ct.POINTER(ct.c_char)()
     ret = c_GetObjectGroupData(clientID, objectType, dataType, ct.byref(handlesC), ct.byref(handlesP), ct.byref(intDataC), ct.byref(intDataP), ct.byref(floatDataC), ct.byref(floatDataP), ct.byref(stringDataC), ct.byref(stringDataP), operationMode)
-    
+
     if ret == 0:
         for i in range(handlesC.value):
             handles.append(handlesP[i])
@@ -1307,7 +1328,7 @@ def simxGetObjectGroupData(clientID, objectType, dataType, operationMode):
             else:
                 a=str(a)
             stringData.append(a)
- 
+
     return ret, handles, intData, floatData, stringData
 
 def simxCallScriptFunction(clientID, scriptDescription, options, functionName, inputInts, inputFloats, inputStrings, inputBuffer, operationMode):
@@ -1404,13 +1425,13 @@ def simxGetObjectVelocity(clientID, objectHandle, operationMode):
     arr2 = []
     for i in range(3):
         arr2.append(angularVel[i])
-    return ret, arr1, arr2 
+    return ret, arr1, arr2
 
 def simxPackInts(intList):
     '''
     Please have a look at the function description/documentation in the V-REP user manual
     '''
-    
+
     if sys.version_info[0] == 3:
         s=bytes()
         for i in range(len(intList)):

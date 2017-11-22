@@ -1640,6 +1640,33 @@ int LUA_GETOBJECTORIENTATION_CALLBACK(lua_State* L)
 // --------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------
+#define LUA_GETOBJECTQUATERNION_COMMAND "simx.getObjectQuaternion"
+#define LUA_GETOBJECTQUATERNION_COMMANDOLD "simxGetObjectQuaternion"
+const int inArgs_GETOBJECTQUATERNION[]={
+    4,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+};
+int LUA_GETOBJECTQUATERNION_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_GETOBJECTQUATERNION,inArgs_GETOBJECTQUATERNION[0],LUA_GETOBJECTQUATERNION_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        std::vector<float> quaternion(4,0.0f);
+        int res=simxGetObjectQuaternion(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],&quaternion[0],inData->at(3).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+        if (res==0)
+            D.pushOutData(CLuaDataItem(quaternion));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
 #define LUA_GETOBJECTPOSITION_COMMAND "simx.getObjectPosition"
 #define LUA_GETOBJECTPOSITION_COMMANDOLD "simxGetObjectPosition"
 const int inArgs_GETOBJECTPOSITION[]={
@@ -2509,6 +2536,30 @@ int LUA_SETOBJECTORIENTATION_CALLBACK(lua_State* L)
     return(D.writeDataToLua(L));
 }
 // --------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
+#define LUA_SETOBJECTQUATERNION_COMMAND "simx.setObjectQuaternion"
+#define LUA_SETOBJECTQUATERNION_COMMANDOLD "simxSetObjectQuaternion"
+const int inArgs_SETOBJECTQUATERNION[]={
+    5,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_float|sim_lua_arg_table,4,
+    sim_lua_arg_int,0,
+};
+int LUA_SETOBJECTQUATERNION_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_SETOBJECTQUATERNION,inArgs_SETOBJECTQUATERNION[0],LUA_SETOBJECTQUATERNION_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        int res=simxSetObjectQuaternion(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],&inData->at(3).floatData[0],inData->at(4).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------
 #define LUA_SETOBJECTPOSITION_COMMAND "simx.setObjectPosition"
@@ -2995,6 +3046,7 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     lua_registerN(L,LUA_GETOBJECTGROUPDATA_COMMAND,LUA_GETOBJECTGROUPDATA_CALLBACK);
     lua_registerN(L,LUA_CALLSCRIPTFUNCTION_COMMAND,LUA_CALLSCRIPTFUNCTION_CALLBACK);
     lua_registerN(L,LUA_GETOBJECTORIENTATION_COMMAND,LUA_GETOBJECTORIENTATION_CALLBACK);
+    lua_registerN(L,LUA_GETOBJECTQUATERNION_COMMAND,LUA_GETOBJECTQUATERNION_CALLBACK);
     lua_registerN(L,LUA_GETOBJECTPOSITION_COMMAND,LUA_GETOBJECTPOSITION_CALLBACK);
     lua_registerN(L,LUA_GETOBJECTPARENT_COMMAND,LUA_GETOBJECTPARENT_CALLBACK);
     lua_registerN(L,LUA_GETOBJECTS_COMMAND,LUA_GETOBJECTS_CALLBACK);
@@ -3027,6 +3079,7 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     lua_registerN(L,LUA_SETJOINTTARGETVELOCITY_COMMAND,LUA_SETJOINTTARGETVELOCITY_CALLBACK);
     lua_registerN(L,LUA_SETMODELPROPERTY_COMMAND,LUA_SETMODELPROPERTY_CALLBACK);
     lua_registerN(L,LUA_SETOBJECTORIENTATION_COMMAND,LUA_SETOBJECTORIENTATION_CALLBACK);
+    lua_registerN(L,LUA_SETOBJECTQUATERNION_COMMAND,LUA_SETOBJECTQUATERNION_CALLBACK);
     lua_registerN(L,LUA_SETOBJECTPOSITION_COMMAND,LUA_SETOBJECTPOSITION_CALLBACK);
     lua_registerN(L,LUA_SETOBJECTPARENT_COMMAND,LUA_SETOBJECTPARENT_CALLBACK);
     lua_registerN(L,LUA_SETOBJECTSELECTION_COMMAND,LUA_SETOBJECTSELECTION_CALLBACK);
@@ -3103,6 +3156,7 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     lua_register(L,LUA_GETOBJECTGROUPDATA_COMMANDOLD,LUA_GETOBJECTGROUPDATA_CALLBACK);
     lua_register(L,LUA_CALLSCRIPTFUNCTION_COMMANDOLD,LUA_CALLSCRIPTFUNCTION_CALLBACK);
     lua_register(L,LUA_GETOBJECTORIENTATION_COMMANDOLD,LUA_GETOBJECTORIENTATION_CALLBACK);
+    lua_register(L,LUA_GETOBJECTQUATERNION_COMMANDOLD,LUA_GETOBJECTQUATERNION_CALLBACK);
     lua_register(L,LUA_GETOBJECTPOSITION_COMMANDOLD,LUA_GETOBJECTPOSITION_CALLBACK);
     lua_register(L,LUA_GETOBJECTPARENT_COMMANDOLD,LUA_GETOBJECTPARENT_CALLBACK);
     lua_register(L,LUA_GETOBJECTS_COMMANDOLD,LUA_GETOBJECTS_CALLBACK);
@@ -3135,6 +3189,7 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     lua_register(L,LUA_SETJOINTTARGETVELOCITY_COMMANDOLD,LUA_SETJOINTTARGETVELOCITY_CALLBACK);
     lua_register(L,LUA_SETMODELPROPERTY_COMMANDOLD,LUA_SETMODELPROPERTY_CALLBACK);
     lua_register(L,LUA_SETOBJECTORIENTATION_COMMANDOLD,LUA_SETOBJECTORIENTATION_CALLBACK);
+    lua_register(L,LUA_SETOBJECTQUATERNION_COMMANDOLD,LUA_SETOBJECTQUATERNION_CALLBACK);
     lua_register(L,LUA_SETOBJECTPOSITION_COMMANDOLD,LUA_SETOBJECTPOSITION_CALLBACK);
     lua_register(L,LUA_SETOBJECTPARENT_COMMANDOLD,LUA_SETOBJECTPARENT_CALLBACK);
     lua_register(L,LUA_SETOBJECTSELECTION_COMMANDOLD,LUA_SETOBJECTSELECTION_CALLBACK);

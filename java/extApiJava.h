@@ -1592,6 +1592,14 @@ JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetObjectOrientation
 
 /*
  * Class:     remoteApi
+ * Method:    simxGetObjectQuaternion
+ * Signature: (IILFloatWA;I)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetObjectQuaternion
+  (JNIEnv *, jobject, jint, jint, jint, jobject, jint);
+
+/*
+ * Class:     remoteApi
  * Method:    simxSetObjectParent
  * Signature: (IIZI)I
  */
@@ -1716,6 +1724,14 @@ JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetFloatingParameter
  * Signature: (IILFloatWA;I)I
  */
 JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxSetObjectOrientation
+  (JNIEnv *, jobject, jint, jint, jint, jobject, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxSetObjectQuaternion
+ * Signature: (IILFloatWA;I)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxSetObjectQuaternion
   (JNIEnv *, jobject, jint, jint, jint, jobject, jint);
 
 /*
@@ -2072,10 +2088,10 @@ JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetObjectVelocity
 
 JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxReadStringStream
   (JNIEnv *, jobject, jint, jstring, jobject, jint);
-  
+
 JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxWriteStringStream
   (JNIEnv *, jobject, jint, jstring, jobject, jint);
-  
+
 JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxCallScriptFunction
   (JNIEnv *, jobject, jint, jstring, jint, jstring, jobject, jobject, jobject, jobject, jobject, jobject, jobject, jobject, jint);
 

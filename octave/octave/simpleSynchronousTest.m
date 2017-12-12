@@ -3,7 +3,7 @@
 % pre-enabled on the server side. You would do this by
 % starting the server (e.g. in a child script) with:
 %
-% simExtRemoteApiStart(19999,1300,false,true)
+% simRemoteApi.start(19999,1300,false,true)
 %
 % But in this example we try to connect on port
 % 19997 where there should be a continuous remote API

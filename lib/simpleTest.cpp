@@ -2,7 +2,7 @@
 // in a child script of a V-REP scene, add following command
 // to be executed just once, at simulation start:
 //
-// simExtRemoteApiStart(19999)
+// simRemoteApi.start(19999)
 //
 // then start simulation, and run this program.
 //

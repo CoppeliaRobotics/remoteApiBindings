@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Code for visualizing grasp attempt examples from the google brain robotics grasping dataset.
-
-https://sites.google.com/site/brainrobotdata/home/grasping-dataset
+"""Code for visualizing data in vrep via python.
 
 Author: Andrew Hundt <ATHundt@gmail.com>
 

@@ -31,7 +31,6 @@ import tensorflow as tf
 from tensorflow.python.platform import flags
 from tensorflow.python.platform import gfile
 from tensorflow.python.ops import data_flow_ops
-from keras.utils import get_file
 from ply import write_xyz_rgb_as_ply
 from PIL import Image
 
@@ -51,6 +50,7 @@ from depth_image_encoding import FloatArrayToRgbImage
 from depth_image_encoding import FloatArrayToRawRGB
 from skimage.transform import resize
 from skimage import img_as_ubyte
+from skimage import img_as_uint
 from skimage.color import grey2rgb
 
 try:
@@ -69,16 +69,9 @@ tf.flags.DEFINE_boolean('vrepWaitUntilConnected', True, 'block startup call unti
 tf.flags.DEFINE_boolean('vrepDoNotReconnectOnceDisconnected', True, '')
 tf.flags.DEFINE_integer('vrepTimeOutInMs', 5000, 'Timeout in milliseconds upon which connection fails')
 tf.flags.DEFINE_integer('vrepCommThreadCycleInMs', 5, 'time between communication cycles')
-tf.flags.DEFINE_integer('vrepVisualizeGraspAttempt_min', 0, 'min grasp attempt to display from dataset, or -1 for no limit')
-tf.flags.DEFINE_integer('vrepVisualizeGraspAttempt_max', 100, 'max grasp attempt to display from dataset, exclusive, or -1 for no limit')
 tf.flags.DEFINE_string('vrepDebugMode', 'save_ply,print_transform',
                        """Options are: '', 'fixed_depth', 'save_ply', 'print_transform', 'print_drawLines'.
                        More than one option can be specified at a time with comma or space separation.""")
-tf.flags.DEFINE_boolean('vrepVisualizeRGBD', True, 'display the rgbd images and point cloud')
-tf.flags.DEFINE_integer('vrepVisualizeRGBD_min', 0, 'min time step on each grasp attempt to display, or -1 for no limit')
-tf.flags.DEFINE_integer('vrepVisualizeRGBD_max', -1, 'max time step on each grasp attempt to display, exclusive, or -1 for no limit')
-tf.flags.DEFINE_boolean('vrepVisualizeSurfaceRelativeTransform', True, 'display the surface relative transform frames')
-tf.flags.DEFINE_boolean('vrepVisualizeSurfaceRelativeTransformLines', True, 'display lines from the camera to surface depth points')
 tf.flags.DEFINE_string('vrepParentName', 'LBR_iiwa_14_R820', 'The default parent frame name from which to base all visualized transforms.')
 tf.flags.DEFINE_boolean('vrepVisualizeDilation', False, 'Visualize result of dilation performed on depth image used for point cloud.')
 tf.flags.DEFINE_string('vrepVisualizeDepthFormat', 'vrep_depth_encoded_rgb',
@@ -109,28 +102,6 @@ tf.flags.DEFINE_string('vrepVisualizeRGBFormat', 'vrep_rgb',
                             Examples include 'vrep_depth_rgb' and 'vrep_depth_encoded_rgb',
                             see http://www.forum.coppeliarobotics.com/viewtopic.php?f=9&t=737&p=27805#p27805.
                        """)
-tf.flags.DEFINE_string('vrepVisualizationPipeline', 'tensorflow',
-                       """Options are: python, tensorflow.
-                           'tensorflow' tensorflow loads the raw data from the dataset and
-                               calculates all features before they are rendered with vrep via python,
-                           'python' loads the raw data from tensorflow,
-                               then the visualize_python function calculates the features
-                               before they are rendered with vrep.
-                       """)
-tf.flags.DEFINE_boolean('vrepVisualizePredictions', False,
-                        """Visualize the predictions of weights defined in grasp_train.py,
-                           If loss is pixel-wise, prediction will be 2d image of probabilities.
-                           Otherwise it's boolean indicate success or failure.
-
-                           Model weights must be available to load, and the weights must match
-                           the model being created for this to work correctly.
-                           If you only wish to visualize the data, set this to False.
-                        """
-                        )
-tf.flags.DEFINE_boolean('vrepVisualizeMatPlotLib', True,
-                        """Visualize the predictions with a matplotlib heat map.
-                        """
-                        )
 
 # the following line is needed for tf versions before 1.5
 # flags.FLAGS._parse_flags()

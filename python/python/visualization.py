@@ -63,17 +63,6 @@ except ImportError:
           'and https://github.com/jrl-umi3218/SpaceVecAlg. '
           'When you build the modules make sure python bindings are enabled.')
 
-tf.flags.DEFINE_string('vrepConnectionAddress', '127.0.0.1', 'The IP address of the running V-REP simulation.')
-tf.flags.DEFINE_integer('vrepConnectionPort', 19999, 'ip port for connecting to V-REP')
-tf.flags.DEFINE_boolean('vrepWaitUntilConnected', True, 'block startup call until vrep is connected')
-tf.flags.DEFINE_boolean('vrepDoNotReconnectOnceDisconnected', True, '')
-tf.flags.DEFINE_integer('vrepTimeOutInMs', 5000, 'Timeout in milliseconds upon which connection fails')
-tf.flags.DEFINE_integer('vrepCommThreadCycleInMs', 5, 'time between communication cycles')
-tf.flags.DEFINE_string('vrepDebugMode', 'save_ply,print_transform',
-                       """Options are: '', 'fixed_depth', 'save_ply', 'print_transform', 'print_drawLines'.
-                       More than one option can be specified at a time with comma or space separation.""")
-tf.flags.DEFINE_string('vrepParentName', 'LBR_iiwa_14_R820', 'The default parent frame name from which to base all visualized transforms.')
-tf.flags.DEFINE_boolean('vrepVisualizeDilation', False, 'Visualize result of dilation performed on depth image used for point cloud.')
 tf.flags.DEFINE_string('vrepVisualizeDepthFormat', 'vrep_depth_encoded_rgb',
                        """ Controls how Depth images are displayed. Options are:
                            None: Do not modify the data and display it as-is for rgb input data (not working properly for float depth).

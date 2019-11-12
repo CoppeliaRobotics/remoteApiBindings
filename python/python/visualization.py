@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Code for visualizing data in vrep via python.
+"""Code for visualizing data in sim via python.
 
 Author: Andrew Hundt <ATHundt@gmail.com>
 
@@ -14,14 +14,14 @@ import six  # compatibility between python 2 + 3 = six
 import matplotlib.pyplot as plt
 
 try:
-    import vrep as vrep
+    import sim as sim
 except Exception as e:
     print ('--------------------------------------------------------------')
-    print ('"vrep.py" could not be imported. This means very probably that')
-    print ('either "vrep.py" or the remoteApi library could not be found.')
+    print ('"sim.py" could not be imported. This means very probably that')
+    print ('either "sim.py" or the remoteApi library could not be found.')
     print ('Make sure both are in PYTHONPATH folder relative to this file,')
-    print ('or appropriately adjust the file "vrep.py. Also follow the"')
-    print ('ReadMe.txt in the vrep remote API folder')
+    print ('or appropriately adjust the file "sim.py. Also follow the"')
+    print ('ReadMe.txt in the sim remote API folder')
     print ('--------------------------------------------------------------')
     print ('')
     raise e
@@ -63,33 +63,33 @@ except ImportError:
           'and https://github.com/jrl-umi3218/SpaceVecAlg. '
           'When you build the modules make sure python bindings are enabled.')
 
-tf.flags.DEFINE_string('vrepVisualizeDepthFormat', 'vrep_depth_encoded_rgb',
+tf.flags.DEFINE_string('csimVisualizeDepthFormat', 'csim_depth_encoded_rgb',
                        """ Controls how Depth images are displayed. Options are:
                            None: Do not modify the data and display it as-is for rgb input data (not working properly for float depth).
                            'depth_rgb': convert a floating point depth image to a straight 0-255 encoding of depths less than 3m
                            'depth_encoded_rgb': convert a floating point depth image to the rgb encoding used by
                                the google brain robot data grasp dataset's raw png depth image encoding,
                                see https://sites.google.com/site/brainrobotdata/home/depth-image-encoding.
-                           'vrep': add a vrep prefix to any of the above commands to
+                           'sim': add a sim prefix to any of the above commands to
                                rotate image by 180 degrees, flip left over right, then invert the color channels
                                after the initial conversion step.
-                               This is due to a problem where V-REP seems to display images differently.
-                               Examples include 'vrep_depth_rgb' and 'vrep_depth_encoded_rgb',
-                               see http://www.forum.coppeliarobotics.com/viewtopic.php?f=9&t=737&p=27805#p27805.
+                               This is due to a problem where CoppeliaSim seems to display images differently.
+                               Examples include 'csim_depth_rgb' and 'csim_depth_encoded_rgb',
+                               see http://forum.coppeliarobotics.com/viewtopic.php?f=9&t=737&p=27805#p27805.
                        """)
-tf.flags.DEFINE_string('vrepVisualizeRGBFormat', 'vrep_rgb',
+tf.flags.DEFINE_string('csimVisualizeRGBFormat', 'csim_rgb',
                        """  Controls how images are displayed. Options are:
                         None: Do not modify the data and display it as-is for rgb input data (not working properly for float depth).
                         'depth_rgb': convert a floating point depth image to a straight 0-255 encoding of depths less than 3m
                         'depth_encoded_rgb': convert a floating point depth image to the rgb encoding used by
                             the google brain robot data grasp dataset's raw png depth image encoding,
                             see https://sites.google.com/site/brainrobotdata/home/depth-image-encoding.
-                        'vrep': add a vrep prefix to any of the above commands to
+                        'sim': add a sim prefix to any of the above commands to
                             rotate image by 180 degrees, flip left over right, then invert the color channels
                             after the initial conversion step.
-                            This is due to a problem where V-REP seems to display images differently.
-                            Examples include 'vrep_depth_rgb' and 'vrep_depth_encoded_rgb',
-                            see http://www.forum.coppeliarobotics.com/viewtopic.php?f=9&t=737&p=27805#p27805.
+                            This is due to a problem where CoppeliaSim seems to display images differently.
+                            Examples include 'csim_depth_rgb' and 'csim_depth_encoded_rgb',
+                            see http://forum.coppeliarobotics.com/viewtopic.php?f=9&t=737&p=27805#p27805.
                        """)
 
 # the following line is needed for tf versions before 1.5
@@ -159,40 +159,40 @@ def depth_image_to_point_cloud(depth, intrinsics_matrix, dtype=np.float32, verbo
     return XYZ.astype(dtype)
 
 
-def vrepPrint(client_id, message):
-    """Print a message in both the python command line and on the V-REP Statusbar.
+def csimPrint(client_id, message):
+    """Print a message in both the python command line and on the CoppeliaSim Statusbar.
 
-    The Statusbar is the white command line output on the bottom of the V-REP GUI window.
+    The Statusbar is the white command line output on the bottom of the CoppeliaSim GUI window.
     """
-    vrep.simxAddStatusbarMessage(client_id, message, vrep.simx_opmode_oneshot)
+    sim.simxAddStatusbarMessage(client_id, message, sim.simx_opmode_oneshot)
     print(message)
 
 
-def create_dummy(client_id, display_name, transform=None, parent_handle=-1, debug=FLAGS.vrepDebugMode, operation_mode=vrep.simx_opmode_blocking):
+def create_dummy(client_id, display_name, transform=None, parent_handle=-1, debug=FLAGS.csimDebugMode, operation_mode=sim.simx_opmode_blocking):
     """Create a dummy object in the simulation
 
     # Arguments
 
-        transform_display_name: name string to use for the object in the vrep scene
-        transform: 3 cartesian (x, y, z) and 4 quaternion (x, y, z, w) elements, same as vrep
-        parent_handle: -1 is the world frame, any other int should be a vrep object handle
+        transform_display_name: name string to use for the object in the sim scene
+        transform: 3 cartesian (x, y, z) and 4 quaternion (x, y, z, w) elements, same as sim
+        parent_handle: -1 is the world frame, any other int should be a sim object handle
     """
     if transform is None:
         transform = np.array([0., 0., 0., 0., 0., 0., 1.])
     # 2. Now create a dummy object at coordinate 0.1,0.2,0.3 with name 'MyDummyName':
     empty_buffer = bytearray()
-    res, ret_ints, ret_floats, ret_strings, ret_buffer = vrep.simxCallScriptFunction(
+    res, ret_ints, ret_floats, ret_strings, ret_buffer = sim.simxCallScriptFunction(
         client_id,
         'remoteApiCommandServer',
-        vrep.sim_scripttype_childscript,
+        sim.sim_scripttype_childscript,
         'createDummy_function',
         [parent_handle],
         transform,
         [display_name],
         empty_buffer,
         operation_mode)
-    if res == vrep.simx_return_ok:
-        # display the reply from V-REP (in this case, the handle of the created dummy)
+    if res == sim.simx_return_ok:
+        # display the reply from CoppeliaSim (in this case, the handle of the created dummy)
         if debug is not None and 'print_transform' in debug:
             print ('Dummy name:', display_name, ' handle: ', ret_ints[0], ' transform: ', transform)
     else:
@@ -207,26 +207,26 @@ def setPose(client_id, display_name, transform=None, parent_handle=-1):
 
     # Arguments
 
-        transform_display_name: name string to use for the object in the vrep scene
-        transform: 3 cartesian (x, y, z) and 4 quaternion (x, y, z, w) elements, same as vrep
-        parent_handle: -1 is the world frame, any other int should be a vrep object handle
+        transform_display_name: name string to use for the object in the sim scene
+        transform: 3 cartesian (x, y, z) and 4 quaternion (x, y, z, w) elements, same as sim
+        parent_handle: -1 is the world frame, any other int should be a sim object handle
     """
     if transform is None:
         transform = np.array([0., 0., 0., 0., 0., 0., 1.])
     # 2. Now create a dummy object at coordinate 0.1,0.2,0.3 with name 'MyDummyName':
     empty_buffer = bytearray()
-    res, ret_ints, ret_floats, ret_strings, ret_buffer = vrep.simxCallScriptFunction(
+    res, ret_ints, ret_floats, ret_strings, ret_buffer = sim.simxCallScriptFunction(
         client_id,
         'remoteApiCommandServer',
-        vrep.sim_scripttype_childscript,
+        sim.sim_scripttype_childscript,
         'createDummy_function',
         [parent_handle],
         transform,
         [display_name],
         empty_buffer,
-        vrep.simx_opmode_blocking)
-    if res == vrep.simx_return_ok:
-        # display the reply from V-REP (in this case, the handle of the created dummy)
+        sim.simx_opmode_blocking)
+    if res == sim.simx_return_ok:
+        # display the reply from CoppeliaSim (in this case, the handle of the created dummy)
         print ('SetPose object name:', display_name, ' handle: ', ret_ints[0], ' transform: ', transform)
     else:
         print('setPose remote function call failed.')
@@ -235,15 +235,15 @@ def setPose(client_id, display_name, transform=None, parent_handle=-1):
     return ret_ints[0]
 
 
-def set_vision_sensor_image(client_id, display_name, image, convert=None, scale_factor=256000.0, operation_mode=vrep.simx_opmode_oneshot_wait):
-    """Display vision sensor image data in a V-REP simulation.
+def set_vision_sensor_image(client_id, display_name, image, convert=None, scale_factor=256000.0, operation_mode=sim.simx_opmode_oneshot_wait):
+    """Display vision sensor image data in a CoppeliaSim simulation.
 
-    [V-REP Vision Sensors](http://www.coppeliarobotics.com/helpFiles/en/visionSensors.htm)
+    [CoppeliaSim Vision Sensors](http://www.coppeliarobotics.com/helpFiles/en/visionSensors.htm)
     [simSetVisionSensorImage](http://www.coppeliarobotics.com/helpFiles/en/apiFunctions.htm#simSetVisionSensorImage)
 
     # Arguments
 
-    display_name: the string display name of the sensor object in the v-rep scene
+    display_name: the string display name of the sensor object in the CoppeliaSim scene
     image: an rgb char array containing an image
     convert: Controls how images are displayed. Options are:
             None: Do not modify the data and display it as-is for rgb input data (not working properly for float depth).
@@ -251,11 +251,11 @@ def set_vision_sensor_image(client_id, display_name, image, convert=None, scale_
             'depth_encoded_rgb': convert a floating point depth image to the rgb encoding used by
                 the google brain robot data grasp dataset's raw png depth image encoding,
                 see https://sites.google.com/site/brainrobotdata/home/depth-image-encoding.
-            'vrep': add a vrep prefix to any of the above commands to
+            'sim': add a sim prefix to any of the above commands to
                 rotate image by 180 degrees, flip left over right, then invert the color channels
                 after the initial conversion step.
-                This is due to a problem where V-REP seems to display images differently.
-                Examples include 'vrep_depth_rgb' and 'vrep_depth_encoded_rgb',
+                This is due to a problem where CoppeliaSim seems to display images differently.
+                Examples include 'csim_depth_rgb' and 'csim_depth_encoded_rgb',
                 see http://www.forum.coppeliarobotics.com/viewtopic.php?f=9&t=737&p=27805#p27805.
     """
     strings = [display_name]
@@ -263,9 +263,9 @@ def set_vision_sensor_image(client_id, display_name, image, convert=None, scale_
 
     # TODO(ahundt) support is_greyscale True again
     is_greyscale = 0
-    vrep_conversion = False
+    csim_conversion = False
     if convert is not None:
-        vrep_conversion = 'vrep' in convert
+        csim_conversion = 'sim' in convert
 
         if 'depth_encoded_rgb' in convert:
             image = np.array(FloatArrayToRgbImage(image, scale_factor=scale_factor, drop_blue=False), dtype=np.uint8)
@@ -273,11 +273,11 @@ def set_vision_sensor_image(client_id, display_name, image, convert=None, scale_
 
             image = img_as_uint(image)
 
-        elif not vrep_conversion:
+        elif not csim_conversion:
             raise ValueError('set_vision_sensor_image() convert parameter must be one of `depth_encoded_rgb`, `depth_rgb`, or None'
-                             'with the optional addition of the word `vrep` to rotate 180, flip left right, then invert colors.')
+                             'with the optional addition of the word `sim` to rotate 180, flip left right, then invert colors.')
 
-    if vrep_conversion:
+    if csim_conversion:
         # rotate 180 degrees, flip left over right, then invert the colors
         image = np.array(256 - np.fliplr(np.rot90(image, 2)), dtype=np.uint8)
 
@@ -295,10 +295,10 @@ def set_vision_sensor_image(client_id, display_name, image, convert=None, scale_
         color_size = 0
 
     cloud_handle = -1
-    res, ret_ints, ret_floats, ret_strings, ret_buffer = vrep.simxCallScriptFunction(
+    res, ret_ints, ret_floats, ret_strings, ret_buffer = sim.simxCallScriptFunction(
         client_id,
         'remoteApiCommandServer',
-        vrep.sim_scripttype_childscript,
+        sim.sim_scripttype_childscript,
         'setVisionSensorImage_function',
         [parent_handle, num_floats, is_greyscale, color_size],  # int params
         np.append(floats, []),  # float params
@@ -306,8 +306,8 @@ def set_vision_sensor_image(client_id, display_name, image, convert=None, scale_
         # byte buffer params
         color_buffer,
         operation_mode)
-    if res == vrep.simx_return_ok:
-        print ('point cloud handle: ', ret_ints[0])  # display the reply from V-REP (in this case, the handle of the created dummy)
+    if res == sim.simx_return_ok:
+        print ('point cloud handle: ', ret_ints[0])  # display the reply from CoppeliaSim (in this case, the handle of the created dummy)
         # set the transform for the point cloud
         return ret_ints[0]
     else:
@@ -319,17 +319,17 @@ def set_vision_sensor_image(client_id, display_name, image, convert=None, scale_
 def create_point_cloud(client_id, display_name, transform=None, point_cloud=None, depth_image=None, color_image=None,
                        camera_intrinsics_matrix=None, parent_handle=-1, clear=True,
                        max_voxel_size=0.01, max_point_count_per_voxel=10, point_size=10, options=8,
-                       rgb_sensor_display_name=None, depth_sensor_display_name=None, convert_depth=FLAGS.vrepVisualizeDepthFormat,
-                       convert_rgb=FLAGS.vrepVisualizeRGBFormat, save_ply_path=None, rgb_display_mode='vision_sensor'):
+                       rgb_sensor_display_name=None, depth_sensor_display_name=None, convert_depth=FLAGS.csimVisualizeDepthFormat,
+                       convert_rgb=FLAGS.csimVisualizeRGBFormat, save_ply_path=None, rgb_display_mode='vision_sensor'):
     """Create a point cloud object in the simulation, plus optionally render the depth and rgb images.
 
     # Arguments
 
-        display_name: name string to use for the object in the vrep scene
+        display_name: name string to use for the object in the sim scene
         depth_image: A depth image of size [width, height, 3]
-        transform: [x, y, z, qw, qx, qy, qz] with 3 cartesian (x, y, z) and 4 quaternion (qx, qy, qz, qw) elements, same as vrep
+        transform: [x, y, z, qw, qx, qy, qz] with 3 cartesian (x, y, z) and 4 quaternion (qx, qy, qz, qw) elements, same as sim
             This transform is from the parent handle to the point cloud base
-        parent_handle: -1 is the world frame, any other int should be a vrep object handle
+        parent_handle: -1 is the world frame, any other int should be a sim object handle
         clear: clear the point cloud if it already exists with the provided display name
         maxVoxelSize: the maximum size of the octree voxels containing points
         maxPtCntPerVoxel: the maximum number of points allowed in a same octree voxel
@@ -349,11 +349,11 @@ def create_point_cloud(client_id, display_name, transform=None, point_cloud=None
             'depth_encoded_rgb': convert a floating point depth image to the rgb encoding used by
                 the google brain robot data grasp dataset's raw png depth image encoding,
                 see https://sites.google.com/site/brainrobotdata/home/depth-image-encoding.
-            'vrep': add a vrep prefix to any of the above commands to
+            'sim': add a sim prefix to any of the above commands to
                 rotate image by 180 degrees, flip left over right, then invert the color channels
                 after the initial conversion step.
-                This is due to a problem where V-REP seems to display images differently.
-                Examples include 'vrep_depth_rgb' and 'vrep_depth_encoded_rgb',
+                This is due to a problem where CoppeliaSim seems to display images differently.
+                Examples include 'csim_depth_rgb' and 'csim_depth_encoded_rgb',
                 see http://www.forum.coppeliarobotics.com/viewtopic.php?f=9&t=737&p=27805#p27805.
         rgb_display_mode: Options help with working around quirks in input image data's layout.
             'point_cloud' to display the image when the point cloud is being generated.
@@ -369,7 +369,7 @@ def create_point_cloud(client_id, display_name, transform=None, point_cloud=None
     # show the depth sensor image
     if depth_sensor_display_name is not None and depth_image is not None:
         # matplotlib.image.imsave(display_name + depth_sensor_display_name + '_norotfliplr.png', depth_image)
-        # rotate 180, flip left over right then invert the image colors for display in V-REP
+        # rotate 180, flip left over right then invert the image colors for display in CoppeliaSim
         # depth_image = np.fliplr(np.rot90(depth_image, 2))
         # matplotlib.image.imsave(display_name + depth_sensor_display_name + '_rot90fliplr.png', depth_image)
         set_vision_sensor_image(client_id, depth_sensor_display_name, depth_image, convert=convert_depth)
@@ -378,7 +378,7 @@ def create_point_cloud(client_id, display_name, transform=None, point_cloud=None
     # done in insertPointCloud_function, which is buggy
     if rgb_sensor_display_name is not None and color_image is not None and rgb_display_mode == 'vision_sensor':
         # matplotlib.image.imsave(display_name + rgb_sensor_display_name + '_norotfliplr.png', color_image)
-        # rotate 180, flip left over right then invert the image colors for display in V-REP
+        # rotate 180, flip left over right then invert the image colors for display in CoppeliaSim
         # matplotlib.image.imsave(display_name + rgb_sensor_display_name + '_rot90fliplr.png', color_image)
         set_vision_sensor_image(client_id, rgb_sensor_display_name, color_image, convert=convert_rgb)
 
@@ -400,10 +400,10 @@ def create_point_cloud(client_id, display_name, transform=None, point_cloud=None
 
     cloud_handle = -1
     # Create the point cloud if it does not exist, or retrieve the handle if it does
-    res, ret_ints, ret_floats, ret_strings, ret_buffer = vrep.simxCallScriptFunction(
+    res, ret_ints, ret_floats, ret_strings, ret_buffer = sim.simxCallScriptFunction(
         client_id,
         'remoteApiCommandServer',
-        vrep.sim_scripttype_childscript,
+        sim.sim_scripttype_childscript,
         'createPointCloud_function',
         # int params
         [parent_handle, transform_entries, point_cloud.size, cloud_handle, clear, max_point_count_per_voxel, options, point_size],
@@ -413,17 +413,17 @@ def create_point_cloud(client_id, display_name, transform=None, point_cloud=None
         strings,
         # byte buffer params
         color_buffer,
-        vrep.simx_opmode_blocking)
+        sim.simx_opmode_blocking)
 
     setPose(client_id, display_name, transform, parent_handle)
 
-    if res == vrep.simx_return_ok:
+    if res == sim.simx_return_ok:
         cloud_handle = ret_ints[0]
 
         # convert the rgb values to a string
         color_size = 0
         if color_image is not None:
-            # see simInsertPointsIntoPointCloud() in vrep documentation
+            # see simInsertPointsIntoPointCloud() in sim documentation
             # 3 indicates the cloud should be in the parent frame, and color is enabled
             # bit 2 is 1 so each point is colored
             simInsertPointsIntoPointCloudOptions = 3
@@ -434,19 +434,19 @@ def create_point_cloud(client_id, display_name, transform=None, point_cloud=None
             simInsertPointsIntoPointCloudOptions = 1
 
         # Actually transfer the point cloud
-        res, ret_ints, ret_floats, ret_strings, ret_buffer = vrep.simxCallScriptFunction(
+        res, ret_ints, ret_floats, ret_strings, ret_buffer = sim.simxCallScriptFunction(
             client_id,
             'remoteApiCommandServer',
-            vrep.sim_scripttype_childscript,
+            sim.sim_scripttype_childscript,
             'insertPointCloud_function',
             [parent_handle, transform_entries, point_cloud.size, cloud_handle, color_size, simInsertPointsIntoPointCloudOptions],
             np.append(point_cloud, []),
             strings,
             color_buffer,
-            vrep.simx_opmode_blocking)
+            sim.simx_opmode_blocking)
 
-        if res == vrep.simx_return_ok:
-            print ('point cloud handle: ', ret_ints[0])  # display the reply from V-REP (in this case, the handle of the created dummy)
+        if res == sim.simx_return_ok:
+            print ('point cloud handle: ', ret_ints[0])  # display the reply from CoppeliaSim (in this case, the handle of the created dummy)
             # set the transform for the point cloud
             return ret_ints[0]
         else:
@@ -460,27 +460,27 @@ def create_point_cloud(client_id, display_name, transform=None, point_cloud=None
         return res
 
 
-def drawLines(client_id, display_name, lines, parent_handle=-1, transform=None, debug=FLAGS.vrepDebugMode, operation_mode=vrep.simx_opmode_blocking):
+def drawLines(client_id, display_name, lines, parent_handle=-1, transform=None, debug=FLAGS.csimDebugMode, operation_mode=sim.simx_opmode_blocking):
     """Create a line in the simulation.
 
     Note that there are currently some quirks with this function. Only one line is accepted,
-    and sometimes v-rep fails to delete the object correctly and lines will fail to draw.
-    In that case you need to close and restart V-REP.
+    and sometimes CoppeliaSim fails to delete the object correctly and lines will fail to draw.
+    In that case you need to close and restart CoppeliaSim.
 
     # Arguments
 
-        transform_display_name: name string to use for the object in the vrep scene
-        transform: 3 cartesian (x, y, z) and 4 quaternion (x, y, z, w) elements, same as vrep
-        parent_handle: -1 is the world frame, any other int should be a vrep object handle
+        transform_display_name: name string to use for the object in the sim scene
+        transform: 3 cartesian (x, y, z) and 4 quaternion (x, y, z, w) elements, same as sim
+        parent_handle: -1 is the world frame, any other int should be a sim object handle
         lines: array of line definitions using two endpoints (x0, y0, z0, x1, y1, z1).
             Multiple lines can be defined but there should be 6 entries (two points) per line.
     """
     # 2. Now create a dummy object at coordinate 0.1,0.2,0.3 with name 'MyDummyName':
     empty_buffer = bytearray()
-    res, ret_ints, ret_floats, ret_strings, ret_buffer = vrep.simxCallScriptFunction(
+    res, ret_ints, ret_floats, ret_strings, ret_buffer = sim.simxCallScriptFunction(
         client_id,
         'remoteApiCommandServer',
-        vrep.sim_scripttype_childscript,
+        sim.sim_scripttype_childscript,
         'addDrawingObject_function',
         [parent_handle, int(lines.size/6)],
         # np.append(transform, lines),
@@ -488,8 +488,8 @@ def drawLines(client_id, display_name, lines, parent_handle=-1, transform=None, 
         [display_name],
         empty_buffer,
         operation_mode)
-    if res == vrep.simx_return_ok:
-        # display the reply from V-REP (in this case, the handle of the created dummy)
+    if res == sim.simx_return_ok:
+        # display the reply from CoppeliaSim (in this case, the handle of the created dummy)
         if debug is not None and 'print_drawLines' in debug:
             print ('drawLines name:', display_name, ' handle: ', ret_ints[0], ' transform: ', transform)
 

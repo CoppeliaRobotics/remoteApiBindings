@@ -451,7 +451,7 @@ sim_boolparam_waiting_for_trigger                =45
 # Integer parameters 
 sim_intparam_error_report_mode      =0  # Check sim_api_errormessage_... constants above for valid values 
 sim_intparam_program_version        =1  # e.g Version 2.1.4 --> 20104. Can only be read 
-sim_intparam_instance_count         =2  # do not use anymore (always returns 1 since V-REP 2.5.11) 
+sim_intparam_instance_count         =2  # do not use anymore (always returns 1 since CoppeliaSim 2.5.11) 
 sim_intparam_custom_cmd_start_id    =3  # can only be read 
 sim_intparam_compilation_version    =4  # 0=evaluation version 1=full version 2=player version. Can only be read 
 sim_intparam_current_page           =5
@@ -493,7 +493,7 @@ sim_floatparam_simulation_time_step =1
 sim_floatparam_stereo_distance        =2
 
 # String parameters 
-sim_stringparam_application_path=0 # path of V-REP's executable 
+sim_stringparam_application_path=0 # path of CoppeliaSim's executable 
 sim_stringparam_video_filename=1
 sim_stringparam_app_arg1            =2
 sim_stringparam_app_arg2            =3

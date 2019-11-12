@@ -3,7 +3,7 @@ import struct
 import sys
 import os
 import ctypes as ct
-from vrepConst import *
+from simConst import *
 
 #load library
 libsimx = None
@@ -22,8 +22,8 @@ try:
 except:
     print ('----------------------------------------------------')
     print ('The remoteApi library could not be loaded. Make sure')
-    print ('it is located in the same folder as "vrep.py", or')
-    print ('appropriately adjust the file "vrep.py"')
+    print ('it is located in the same folder as "sim.py", or')
+    print ('appropriately adjust the file "sim.py"')
     print ('----------------------------------------------------')
     print ('')
 
@@ -140,21 +140,21 @@ c_CallScriptFunction        = ct.CFUNCTYPE(ct.c_int32,ct.c_int32,ct.POINTER(ct.c
 #API functions
 def simxGetJointPosition(clientID, jointHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     position = ct.c_float()
     return c_GetJointPosition(clientID, jointHandle, ct.byref(position), operationMode), position.value
 
 def simxSetJointPosition(clientID, jointHandle, position, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_SetJointPosition(clientID, jointHandle, position, operationMode)
 
 def simxGetJointMatrix(clientID, jointHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     matrix = (ct.c_float*12)()
     ret = c_GetJointMatrix(clientID, jointHandle, matrix, operationMode)
@@ -165,48 +165,48 @@ def simxGetJointMatrix(clientID, jointHandle, operationMode):
 
 def simxSetSphericalJointMatrix(clientID, jointHandle, matrix, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     matrix = (ct.c_float*12)(*matrix)
     return c_SetSphericalJointMatrix(clientID, jointHandle, matrix, operationMode)
 
 def simxSetJointTargetVelocity(clientID, jointHandle, targetVelocity, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_SetJointTargetVelocity(clientID, jointHandle, targetVelocity, operationMode)
 
 def simxSetJointTargetPosition(clientID, jointHandle, targetPosition, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_SetJointTargetPosition(clientID, jointHandle, targetPosition, operationMode)
 
 def simxJointGetForce(clientID, jointHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     force = ct.c_float()
     return c_GetJointForce(clientID, jointHandle, ct.byref(force), operationMode), force.value
 
 def simxGetJointForce(clientID, jointHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     force = ct.c_float()
     return c_GetJointForce(clientID, jointHandle, ct.byref(force), operationMode), force.value
 
 def simxSetJointForce(clientID, jointHandle, force, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     return c_SetJointForce(clientID, jointHandle, force, operationMode)
 
 def simxReadForceSensor(clientID, forceSensorHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     state = ct.c_ubyte()
     forceVector  = (ct.c_float*3)()
@@ -226,13 +226,13 @@ def simxReadForceSensor(clientID, forceSensorHandle, operationMode):
 
 def simxBreakForceSensor(clientID, forceSensorHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     return c_BreakForceSensor(clientID, forceSensorHandle, operationMode)
 
 def simxReadVisionSensor(clientID, sensorHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     detectionState = ct.c_ubyte()
@@ -255,7 +255,7 @@ def simxReadVisionSensor(clientID, sensorHandle, operationMode):
 
 def simxGetObjectHandle(clientID, objectName, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     handle = ct.c_int()
     if (sys.version_info[0] == 3) and (type(objectName) is str):
@@ -264,7 +264,7 @@ def simxGetObjectHandle(clientID, objectName, operationMode):
 
 def simxGetVisionSensorImage(clientID, sensorHandle, options, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     resolution = (ct.c_int*2)()
@@ -286,7 +286,7 @@ def simxGetVisionSensorImage(clientID, sensorHandle, options, operationMode):
 
 def simxSetVisionSensorImage(clientID, sensorHandle, image, options, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     size = len(image)
     image_bytes  = (ct.c_byte*size)(*image)
@@ -294,7 +294,7 @@ def simxSetVisionSensorImage(clientID, sensorHandle, image, options, operationMo
 
 def simxGetVisionSensorDepthBuffer(clientID, sensorHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     c_buffer  = ct.POINTER(ct.c_float)()
     resolution = (ct.c_int*2)()
@@ -311,14 +311,14 @@ def simxGetVisionSensorDepthBuffer(clientID, sensorHandle, operationMode):
 
 def simxGetObjectChild(clientID, parentObjectHandle, childIndex, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     childObjectHandle = ct.c_int()
     return c_GetObjectChild(clientID, parentObjectHandle, childIndex, ct.byref(childObjectHandle), operationMode), childObjectHandle.value
 
 def simxGetObjectParent(clientID, childObjectHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     parentObjectHandle = ct.c_int()
@@ -326,7 +326,7 @@ def simxGetObjectParent(clientID, childObjectHandle, operationMode):
 
 def simxReadProximitySensor(clientID, sensorHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     detectionState = ct.c_ubyte()
@@ -344,7 +344,7 @@ def simxReadProximitySensor(clientID, sensorHandle, operationMode):
 
 def simxLoadModel(clientID, modelPathAndName, options, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     baseHandle = ct.c_int()
     if (sys.version_info[0] == 3) and (type(modelPathAndName) is str):
@@ -353,7 +353,7 @@ def simxLoadModel(clientID, modelPathAndName, options, operationMode):
 
 def simxLoadUI(clientID, uiPathAndName, options, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     count = ct.c_int()
@@ -373,7 +373,7 @@ def simxLoadUI(clientID, uiPathAndName, options, operationMode):
 
 def simxLoadScene(clientID, scenePathAndName, options, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     if (sys.version_info[0] == 3) and (type(scenePathAndName) is str):
@@ -382,28 +382,28 @@ def simxLoadScene(clientID, scenePathAndName, options, operationMode):
 
 def simxStartSimulation(clientID, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_StartSimulation(clientID, operationMode)
 
 def simxPauseSimulation(clientID, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_PauseSimulation(clientID, operationMode)
 
 def simxStopSimulation(clientID, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_StopSimulation(clientID, operationMode)
 
 def simxGetUIHandle(clientID, uiName, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     handle = ct.c_int()
@@ -413,7 +413,7 @@ def simxGetUIHandle(clientID, uiName, operationMode):
 
 def simxGetUISlider(clientID, uiHandle, uiButtonID, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     position = ct.c_int()
@@ -421,14 +421,14 @@ def simxGetUISlider(clientID, uiHandle, uiButtonID, operationMode):
 
 def simxSetUISlider(clientID, uiHandle, uiButtonID, position, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_SetUISlider(clientID, uiHandle, uiButtonID, position, operationMode)
 
 def simxGetUIEventButton(clientID, uiHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     uiEventButtonID = ct.c_int()
@@ -441,7 +441,7 @@ def simxGetUIEventButton(clientID, uiHandle, operationMode):
 
 def simxGetUIButtonProperty(clientID, uiHandle, uiButtonID, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     prop = ct.c_int()
@@ -449,14 +449,14 @@ def simxGetUIButtonProperty(clientID, uiHandle, uiButtonID, operationMode):
 
 def simxSetUIButtonProperty(clientID, uiHandle, uiButtonID, prop, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_SetUIButtonProperty(clientID, uiHandle, uiButtonID, prop, operationMode)
 
 def simxAddStatusbarMessage(clientID, message, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     if (sys.version_info[0] == 3) and (type(message) is str):
@@ -465,7 +465,7 @@ def simxAddStatusbarMessage(clientID, message, operationMode):
 
 def simxAuxiliaryConsoleOpen(clientID, title, maxLines, mode, position, size, textColor, backgroundColor, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     consoleHandle = ct.c_int()
@@ -491,14 +491,14 @@ def simxAuxiliaryConsoleOpen(clientID, title, maxLines, mode, position, size, te
 
 def simxAuxiliaryConsoleClose(clientID, consoleHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_AuxiliaryConsoleClose(clientID, consoleHandle, operationMode)
 
 def simxAuxiliaryConsolePrint(clientID, consoleHandle, txt, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     if (sys.version_info[0] == 3) and (type(txt) is str):
@@ -507,14 +507,14 @@ def simxAuxiliaryConsolePrint(clientID, consoleHandle, txt, operationMode):
 
 def simxAuxiliaryConsoleShow(clientID, consoleHandle, showState, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_AuxiliaryConsoleShow(clientID, consoleHandle, showState, operationMode)
 
 def simxGetObjectOrientation(clientID, objectHandle, relativeToObjectHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     eulerAngles = (ct.c_float*3)()
     ret = c_GetObjectOrientation(clientID, objectHandle, relativeToObjectHandle, eulerAngles, operationMode)
@@ -525,7 +525,7 @@ def simxGetObjectOrientation(clientID, objectHandle, relativeToObjectHandle, ope
 
 def simxGetObjectQuaternion(clientID, objectHandle, relativeToObjectHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     quaternion = (ct.c_float*4)()
     ret = c_GetObjectQuaternion(clientID, objectHandle, relativeToObjectHandle, quaternion, operationMode)
@@ -536,7 +536,7 @@ def simxGetObjectQuaternion(clientID, objectHandle, relativeToObjectHandle, oper
 
 def simxGetObjectPosition(clientID, objectHandle, relativeToObjectHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     position = (ct.c_float*3)()
     ret = c_GetObjectPosition(clientID, objectHandle, relativeToObjectHandle, position, operationMode)
@@ -547,7 +547,7 @@ def simxGetObjectPosition(clientID, objectHandle, relativeToObjectHandle, operat
 
 def simxSetObjectOrientation(clientID, objectHandle, relativeToObjectHandle, eulerAngles, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     angles = (ct.c_float*3)(*eulerAngles)
@@ -555,7 +555,7 @@ def simxSetObjectOrientation(clientID, objectHandle, relativeToObjectHandle, eul
 
 def simxSetObjectQuaternion(clientID, objectHandle, relativeToObjectHandle, quaternion, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     quat = (ct.c_float*4)(*quaternion)
@@ -563,7 +563,7 @@ def simxSetObjectQuaternion(clientID, objectHandle, relativeToObjectHandle, quat
 
 def simxSetObjectPosition(clientID, objectHandle, relativeToObjectHandle, position, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     c_position = (ct.c_float*3)(*position)
@@ -571,14 +571,14 @@ def simxSetObjectPosition(clientID, objectHandle, relativeToObjectHandle, positi
 
 def simxSetObjectParent(clientID, objectHandle, parentObject, keepInPlace, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_SetObjectParent(clientID, objectHandle, parentObject, keepInPlace, operationMode)
 
 def simxSetUIButtonLabel(clientID, uiHandle, uiButtonID, upStateLabel, downStateLabel, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     if sys.version_info[0] == 3:
@@ -590,7 +590,7 @@ def simxSetUIButtonLabel(clientID, uiHandle, uiButtonID, upStateLabel, downState
 
 def simxGetLastErrors(clientID, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     errors =[]
     errorCnt = ct.c_int()
@@ -616,7 +616,7 @@ def simxGetLastErrors(clientID, operationMode):
 
 def simxGetArrayParameter(clientID, paramIdentifier, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     paramValues = (ct.c_float*3)()
     ret = c_GetArrayParameter(clientID, paramIdentifier, paramValues, operationMode)
@@ -627,7 +627,7 @@ def simxGetArrayParameter(clientID, paramIdentifier, operationMode):
 
 def simxSetArrayParameter(clientID, paramIdentifier, paramValues, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     c_paramValues = (ct.c_float*3)(*paramValues)
@@ -635,7 +635,7 @@ def simxSetArrayParameter(clientID, paramIdentifier, paramValues, operationMode)
 
 def simxGetBooleanParameter(clientID, paramIdentifier, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     paramValue = ct.c_ubyte()
@@ -643,14 +643,14 @@ def simxGetBooleanParameter(clientID, paramIdentifier, operationMode):
 
 def simxSetBooleanParameter(clientID, paramIdentifier, paramValue, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_SetBooleanParameter(clientID, paramIdentifier, paramValue, operationMode)
 
 def simxGetIntegerParameter(clientID, paramIdentifier, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     paramValue = ct.c_int()
@@ -658,14 +658,14 @@ def simxGetIntegerParameter(clientID, paramIdentifier, operationMode):
 
 def simxSetIntegerParameter(clientID, paramIdentifier, paramValue, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_SetIntegerParameter(clientID, paramIdentifier, paramValue, operationMode)
 
 def simxGetFloatingParameter(clientID, paramIdentifier, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     paramValue = ct.c_float()
@@ -673,14 +673,14 @@ def simxGetFloatingParameter(clientID, paramIdentifier, operationMode):
 
 def simxSetFloatingParameter(clientID, paramIdentifier, paramValue, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_SetFloatingParameter(clientID, paramIdentifier, paramValue, operationMode)
 
 def simxGetStringParameter(clientID, paramIdentifier, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     paramValue = ct.POINTER(ct.c_char)()
     ret = c_GetStringParameter(clientID, paramIdentifier, ct.byref(paramValue), operationMode)
@@ -702,7 +702,7 @@ def simxGetStringParameter(clientID, paramIdentifier, operationMode):
 
 def simxGetCollisionHandle(clientID, collisionObjectName, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     handle = ct.c_int()
@@ -712,7 +712,7 @@ def simxGetCollisionHandle(clientID, collisionObjectName, operationMode):
 
 def simxGetCollectionHandle(clientID, collectionName, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     handle = ct.c_int()
@@ -722,7 +722,7 @@ def simxGetCollectionHandle(clientID, collectionName, operationMode):
 
 def simxGetDistanceHandle(clientID, distanceObjectName, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     handle = ct.c_int()
@@ -732,14 +732,14 @@ def simxGetDistanceHandle(clientID, distanceObjectName, operationMode):
 
 def simxReadCollision(clientID, collisionObjectHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     collisionState = ct.c_ubyte()
     return c_ReadCollision(clientID, collisionObjectHandle, ct.byref(collisionState), operationMode), bool(collisionState.value!=0)
 
 def simxReadDistance(clientID, distanceObjectHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     minimumDistance = ct.c_float()
@@ -747,35 +747,35 @@ def simxReadDistance(clientID, distanceObjectHandle, operationMode):
 
 def simxRemoveObject(clientID, objectHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_RemoveObject(clientID, objectHandle, operationMode)
 
 def simxRemoveModel(clientID, objectHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_RemoveModel(clientID, objectHandle, operationMode)
 
 def simxRemoveUI(clientID, uiHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_RemoveUI(clientID, uiHandle, operationMode)
 
 def simxCloseScene(clientID, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_CloseScene(clientID, operationMode)
 
 def simxGetObjects(clientID, objectType, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     objectCount = ct.c_int()
@@ -792,7 +792,7 @@ def simxGetObjects(clientID, objectType, operationMode):
 
 def simxDisplayDialog(clientID, titleText, mainText, dialogType, initialText, titleColors, dialogColors, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     if titleColors != None:
         c_titleColors  = (ct.c_float*6)(*titleColors)
@@ -816,14 +816,14 @@ def simxDisplayDialog(clientID, titleText, mainText, dialogType, initialText, ti
 
 def simxEndDialog(clientID, dialogHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_EndDialog(clientID, dialogHandle, operationMode)
 
 def simxGetDialogInput(clientID, dialogHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     inputText = ct.POINTER(ct.c_char)()
     ret = c_GetDialogInput(clientID, dialogHandle, ct.byref(inputText), operationMode)
@@ -847,14 +847,14 @@ def simxGetDialogInput(clientID, dialogHandle, operationMode):
 
 def simxGetDialogResult(clientID, dialogHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     result = ct.c_int()
     return c_GetDialogResult(clientID, dialogHandle, ct.byref(result), operationMode), result.value
 
 def simxCopyPasteObjects(clientID, objectHandles, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     c_objectHandles  = (ct.c_int*len(objectHandles))(*objectHandles)
     c_objectHandles = ct.cast(c_objectHandles,ct.POINTER(ct.c_int)) # IronPython needs this
@@ -872,7 +872,7 @@ def simxCopyPasteObjects(clientID, objectHandles, operationMode):
 
 def simxGetObjectSelection(clientID, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     objectCount   = ct.c_int()
     objectHandles = ct.POINTER(ct.c_int)()
@@ -889,7 +889,7 @@ def simxGetObjectSelection(clientID, operationMode):
 
 def simxSetObjectSelection(clientID, objectHandles, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     c_objectHandles  = (ct.c_int*len(objectHandles))(*objectHandles)
@@ -897,7 +897,7 @@ def simxSetObjectSelection(clientID, objectHandles, operationMode):
 
 def simxClearFloatSignal(clientID, signalName, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     if (sys.version_info[0] == 3) and (type(signalName) is str):
@@ -906,7 +906,7 @@ def simxClearFloatSignal(clientID, signalName, operationMode):
 
 def simxClearIntegerSignal(clientID, signalName, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     if (sys.version_info[0] == 3) and (type(signalName) is str):
@@ -915,7 +915,7 @@ def simxClearIntegerSignal(clientID, signalName, operationMode):
 
 def simxClearStringSignal(clientID, signalName, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     if (sys.version_info[0] == 3) and (type(signalName) is str):
@@ -924,7 +924,7 @@ def simxClearStringSignal(clientID, signalName, operationMode):
 
 def simxGetFloatSignal(clientID, signalName, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     signalValue = ct.c_float()
@@ -934,7 +934,7 @@ def simxGetFloatSignal(clientID, signalName, operationMode):
 
 def simxGetIntegerSignal(clientID, signalName, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     signalValue = ct.c_int()
@@ -944,7 +944,7 @@ def simxGetIntegerSignal(clientID, signalName, operationMode):
 
 def simxGetStringSignal(clientID, signalName, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     signalLength = ct.c_int();
@@ -964,7 +964,7 @@ def simxGetStringSignal(clientID, signalName, operationMode):
 
 def simxGetAndClearStringSignal(clientID, signalName, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     signalLength = ct.c_int();
@@ -984,7 +984,7 @@ def simxGetAndClearStringSignal(clientID, signalName, operationMode):
 
 def simxReadStringStream(clientID, signalName, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     signalLength = ct.c_int();
@@ -1004,7 +1004,7 @@ def simxReadStringStream(clientID, signalName, operationMode):
 
 def simxSetFloatSignal(clientID, signalName, signalValue, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     if (sys.version_info[0] == 3) and (type(signalName) is str):
@@ -1013,7 +1013,7 @@ def simxSetFloatSignal(clientID, signalName, signalValue, operationMode):
 
 def simxSetIntegerSignal(clientID, signalName, signalValue, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     if (sys.version_info[0] == 3) and (type(signalName) is str):
@@ -1022,7 +1022,7 @@ def simxSetIntegerSignal(clientID, signalName, signalValue, operationMode):
 
 def simxSetStringSignal(clientID, signalName, signalValue, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     sigV=signalValue
@@ -1045,7 +1045,7 @@ def simxSetStringSignal(clientID, signalName, signalValue, operationMode):
 
 def simxAppendStringSignal(clientID, signalName, signalValue, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     sigV=signalValue
@@ -1068,7 +1068,7 @@ def simxAppendStringSignal(clientID, signalName, signalValue, operationMode):
 
 def simxWriteStringStream(clientID, signalName, signalValue, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     sigV=signalValue
@@ -1091,7 +1091,7 @@ def simxWriteStringStream(clientID, signalName, signalValue, operationMode):
 
 def simxGetObjectFloatParameter(clientID, objectHandle, parameterID, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     parameterValue = ct.c_float()
@@ -1099,14 +1099,14 @@ def simxGetObjectFloatParameter(clientID, objectHandle, parameterID, operationMo
 
 def simxSetObjectFloatParameter(clientID, objectHandle, parameterID, parameterValue, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_SetObjectFloatParameter(clientID, objectHandle, parameterID, parameterValue, operationMode)
 
 def simxGetObjectIntParameter(clientID, objectHandle, parameterID, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     parameterValue = ct.c_int()
@@ -1114,28 +1114,28 @@ def simxGetObjectIntParameter(clientID, objectHandle, parameterID, operationMode
 
 def simxSetObjectIntParameter(clientID, objectHandle, parameterID, parameterValue, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_SetObjectIntParameter(clientID, objectHandle, parameterID, parameterValue, operationMode)
 
 def simxGetModelProperty(clientID, objectHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     prop = ct.c_int()
     return c_GetModelProperty(clientID, objectHandle, ct.byref(prop), operationMode), prop.value
 
 def simxSetModelProperty(clientID, objectHandle, prop, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_SetModelProperty(clientID, objectHandle, prop, operationMode)
 
 def simxStart(connectionAddress, connectionPort, waitUntilConnected, doNotReconnectOnceDisconnected, timeOutInMs, commThreadCycleInMs):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     if (sys.version_info[0] == 3) and (type(connectionAddress) is str):
@@ -1144,84 +1144,84 @@ def simxStart(connectionAddress, connectionPort, waitUntilConnected, doNotReconn
 
 def simxFinish(clientID):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_Finish(clientID)
 
 def simxGetPingTime(clientID):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     pingTime = ct.c_int()
     return c_GetPingTime(clientID, ct.byref(pingTime)), pingTime.value
 
 def simxGetLastCmdTime(clientID):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_GetLastCmdTime(clientID)
 
 def simxSynchronousTrigger(clientID):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_SynchronousTrigger(clientID)
 
 def simxSynchronous(clientID, enable):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_Synchronous(clientID, enable)
 
 def simxPauseCommunication(clientID, enable):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_PauseCommunication(clientID, enable)
 
 def simxGetInMessageInfo(clientID, infoType):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     info = ct.c_int()
     return c_GetInMessageInfo(clientID, infoType, ct.byref(info)), info.value
 
 def simxGetOutMessageInfo(clientID, infoType):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     info = ct.c_int()
     return c_GetOutMessageInfo(clientID, infoType, ct.byref(info)), info.value
 
 def simxGetConnectionId(clientID):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_GetConnectionId(clientID)
 
 def simxCreateBuffer(bufferSize):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_CreateBuffer(bufferSize)
 
 def simxReleaseBuffer(buffer):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     return c_ReleaseBuffer(buffer)
 
 def simxTransferFile(clientID, filePathAndName, fileName_serverSide, timeOut, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     if (sys.version_info[0] == 3) and (type(filePathAndName) is str):
@@ -1230,7 +1230,7 @@ def simxTransferFile(clientID, filePathAndName, fileName_serverSide, timeOut, op
 
 def simxEraseFile(clientID, fileName_serverSide, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     if (sys.version_info[0] == 3) and (type(fileName_serverSide) is str):
@@ -1239,7 +1239,7 @@ def simxEraseFile(clientID, fileName_serverSide, operationMode):
 
 def simxCreateDummy(clientID, size, color, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     handle = ct.c_int()
@@ -1251,7 +1251,7 @@ def simxCreateDummy(clientID, size, color, operationMode):
 
 def simxQuery(clientID, signalName, signalValue, retSignalName, timeOutInMs):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     retSignalLength = ct.c_int();
@@ -1289,7 +1289,7 @@ def simxQuery(clientID, signalName, signalValue, retSignalName, timeOutInMs):
 
 def simxGetObjectGroupData(clientID, objectType, dataType, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     handles =[]
@@ -1333,7 +1333,7 @@ def simxGetObjectGroupData(clientID, objectType, dataType, operationMode):
 
 def simxCallScriptFunction(clientID, scriptDescription, options, functionName, inputInts, inputFloats, inputStrings, inputBuffer, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     inputBufferV=inputBuffer
@@ -1414,7 +1414,7 @@ def simxCallScriptFunction(clientID, scriptDescription, options, functionName, i
 
 def simxGetObjectVelocity(clientID, objectHandle, operationMode):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     linearVel  = (ct.c_float*3)()
     angularVel = (ct.c_float*3)()
@@ -1429,7 +1429,7 @@ def simxGetObjectVelocity(clientID, objectHandle, operationMode):
 
 def simxPackInts(intList):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     if sys.version_info[0] == 3:
@@ -1445,7 +1445,7 @@ def simxPackInts(intList):
 
 def simxUnpackInts(intsPackedInString):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     b=[]
     for i in range(int(len(intsPackedInString)/4)):
@@ -1454,7 +1454,7 @@ def simxUnpackInts(intsPackedInString):
 
 def simxPackFloats(floatList):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     if sys.version_info[0] == 3:
@@ -1470,7 +1470,7 @@ def simxPackFloats(floatList):
 
 def simxUnpackFloats(floatsPackedInString):
     '''
-    Please have a look at the function description/documentation in the V-REP user manual
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
     b=[]
     for i in range(int(len(floatsPackedInString)/4)):

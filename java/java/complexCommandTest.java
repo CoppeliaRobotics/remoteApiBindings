@@ -2,7 +2,7 @@
 // a remote API client. You can also use a similar construct for
 // commands that are not directly supported by the remote API.
 //
-// Load the demo scene 'remoteApiCommandServerExample.ttt' in V-REP, then 
+// Load the demo scene 'remoteApiCommandServerExample.ttt' in CoppeliaSim, then 
 // start the simulation and run this program.
 //
 // IMPORTANT: for each successful call to simxStart, there
@@ -18,9 +18,9 @@ public class complexCommandTest
     public static void main(String[] args)
     {
         System.out.println("Program started");
-        remoteApi vrep = new remoteApi();
-        vrep.simxFinish(-1); // just in case, close all opened connections
-        int clientID = vrep.simxStart("127.0.0.1",19999,true,true,5000,5);
+        remoteApi sim = new remoteApi();
+        sim.simxFinish(-1); // just in case, close all opened connections
+        int clientID = sim.simxStart("127.0.0.1",19999,true,true,5000,5);
         if (clientID!=-1)
         {
             System.out.println("Connected to remote API server");   
@@ -29,9 +29,9 @@ public class complexCommandTest
             StringWA inStrings=new StringWA(1);
             inStrings.getArray()[0]="Hello world!";
             StringWA outStrings=new StringWA(0);
-            int result=vrep.simxCallScriptFunction(clientID,"remoteApiCommandServer",vrep.sim_scripttype_childscript,"displayText_function",null,null,inStrings,null,null,null,outStrings,null,vrep.simx_opmode_blocking);
-            if (result==vrep.simx_return_ok)
-                System.out.format("Returned message: %s\n",outStrings.getArray()[0]); // display the reply from V-REP (in this case, just a string)
+            int result=sim.simxCallScriptFunction(clientID,"remoteApiCommandServer",sim.sim_scripttype_childscript,"displayText_function",null,null,inStrings,null,null,null,outStrings,null,sim.simx_opmode_blocking);
+            if (result==sim.simx_return_ok)
+                System.out.format("Returned message: %s\n",outStrings.getArray()[0]); // display the reply from CoppeliaSim (in this case, just a string)
             else
                 System.out.format("Remote function call failed\n");
 
@@ -43,9 +43,9 @@ public class complexCommandTest
             inStrings=new StringWA(1);
             inStrings.getArray()[0]="MyDummyName";
             IntWA outInts=new IntWA(0);
-            result=vrep.simxCallScriptFunction(clientID,"remoteApiCommandServer",vrep.sim_scripttype_childscript,"createDummy_function",null,inFloats,inStrings,null,outInts,null,null,null,vrep.simx_opmode_blocking);
-            if (result==vrep.simx_return_ok)
-                System.out.format("Dummy handle: %d\n",outInts.getArray()[0]); // display the reply from V-REP (in this case, the handle of the created dummy)
+            result=sim.simxCallScriptFunction(clientID,"remoteApiCommandServer",sim.sim_scripttype_childscript,"createDummy_function",null,inFloats,inStrings,null,outInts,null,null,null,sim.simx_opmode_blocking);
+            if (result==sim.simx_return_ok)
+                System.out.format("Dummy handle: %d\n",outInts.getArray()[0]); // display the reply from CoppeliaSim (in this case, the handle of the created dummy)
             else
                 System.out.format("Remote function call failed\n");
 
@@ -53,14 +53,14 @@ public class complexCommandTest
             inStrings.getArray()[0]="local octreeHandle=simCreateOctree(0.5,0,1)\n" 
             + "simInsertVoxelsIntoOctree(octreeHandle,0,{0.1,0.1,0.1},{255,0,255})\n" 
             + "return 'done'";
-            result=vrep.simxCallScriptFunction(clientID,"remoteApiCommandServer",vrep.sim_scripttype_childscript,"executeCode_function",null,null,inStrings,null,null,null,outStrings,null,vrep.simx_opmode_blocking);
-            if (result==vrep.simx_return_ok)
+            result=sim.simxCallScriptFunction(clientID,"remoteApiCommandServer",sim.sim_scripttype_childscript,"executeCode_function",null,null,inStrings,null,null,null,outStrings,null,sim.simx_opmode_blocking);
+            if (result==sim.simx_return_ok)
                 System.out.format("Code execution returned: %s\n",outStrings.getArray()[0]);
             else
                 System.out.format("Remote function call failed\n");
 
-            // Now close the connection to V-REP:   
-            vrep.simxFinish(clientID);
+            // Now close the connection to CoppeliaSim:   
+            sim.simxFinish(clientID);
         }
         else
             System.out.println("Failed connecting to remote API server");

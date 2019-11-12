@@ -1,7 +1,7 @@
 #pragma once
 
 #include "luaDataItem.h"
-#include "v_repConst.h"
+#include "simConst.h"
 
 extern "C" {
     #include "lua.h"

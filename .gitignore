@@ -32,3 +32,4 @@ release/
 x64/
 .vs/
 *.user
+.DS_Store

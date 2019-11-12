@@ -2,7 +2,7 @@
 // a remote API client. You can also use a similar construct for
 // commands that are not directly supported by the remote API.
 //
-// Load the demo scene 'remoteApiCommandServerExample.ttt' in V-REP, then 
+// Load the demo scene 'remoteApiCommandServerExample.ttt' in CoppeliaSim, then 
 // start the simulation and run this program.
 //
 // IMPORTANT: for each successful call to simxStart, there
@@ -28,7 +28,7 @@ int main(int argc,char* argv[])
         char* retStrings;
         int result=simxCallScriptFunction(clientID,"remoteApiCommandServer",sim_scripttype_childscript,"displayText_function",0,NULL,0,NULL,1,"Hello world!",0,NULL,NULL,NULL,NULL,NULL,&retStringCnt,&retStrings,NULL,NULL,simx_opmode_blocking);
         if (result==simx_return_ok)
-            printf("Returned message: %s\n",retStrings); // display the reply from V-REP (in this case, just a string)
+            printf("Returned message: %s\n",retStrings); // display the reply from CoppeliaSim (in this case, just a string)
         else
             printf("Remote function call failed\n");
 
@@ -38,7 +38,7 @@ int main(int argc,char* argv[])
         int* retInts;
         result=simxCallScriptFunction(clientID,"remoteApiCommandServer",sim_scripttype_childscript,"createDummy_function",0,NULL,3,coords,1,"MyDummyName",0,NULL,&retIntCnt,&retInts,NULL,NULL,NULL,NULL,NULL,NULL,simx_opmode_blocking);
         if (result==simx_return_ok)
-            printf("Dummy handle: %i\n",retInts[0]); // display the reply from V-REP (in this case, the handle of the created dummy)
+            printf("Dummy handle: %i\n",retInts[0]); // display the reply from CoppeliaSim (in this case, the handle of the created dummy)
         else
             printf("Remote function call failed\n");
 
@@ -54,7 +54,7 @@ int main(int argc,char* argv[])
 
         extApi_sleepMs(4000);
 
-        // Now close the connection to V-REP:   
+        // Now close the connection to CoppeliaSim:   
         simxFinish(clientID);
     }
     return(0);

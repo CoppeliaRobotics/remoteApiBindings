@@ -22,32 +22,32 @@ public class simpleSynchronousTest
     public static void main(String[] args)
     {
         System.out.println("Program started");
-        remoteApi vrep = new remoteApi();
-        vrep.simxFinish(-1); // just in case, close all opened connections
-        int clientID = vrep.simxStart("127.0.0.1",19997,true,true,5000,5);
+        remoteApi sim = new remoteApi();
+        sim.simxFinish(-1); // just in case, close all opened connections
+        int clientID = sim.simxStart("127.0.0.1",19997,true,true,5000,5);
         if (clientID!=-1)
         {
             System.out.println("Connected to remote API server");   
 
             // enable the synchronous mode on the client:
-            vrep.simxSynchronous(clientID,true);
+            sim.simxSynchronous(clientID,true);
 
             // start the simulation:
-            vrep.simxStartSimulation(clientID,vrep.simx_opmode_blocking);
+            sim.simxStartSimulation(clientID,sim.simx_opmode_blocking);
 
             // Now step a few times:
             for (int i=0;i<10;i++)
             {
                 System.out.println("Press enter to step the simulation!");
                 String input=System.console().readLine();
-                vrep.simxSynchronousTrigger(clientID);
+                sim.simxSynchronousTrigger(clientID);
             }
 
             // stop the simulation:
-            vrep.simxStopSimulation(clientID,vrep.simx_opmode_blocking);
+            sim.simxStopSimulation(clientID,sim.simx_opmode_blocking);
 
-            // Now close the connection to V-REP:   
-            vrep.simxFinish(clientID);
+            // Now close the connection to CoppeliaSim:   
+            sim.simxFinish(clientID);
         }
         else
             System.out.println("Failed connecting to remote API server");

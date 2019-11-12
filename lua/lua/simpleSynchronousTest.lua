@@ -37,7 +37,7 @@ if clientID~=-1 then
     -- stop the simulation:
     simxStopSimulation(clientID,simx_opmode_blocking)
 
-    -- Now close the connection to V-REP:   
+    -- Now close the connection to CoppeliaSim:   
     simxFinish(clientID)
 else
     print('Failed connecting to remote API server')

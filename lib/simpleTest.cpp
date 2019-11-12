@@ -1,5 +1,5 @@
-// Make sure to have the server side running in V-REP: 
-// in a child script of a V-REP scene, add following command
+// Make sure to have the server side running in CoppeliaSim: 
+// in a child script of a CoppeliaSim scene, add following command
 // to be executed just once, at simulation start:
 //
 // simRemoteApi.start(19999)
@@ -42,17 +42,17 @@ int main(int argc,char* argv[])
         {
             ret=simxGetIntegerParameter(clientID,sim_intparam_mouse_x,&mouseX,simx_opmode_buffer); // Try to retrieve the streamed data
             if (ret==simx_return_ok) // After initialization of streaming, it will take a few ms before the first value arrives, so check the return code
-                printf("Mouse position x: %d\n",mouseX); // Mouse position x is actualized when the cursor is over V-REP's window
+                printf("Mouse position x: %d\n",mouseX); // Mouse position x is actualized when the cursor is over CoppeliaSim's window
         }
         
-        // Now send some data to V-REP in a non-blocking fashion:
-        simxAddStatusbarMessage(clientID,"Hello V-REP!",simx_opmode_oneshot);
+        // Now send some data to CoppeliaSim in a non-blocking fashion:
+        simxAddStatusbarMessage(clientID,"Hello CoppeliaSim!",simx_opmode_oneshot);
 
-        // Before closing the connection to V-REP, make sure that the last command sent out had time to arrive. You can guarantee this with (for example):
+        // Before closing the connection to CoppeliaSim, make sure that the last command sent out had time to arrive. You can guarantee this with (for example):
         int pingTime;
         simxGetPingTime(clientID,&pingTime);
 
-        // Now close the connection to V-REP:   
+        // Now close the connection to CoppeliaSim:   
         simxFinish(clientID);
     }
     return(0);

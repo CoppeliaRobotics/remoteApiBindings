@@ -15,7 +15,7 @@
 
 function simpleSynchronousTest()
     disp('Program started');
-    vrep=remApiSetup();
+    sim=remApiSetup();
     simxFinish(-1); % just in case, close all opened connections
     clientID=simxStart('127.0.0.1',19997,true,true,5000,5);
 
@@ -26,7 +26,7 @@ function simpleSynchronousTest()
         simxSynchronous(clientID,true);
 
         % start the simulation:
-        simxStartSimulation(clientID,vrep.simx_opmode_blocking);
+        simxStartSimulation(clientID,sim.simx_opmode_blocking);
 
         % Now step a few times:
         for i=0:10
@@ -36,9 +36,9 @@ function simpleSynchronousTest()
         end
 
         % stop the simulation:
-        simxStopSimulation(clientID,vrep.simx_opmode_blocking);
+        simxStopSimulation(clientID,sim.simx_opmode_blocking);
 
-        % Now close the connection to V-REP:    
+        % Now close the connection to CoppeliaSim:    
         simxFinish(clientID);
     else
         disp('Failed connecting to remote API server');

@@ -3614,10 +3614,7 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
 
     registerVariableN(L,"sim.scripttype_mainscript",(boost::lexical_cast<std::string>(int(sim_scripttype_mainscript))).c_str());
     registerVariableN(L,"sim.scripttype_childscript",(boost::lexical_cast<std::string>(int(sim_scripttype_childscript))).c_str());
-    registerVariableN(L,"sim.scripttype_jointctrlcallback",(boost::lexical_cast<std::string>(int(sim_scripttype_jointctrlcallback))).c_str());
-    registerVariableN(L,"sim.scripttype_contactcallback",(boost::lexical_cast<std::string>(int(sim_scripttype_contactcallback))).c_str());
     registerVariableN(L,"sim.scripttype_customizationscript",(boost::lexical_cast<std::string>(int(sim_scripttype_customizationscript))).c_str());
-    registerVariableN(L,"sim.scripttype_generalcallback",(boost::lexical_cast<std::string>(int(sim_scripttype_generalcallback))).c_str());
 
     registerVariableN(L,"simx.return_ok",(boost::lexical_cast<std::string>(int(simx_return_ok))).c_str());
     registerVariableN(L,"simx.return_novalue_flag",(boost::lexical_cast<std::string>(int(simx_return_novalue_flag))).c_str());
@@ -4060,10 +4057,7 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
 
     registerVariable(L,"sim_scripttype_mainscript",(boost::lexical_cast<std::string>(int(sim_scripttype_mainscript))).c_str());
     registerVariable(L,"sim_scripttype_childscript",(boost::lexical_cast<std::string>(int(sim_scripttype_childscript))).c_str());
-    registerVariable(L,"sim_scripttype_jointctrlcallback",(boost::lexical_cast<std::string>(int(sim_scripttype_jointctrlcallback))).c_str());
-    registerVariable(L,"sim_scripttype_contactcallback",(boost::lexical_cast<std::string>(int(sim_scripttype_contactcallback))).c_str());
     registerVariable(L,"sim_scripttype_customizationscript",(boost::lexical_cast<std::string>(int(sim_scripttype_customizationscript))).c_str());
-    registerVariable(L,"sim_scripttype_generalcallback",(boost::lexical_cast<std::string>(int(sim_scripttype_generalcallback))).c_str());
 
     registerVariable(L,"simx_return_ok",(boost::lexical_cast<std::string>(int(simx_return_ok))).c_str());
     registerVariable(L,"simx_return_novalue_flag",(boost::lexical_cast<std::string>(int(simx_return_novalue_flag))).c_str());

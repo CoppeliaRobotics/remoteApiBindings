@@ -1406,6 +1406,17 @@ JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetJointForce
 JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxSetJointForce
   (JNIEnv *, jobject, jint, jint, jfloat, jint);
 
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxSetJointMaxForce
+  (JNIEnv *, jobject, jint, jint, jfloat, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxGetJointMaxForce
+ * Signature: (ILFloatW;I)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetJointMaxForce
+  (JNIEnv *, jobject, jint, jint, jobject, jint);
+  
 /*
  * Class:     remoteApi
  * Method:    simxReadForceSensor

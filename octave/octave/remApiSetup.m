@@ -780,6 +780,7 @@ function [sim] = remApiSetup()
     autoload("simxGetVisionSensorDepthBuffer",octfile);
     autoload("simxGetVisionSensorImage",octfile);
     autoload("simxGetJointForce",octfile);
+    autoload("simxGetJointMaxForce",octfile);
     autoload("simxJointGetForce",octfile);
     autoload("simxLoadModel",octfile);
     autoload("simxLoadScene",octfile);
@@ -803,6 +804,7 @@ function [sim] = remApiSetup()
     autoload("simxSetIntegerParameter",octfile);
     autoload("simxSetIntegerSignal",octfile);
     autoload("simxSetJointForce",octfile);
+    autoload("simxSetJointMaxForce",octfile);
     autoload("simxSetJointPosition",octfile);
     autoload("simxSetJointTargetPosition",octfile);
     autoload("simxSetJointTargetVelocity",octfile);

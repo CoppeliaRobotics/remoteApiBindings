@@ -23,6 +23,8 @@ public class remoteApi
     public native int simxJointGetForce(int clientID,int jointHandle,FloatW force,int operationMode);
     public native int simxGetJointForce(int clientID,int jointHandle,FloatW force,int operationMode);
     public native int simxSetJointForce(int clientID,int jointHandle,float force,int operationMode);
+    public native int simxSetJointMaxForce(int clientID,int jointHandle,float force,int operationMode);
+    public native int simxGetJointMaxForce(int clientID,int jointHandle,FloatW force,int operationMode);
     public native int simxReadForceSensor(int clientID,int forceSensorHandle, IntW state,FloatWA forceVector,FloatWA torqueVector,int operationMode);
     public native int simxBreakForceSensor(int clientID,int forceSensorHandle,int operationMode);
     public native int simxReadVisionSensor(int clientID,int sensorHandle,BoolW detectionState, FloatWAA auxValues, int operationMode);

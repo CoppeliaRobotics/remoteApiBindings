@@ -35,7 +35,9 @@ c_SetSphericalJointMatrix   = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct
 c_SetJointTargetVelocity    = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_float, ct.c_int32)(("simxSetJointTargetVelocity", libsimx))
 c_SetJointTargetPosition    = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_float, ct.c_int32)(("simxSetJointTargetPosition", libsimx))
 c_GetJointForce             = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.POINTER(ct.c_float), ct.c_int32)(("simxGetJointForce", libsimx))
-c_SetJointForce             = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_float, ct.c_int32)(("simxSetJointForce", libsimx))
+c_GetJointMaxForce          = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.POINTER(ct.c_float), ct.c_int32)(("simxGetJointMaxForce", libsimx))
+c_SetJointForce             = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_float, ct.c_int32)(("simxSetJointMaxForce", libsimx))
+c_SetJointMaxForce          = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_float, ct.c_int32)(("simxSetJointMaxForce", libsimx))
 c_ReadForceSensor           = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.POINTER(ct.c_ubyte), ct.POINTER(ct.c_float), ct.POINTER(ct.c_float), ct.c_int32)(("simxReadForceSensor", libsimx))
 c_BreakForceSensor          = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_int32)(("simxBreakForceSensor", libsimx))
 c_ReadVisionSensor          = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.POINTER(ct.c_ubyte), ct.POINTER(ct.POINTER(ct.c_float)), ct.POINTER(ct.POINTER(ct.c_int32)), ct.c_int32)(("simxReadVisionSensor", libsimx))
@@ -198,11 +200,24 @@ def simxGetJointForce(clientID, jointHandle, operationMode):
     force = ct.c_float()
     return c_GetJointForce(clientID, jointHandle, ct.byref(force), operationMode), force.value
 
+def simxGetJointMaxForce(clientID, jointHandle, operationMode):
+    '''
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
+    '''
+    force = ct.c_float()
+    return c_GetJointMaxForce(clientID, jointHandle, ct.byref(force), operationMode), force.value
+
 def simxSetJointForce(clientID, jointHandle, force, operationMode):
     '''
     Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
-    return c_SetJointForce(clientID, jointHandle, force, operationMode)
+    return c_SetJointMaxForce(clientID, jointHandle, force, operationMode)
+
+def simxSetJointMaxForce(clientID, jointHandle, force, operationMode):
+    '''
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
+    '''
+    return c_SetJointMaxForce(clientID, jointHandle, force, operationMode)
 
 def simxReadForceSensor(clientID, forceSensorHandle, operationMode):
     '''

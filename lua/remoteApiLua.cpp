@@ -1245,6 +1245,31 @@ int LUA_GETJOINTFORCE_CALLBACK(lua_State* L)
 // --------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------
+#define LUA_GETJOINTMAXFORCE_COMMAND "simx.getJointMaxForce"
+const int inArgs_GETJOINTMAXFORCE[]={
+    3,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+};
+int LUA_GETJOINTMAXFORCE_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_GETJOINTMAXFORCE,inArgs_GETJOINTMAXFORCE[0],LUA_GETJOINTMAXFORCE_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        float force;
+        int res=simxGetJointMaxForce(_clientId,inData->at(1).intData[0],&force,inData->at(2).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+        if (res==0)
+            D.pushOutData(CLuaDataItem(force));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
 #define LUA_GETJOINTMATRIX_COMMAND "simx.getJointMatrix"
 #define LUA_GETJOINTMATRIX_COMMANDOLD "simxGetJointMatrix"
 const int inArgs_GETJOINTMATRIX[]={
@@ -2409,7 +2434,30 @@ int LUA_SETJOINTFORCE_CALLBACK(lua_State* L)
     {
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
-        int res=simxSetJointForce(_clientId,inData->at(1).intData[0],inData->at(2).floatData[0],inData->at(3).intData[0]);
+        int res=simxSetJointMaxForce(_clientId,inData->at(1).intData[0],inData->at(2).floatData[0],inData->at(3).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+#define LUA_SETJOINTMAXFORCE_COMMAND "simx.setJointMaxForce"
+const int inArgs_SETJOINTMAXFORCE[]={
+    4,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_float,0,
+    sim_lua_arg_int,0,
+};
+int LUA_SETJOINTMAXFORCE_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_SETJOINTMAXFORCE,inArgs_SETJOINTMAXFORCE[0],LUA_SETJOINTMAXFORCE_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        int res=simxSetJointMaxForce(_clientId,inData->at(1).intData[0],inData->at(2).floatData[0],inData->at(3).intData[0]);
         D.pushOutData(CLuaDataItem(res));
     }
     return(D.writeDataToLua(L));
@@ -3035,6 +3083,7 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     lua_registerN(L,LUA_GETINMESSAGEINFO_COMMAND,LUA_GETINMESSAGEINFO_CALLBACK);
     lua_registerN(L,LUA_GETOUTMESSAGEINFO_COMMAND,LUA_GETOUTMESSAGEINFO_CALLBACK);
     lua_registerN(L,LUA_GETJOINTFORCE_COMMAND,LUA_GETJOINTFORCE_CALLBACK);
+    lua_registerN(L,LUA_GETJOINTMAXFORCE_COMMAND,LUA_GETJOINTMAXFORCE_CALLBACK);
     lua_registerN(L,LUA_GETJOINTMATRIX_COMMAND,LUA_GETJOINTMATRIX_CALLBACK);
     lua_registerN(L,LUA_GETJOINTPOSITION_COMMAND,LUA_GETJOINTPOSITION_CALLBACK);
     lua_registerN(L,LUA_GETLASTCMDTIME_COMMAND,LUA_GETLASTCMDTIME_CALLBACK);
@@ -3074,6 +3123,7 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     lua_registerN(L,LUA_REMOVEOBJECT_COMMAND,LUA_REMOVEOBJECT_CALLBACK);
     lua_registerN(L,LUA_REMOVEUI_COMMAND,LUA_REMOVEUI_CALLBACK);
     lua_registerN(L,LUA_SETJOINTFORCE_COMMAND,LUA_SETJOINTFORCE_CALLBACK);
+    lua_registerN(L,LUA_SETJOINTMAXFORCE_COMMAND,LUA_SETJOINTMAXFORCE_CALLBACK);
     lua_registerN(L,LUA_SETJOINTPOSITION_COMMAND,LUA_SETJOINTPOSITION_CALLBACK);
     lua_registerN(L,LUA_SETJOINTTARGETPOSITION_COMMAND,LUA_SETJOINTTARGETPOSITION_CALLBACK);
     lua_registerN(L,LUA_SETJOINTTARGETVELOCITY_COMMAND,LUA_SETJOINTTARGETVELOCITY_CALLBACK);

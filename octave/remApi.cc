@@ -1900,6 +1900,30 @@ DEFUN_DLD (simxGetJointForce,args,nargout,"simxGetJointForce")
     return retVallist;
 }
 
+DEFUN_DLD (simxGetJointMaxForce,args,nargout,"simxGetJointMaxForce")
+{
+    const char* funcName="simxGetJointMaxForce";
+// simxGetJointMaxForce(simxInt clientID,simxInt jointHandle,simxFloat* force,simxInt operationMode)
+    octave_value_list retVallist;
+
+    simxInt retVal=simx_return_local_error_flag;
+     if (!checkInputArgs(funcName,args,3,1,1,1))
+    {
+        retVallist(1) = 0.0f;
+        retVallist(0) = retVal;
+        return retVallist;
+    }
+
+    simxInt clientID = args(0).int_value();
+    simxInt jointHandle = args(1).int_value();
+    simxFloat force;
+    simxInt operationMode = args(2).int_value();
+    retVal = simxGetJointMaxForce ( clientID, jointHandle, &force, operationMode);
+    retVallist(1) = force;
+    retVallist(0) = retVal;
+    return retVallist;
+}
+
 DEFUN_DLD (simxLoadModel,args,nargout,"simxLoadModel")
 {
     const char* funcName="simxLoadModel";
@@ -2403,8 +2427,8 @@ DEFUN_DLD (simxSetIntegerSignal,args,nargout,"simxSetIntegerSignal")
 
 DEFUN_DLD (simxSetJointForce,args,nargout,"simxSetJointForce")
 {
-    const char* funcName="simxSetJointForce";
-// simxSetJointForce(simxInt clientID,simxInt jointHandle,simxFloat force,simxInt operationMode)
+    const char* funcName="simxSetJointMaxForce";
+// simxSetJointMaxForce(simxInt clientID,simxInt jointHandle,simxFloat force,simxInt operationMode)
     octave_value_list retVallist;
 
     octave_value retVal=simx_return_local_error_flag;
@@ -2419,7 +2443,32 @@ DEFUN_DLD (simxSetJointForce,args,nargout,"simxSetJointForce")
     simxFloat force = args(2).float_value();
     simxInt operationMode = args(3).int_value();
 
-    retVal = simxSetJointForce(clientID,jointHandle,force,operationMode);
+    retVal = simxSetJointMaxForce(clientID,jointHandle,force,operationMode);
+
+    retVallist(0) = retVal;
+
+    return retVallist;
+}
+
+DEFUN_DLD (simxSetJointMaxForce,args,nargout,"simxSetJointMaxForce")
+{
+    const char* funcName="simxSetJointMaxForce";
+// simxSetJointMaxForce(simxInt clientID,simxInt jointHandle,simxFloat force,simxInt operationMode)
+    octave_value_list retVallist;
+
+    octave_value retVal=simx_return_local_error_flag;
+     if (!checkInputArgs(funcName,args,4,1,1,1,1))
+    {
+        retVallist(0) = retVal;
+        return retVallist;
+    }
+
+    simxInt clientID = args(0).int_value() ;
+    simxInt jointHandle = args(1).int_value();
+    simxFloat force = args(2).float_value();
+    simxInt operationMode = args(3).int_value();
+
+    retVal = simxSetJointMaxForce(clientID,jointHandle,force,operationMode);
 
     retVallist(0) = retVal;
 

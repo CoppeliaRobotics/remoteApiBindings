@@ -14,3 +14,5 @@ remote API with "sim=remApi('remoteApi','extApi.h');" instead of "sim=remApi('re
 Finally, if you wish to rebuild the prototype file, you will have to comply with above conditions, then type:
 
 loadlibrary('remoteApi','extApi.h','mfilename','remoteApiProto')
+
+For more examples, have a look at the python folder: language is different but principles are the same

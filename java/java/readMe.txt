@@ -9,3 +9,5 @@ You might also have to add the folder to the system path. In Linux for instance,
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:`pwd`
 
 before executing simpleTest.
+
+For more examples, have a look at the python folder: language is different but principles are the same

@@ -43,6 +43,8 @@ if clientID!=-1:
         while executedMovId!=id:
             retCode,s=sim.simxGetStringSignal(clientID,stringSignalName,sim.simx_opmode_buffer)
             if retCode==sim.simx_return_ok:
+                if type(s)==bytearray:
+                    s=s.decode('ascii') # python2/python3 differences
                 executedMovId=s
 
     # Start streaming stringSignalName string signal:

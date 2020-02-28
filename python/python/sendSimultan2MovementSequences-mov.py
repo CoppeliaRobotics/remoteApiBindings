@@ -52,12 +52,16 @@ with Client() as client:
             while client.executedMovId1!=id:
                 retCode,s=sim.simxGetStringSignal(client.id,client.stringSignalName1,sim.simx_opmode_buffer)
                 if retCode==sim.simx_return_ok:
+                    if type(s)==bytearray:
+                        s=s.decode('ascii') # python2/python3 differences
                     client.executedMovId1=s
 
         def waitForMovementExecuted2(id):
             while client.executedMovId2!=id:
                 retCode,s=sim.simxGetStringSignal(client.id,client.stringSignalName2,sim.simx_opmode_buffer)
                 if retCode==sim.simx_return_ok:
+                    if type(s)==bytearray:
+                        s=s.decode('ascii') # python2/python3 differences
                     client.executedMovId2=s
 
         # Start streaming client.stringSignalName1 and client.stringSignalName2 string signals:

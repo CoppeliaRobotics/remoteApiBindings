@@ -44,6 +44,8 @@ if clientID!=-1:
         while executedMovId!=id:
             retCode,s=sim.simxGetStringSignal(clientID,stringSignalName,sim.simx_opmode_buffer)
             if retCode==sim.simx_return_ok:
+                if type(s)==bytearray:
+                    s=s.decode('ascii') # python2/python3 differences
                 executedMovId=s
 
     # Start streaming stringSignalName string signal:
@@ -85,7 +87,7 @@ if clientID!=-1:
     waitForMovementExecuted('movSeq1')
 
     sim.simxStopSimulation(clientID,sim.simx_opmode_blocking)
-    sim.simxGetIntegerSignal(clientID,integerSignalName,sim.simx_opmode_discontinue)
+    sim.simxGetStringSignal(clientID,stringSignalName,sim.simx_opmode_discontinue)
     sim.simxGetPingTime(clientID)
 
     # Now close the connection to CoppeliaSim:

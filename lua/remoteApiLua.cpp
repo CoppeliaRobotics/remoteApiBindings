@@ -3281,13 +3281,11 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     registerVariableN(L,"sim.appobj_distance_type",(boost::lexical_cast<std::string>(int(sim_appobj_distance_type))).c_str());
     registerVariableN(L,"sim.appobj_simulation_type",(boost::lexical_cast<std::string>(int(sim_appobj_simulation_type))).c_str());
     registerVariableN(L,"sim.appobj_ik_type",(boost::lexical_cast<std::string>(int(sim_appobj_ik_type))).c_str());
-    registerVariableN(L,"sim.appobj_constraintsolver_type",(boost::lexical_cast<std::string>(int(sim_appobj_constraintsolver_type))).c_str());
     registerVariableN(L,"sim.appobj_collection_type",(boost::lexical_cast<std::string>(int(sim_appobj_collection_type))).c_str());
     registerVariableN(L,"sim.appobj_ui_type",(boost::lexical_cast<std::string>(int(sim_appobj_ui_type))).c_str());
     registerVariableN(L,"sim.appobj_script_type",(boost::lexical_cast<std::string>(int(sim_appobj_script_type))).c_str());
     registerVariableN(L,"sim.appobj_pathplanning_type",(boost::lexical_cast<std::string>(int(sim_appobj_pathplanning_type))).c_str());
     registerVariableN(L,"sim.appobj_texture_type",(boost::lexical_cast<std::string>(int(sim_appobj_texture_type))).c_str());
-    registerVariableN(L,"sim.appobj_motionplanning_type",(boost::lexical_cast<std::string>(int(sim_appobj_motionplanning_type))).c_str());
 
     registerVariableN(L,"sim.light_omnidirectional_subtype",(boost::lexical_cast<std::string>(int(sim_light_omnidirectional_subtype))).c_str());
     registerVariableN(L,"sim.light_spot_subtype",(boost::lexical_cast<std::string>(int(sim_light_spot_subtype))).c_str());
@@ -3317,14 +3315,12 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     registerVariableN(L,"sim.objectspecialproperty_detectable_capacitive",(boost::lexical_cast<std::string>(int(sim_objectspecialproperty_detectable_capacitive))).c_str());
     registerVariableN(L,"sim.objectspecialproperty_renderable",(boost::lexical_cast<std::string>(int(sim_objectspecialproperty_renderable))).c_str());
     registerVariableN(L,"sim.objectspecialproperty_detectable_all",(boost::lexical_cast<std::string>(int(sim_objectspecialproperty_detectable_all))).c_str());
-    registerVariableN(L,"sim.objectspecialproperty_cuttable",(boost::lexical_cast<std::string>(int(sim_objectspecialproperty_cuttable))).c_str());
     registerVariableN(L,"sim.objectspecialproperty_pathplanning_ignored",(boost::lexical_cast<std::string>(int(sim_objectspecialproperty_pathplanning_ignored))).c_str());
 
     registerVariableN(L,"sim.modelproperty_not_collidable",(boost::lexical_cast<std::string>(int(sim_modelproperty_not_collidable))).c_str());
     registerVariableN(L,"sim.modelproperty_not_measurable",(boost::lexical_cast<std::string>(int(sim_modelproperty_not_measurable))).c_str());
     registerVariableN(L,"sim.modelproperty_not_renderable",(boost::lexical_cast<std::string>(int(sim_modelproperty_not_renderable))).c_str());
     registerVariableN(L,"sim.modelproperty_not_detectable",(boost::lexical_cast<std::string>(int(sim_modelproperty_not_detectable))).c_str());
-    registerVariableN(L,"sim.modelproperty_not_cuttable",(boost::lexical_cast<std::string>(int(sim_modelproperty_not_cuttable))).c_str());
     registerVariableN(L,"sim.modelproperty_not_dynamic",(boost::lexical_cast<std::string>(int(sim_modelproperty_not_dynamic))).c_str());
     registerVariableN(L,"sim.modelproperty_not_respondable",(boost::lexical_cast<std::string>(int(sim_modelproperty_not_respondable))).c_str());
     registerVariableN(L,"sim.modelproperty_not_reset",(boost::lexical_cast<std::string>(int(sim_modelproperty_not_reset))).c_str());
@@ -3428,7 +3424,6 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     registerVariableN(L,"sim.boolparam_video_recording_triggered",(boost::lexical_cast<std::string>(int(sim_boolparam_video_recording_triggered))).c_str());
     registerVariableN(L,"sim.boolparam_reserved1",(boost::lexical_cast<std::string>(int(sim_boolparam_reserved1))).c_str());
     registerVariableN(L,"sim.boolparam_reserved2",(boost::lexical_cast<std::string>(int(sim_boolparam_reserved2))).c_str());
-    registerVariableN(L,"sim.boolparam_threaded_rendering_enabled",(boost::lexical_cast<std::string>(int(sim_boolparam_threaded_rendering_enabled))).c_str());
     registerVariableN(L,"sim.boolparam_fullscreen",(boost::lexical_cast<std::string>(int(sim_boolparam_fullscreen))).c_str());
     registerVariableN(L,"sim.boolparam_headless",(boost::lexical_cast<std::string>(int(sim_boolparam_headless))).c_str());
     registerVariableN(L,"sim.boolparam_hierarchy_toolbarbutton_enabled",(boost::lexical_cast<std::string>(int(sim_boolparam_hierarchy_toolbarbutton_enabled))).c_str());
@@ -3460,8 +3455,6 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     registerVariableN(L,"sim.intparam_edit_mode_type",(boost::lexical_cast<std::string>(int(sim_intparam_edit_mode_type))).c_str());
     registerVariableN(L,"sim.intparam_server_port_next",(boost::lexical_cast<std::string>(int(sim_intparam_server_port_next))).c_str());
     registerVariableN(L,"sim.intparam_qt_version",(boost::lexical_cast<std::string>(int(sim_intparam_qt_version))).c_str());
-    registerVariableN(L,"sim.intparam_event_flags_read",(boost::lexical_cast<std::string>(int(sim_intparam_event_flags_read))).c_str());
-    registerVariableN(L,"sim.intparam_event_flags_read_clear",(boost::lexical_cast<std::string>(int(sim_intparam_event_flags_read_clear))).c_str());
     registerVariableN(L,"sim.intparam_platform",(boost::lexical_cast<std::string>(int(sim_intparam_platform))).c_str());
     registerVariableN(L,"sim.intparam_scene_unique_id",(boost::lexical_cast<std::string>(int(sim_intparam_scene_unique_id))).c_str());
     registerVariableN(L,"sim.intparam_work_thread_count, /* 0-256. 0 to disable",(boost::lexical_cast<std::string>(int(sim_intparam_work_thread_count))).c_str());
@@ -3652,9 +3645,6 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     registerVariableN(L,"sim.pplanfloatparam_delta_min",(boost::lexical_cast<std::string>(int(sim_pplanfloatparam_delta_min))).c_str());
     registerVariableN(L,"sim.pplanfloatparam_delta_range",(boost::lexical_cast<std::string>(int(sim_pplanfloatparam_delta_range))).c_str());
 
-    registerVariableN(L,"sim.mplanintparam_nodes_computed",(boost::lexical_cast<std::string>(int(sim_mplanintparam_nodes_computed))).c_str());
-    registerVariableN(L,"sim.mplanintparam_prepare_nodes",(boost::lexical_cast<std::string>(int(sim_mplanintparam_prepare_nodes))).c_str());
-    registerVariableN(L,"sim.mplanintparam_clear_nodes",(boost::lexical_cast<std::string>(int(sim_mplanintparam_clear_nodes))).c_str());
 
     registerVariableN(L,"sim.jointmode_passive",(boost::lexical_cast<std::string>(int(sim_jointmode_passive))).c_str());
     registerVariableN(L,"sim.jointmode_motion",(boost::lexical_cast<std::string>(int(sim_jointmode_motion_deprecated))).c_str());
@@ -3724,13 +3714,11 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     registerVariable(L,"sim_appobj_distance_type",(boost::lexical_cast<std::string>(int(sim_appobj_distance_type))).c_str());
     registerVariable(L,"sim_appobj_simulation_type",(boost::lexical_cast<std::string>(int(sim_appobj_simulation_type))).c_str());
     registerVariable(L,"sim_appobj_ik_type",(boost::lexical_cast<std::string>(int(sim_appobj_ik_type))).c_str());
-    registerVariable(L,"sim_appobj_constraintsolver_type",(boost::lexical_cast<std::string>(int(sim_appobj_constraintsolver_type))).c_str());
     registerVariable(L,"sim_appobj_collection_type",(boost::lexical_cast<std::string>(int(sim_appobj_collection_type))).c_str());
     registerVariable(L,"sim_appobj_ui_type",(boost::lexical_cast<std::string>(int(sim_appobj_ui_type))).c_str());
     registerVariable(L,"sim_appobj_script_type",(boost::lexical_cast<std::string>(int(sim_appobj_script_type))).c_str());
     registerVariable(L,"sim_appobj_pathplanning_type",(boost::lexical_cast<std::string>(int(sim_appobj_pathplanning_type))).c_str());
     registerVariable(L,"sim_appobj_texture_type",(boost::lexical_cast<std::string>(int(sim_appobj_texture_type))).c_str());
-    registerVariable(L,"sim_appobj_motionplanning_type",(boost::lexical_cast<std::string>(int(sim_appobj_motionplanning_type))).c_str());
 
     registerVariable(L,"sim_light_omnidirectional_subtype",(boost::lexical_cast<std::string>(int(sim_light_omnidirectional_subtype))).c_str());
     registerVariable(L,"sim_light_spot_subtype",(boost::lexical_cast<std::string>(int(sim_light_spot_subtype))).c_str());
@@ -3760,14 +3748,12 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     registerVariable(L,"sim_objectspecialproperty_detectable_capacitive",(boost::lexical_cast<std::string>(int(sim_objectspecialproperty_detectable_capacitive))).c_str());
     registerVariable(L,"sim_objectspecialproperty_renderable",(boost::lexical_cast<std::string>(int(sim_objectspecialproperty_renderable))).c_str());
     registerVariable(L,"sim_objectspecialproperty_detectable_all",(boost::lexical_cast<std::string>(int(sim_objectspecialproperty_detectable_all))).c_str());
-    registerVariable(L,"sim_objectspecialproperty_cuttable",(boost::lexical_cast<std::string>(int(sim_objectspecialproperty_cuttable))).c_str());
     registerVariable(L,"sim_objectspecialproperty_pathplanning_ignored",(boost::lexical_cast<std::string>(int(sim_objectspecialproperty_pathplanning_ignored))).c_str());
 
     registerVariable(L,"sim_modelproperty_not_collidable",(boost::lexical_cast<std::string>(int(sim_modelproperty_not_collidable))).c_str());
     registerVariable(L,"sim_modelproperty_not_measurable",(boost::lexical_cast<std::string>(int(sim_modelproperty_not_measurable))).c_str());
     registerVariable(L,"sim_modelproperty_not_renderable",(boost::lexical_cast<std::string>(int(sim_modelproperty_not_renderable))).c_str());
     registerVariable(L,"sim_modelproperty_not_detectable",(boost::lexical_cast<std::string>(int(sim_modelproperty_not_detectable))).c_str());
-    registerVariable(L,"sim_modelproperty_not_cuttable",(boost::lexical_cast<std::string>(int(sim_modelproperty_not_cuttable))).c_str());
     registerVariable(L,"sim_modelproperty_not_dynamic",(boost::lexical_cast<std::string>(int(sim_modelproperty_not_dynamic))).c_str());
     registerVariable(L,"sim_modelproperty_not_respondable",(boost::lexical_cast<std::string>(int(sim_modelproperty_not_respondable))).c_str());
     registerVariable(L,"sim_modelproperty_not_reset",(boost::lexical_cast<std::string>(int(sim_modelproperty_not_reset))).c_str());
@@ -3871,7 +3857,6 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     registerVariable(L,"sim_boolparam_video_recording_triggered",(boost::lexical_cast<std::string>(int(sim_boolparam_video_recording_triggered))).c_str());
     registerVariable(L,"sim_boolparam_reserved1",(boost::lexical_cast<std::string>(int(sim_boolparam_reserved1))).c_str());
     registerVariable(L,"sim_boolparam_reserved2",(boost::lexical_cast<std::string>(int(sim_boolparam_reserved2))).c_str());
-    registerVariable(L,"sim_boolparam_threaded_rendering_enabled",(boost::lexical_cast<std::string>(int(sim_boolparam_threaded_rendering_enabled))).c_str());
     registerVariable(L,"sim_boolparam_fullscreen",(boost::lexical_cast<std::string>(int(sim_boolparam_fullscreen))).c_str());
     registerVariable(L,"sim_boolparam_headless",(boost::lexical_cast<std::string>(int(sim_boolparam_headless))).c_str());
     registerVariable(L,"sim_boolparam_hierarchy_toolbarbutton_enabled",(boost::lexical_cast<std::string>(int(sim_boolparam_hierarchy_toolbarbutton_enabled))).c_str());
@@ -3903,8 +3888,6 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     registerVariable(L,"sim_intparam_edit_mode_type",(boost::lexical_cast<std::string>(int(sim_intparam_edit_mode_type))).c_str());
     registerVariable(L,"sim_intparam_server_port_next",(boost::lexical_cast<std::string>(int(sim_intparam_server_port_next))).c_str());
     registerVariable(L,"sim_intparam_qt_version",(boost::lexical_cast<std::string>(int(sim_intparam_qt_version))).c_str());
-    registerVariable(L,"sim_intparam_event_flags_read",(boost::lexical_cast<std::string>(int(sim_intparam_event_flags_read))).c_str());
-    registerVariable(L,"sim_intparam_event_flags_read_clear",(boost::lexical_cast<std::string>(int(sim_intparam_event_flags_read_clear))).c_str());
     registerVariable(L,"sim_intparam_platform",(boost::lexical_cast<std::string>(int(sim_intparam_platform))).c_str());
     registerVariable(L,"sim_intparam_scene_unique_id",(boost::lexical_cast<std::string>(int(sim_intparam_scene_unique_id))).c_str());
     registerVariable(L,"sim_intparam_work_thread_count, /* 0-256. 0 to disable",(boost::lexical_cast<std::string>(int(sim_intparam_work_thread_count))).c_str());
@@ -4095,10 +4078,6 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     registerVariable(L,"sim_pplanfloatparam_delta_min",(boost::lexical_cast<std::string>(int(sim_pplanfloatparam_delta_min))).c_str());
     registerVariable(L,"sim_pplanfloatparam_delta_range",(boost::lexical_cast<std::string>(int(sim_pplanfloatparam_delta_range))).c_str());
 
-    registerVariable(L,"sim_mplanintparam_nodes_computed",(boost::lexical_cast<std::string>(int(sim_mplanintparam_nodes_computed))).c_str());
-    registerVariable(L,"sim_mplanintparam_prepare_nodes",(boost::lexical_cast<std::string>(int(sim_mplanintparam_prepare_nodes))).c_str());
-    registerVariable(L,"sim_mplanintparam_clear_nodes",(boost::lexical_cast<std::string>(int(sim_mplanintparam_clear_nodes))).c_str());
-
     registerVariable(L,"sim_jointmode_passive",(boost::lexical_cast<std::string>(int(sim_jointmode_passive))).c_str());
     registerVariable(L,"sim_jointmode_motion",(boost::lexical_cast<std::string>(int(sim_jointmode_motion_deprecated))).c_str());
     registerVariable(L,"sim_jointmode_ik",(boost::lexical_cast<std::string>(int(sim_jointmode_ik))).c_str());
@@ -4140,18 +4119,6 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     registerVariable(L,"simx_cmdheaderoffset_cmd",(boost::lexical_cast<std::string>(int(simx_cmdheaderoffset_cmd))).c_str());
     registerVariable(L,"simx_cmdheaderoffset_sim_time",(boost::lexical_cast<std::string>(int(simx_cmdheaderoffset_sim_time))).c_str());
     registerVariable(L,"simx_cmdheaderoffset_status",(boost::lexical_cast<std::string>(int(simx_cmdheaderoffset_status))).c_str());
-
-
-
-
-
-
-
-
-
-
-
-
 
     return 1;
 }

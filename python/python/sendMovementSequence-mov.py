@@ -32,8 +32,8 @@ if clientID!=-1:
 
     executedMovId='notReady'
 
-    targetArm='threadedBlueArm'
-    #targetArm='nonThreadedRedArm'
+    targetArm='blueArm'
+    #targetArm='redArm'
 
     stringSignalName=targetArm+'_executedMovId'
 

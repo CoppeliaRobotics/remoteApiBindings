@@ -42,8 +42,8 @@ with Client() as client:
     if client.id!=-1:
         print ('Connected to remote API server')
 
-        targetArm1='threadedBlueArm'
-        targetArm2='nonThreadedRedArm'
+        targetArm1='blueArm'
+        targetArm2='redArm'
 
         client.stringSignalName1=targetArm1+'_executedMovId'
         client.stringSignalName2=targetArm2+'_executedMovId'

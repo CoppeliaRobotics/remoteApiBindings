@@ -1,6 +1,6 @@
 # Make sure to have CoppeliaSim running, with followig scene loaded:
 #
-# scenes/movementViaRemoteApi.ttt
+# scenes/messaging/movementViaRemoteApi.ttt
 #
 # Do not launch simulation, then run this script
 #

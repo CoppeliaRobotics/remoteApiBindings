@@ -1456,6 +1456,24 @@ classdef remApi
             [rtn minimumDistance] = calllib(obj.libName,'simxReadDistance',clientID,distanceObjectHandle_,minimumDistance,operationMode_);
         end
 
+        function [rtn collisionState]= simxCheckCollision(obj,clientID,entity1,entity2,operationMode)
+            entity1_ = int32(entity1);
+            entity2_ = int32(entity2);
+            operationMode_ = int32(operationMode);
+            collisionState = libpointer('uint8Ptr',uint8(0));
+
+            [rtn collisionState] = calllib(obj.libName,'simxCheckCollision',clientID,entity1_,entity2_,collisionState,operationMode_);
+        end
+
+        function [rtn minimumDistance]= simxCheckDistance(obj,clientID,entity1,entity2,operationMode)
+            entity1_ = int32(entity1);
+            entity2_ = int32(entity2);
+            operationMode_ = int32(operationMode);
+            minimumDistance = libpointer('singlePtr',single(0));
+
+            [rtn minimumDistance] = calllib(obj.libName,'simxCheckDistance',clientID,entity1_,entity2_,minimumDistance,operationMode_);
+        end
+
         function [rtn state forceVector torqueVector]= simxReadForceSensor(obj,clientID,forceSensorHandle,operationMode)
             forceSensorHandle_ = int32(forceSensorHandle);
             state = libpointer('uint8Ptr', uint8(0));

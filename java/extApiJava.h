@@ -1723,6 +1723,14 @@ JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxReadDistance
 
 /*
  * Class:     remoteApi
+ * Method:    simxCheckDistance
+ * Signature: (ILFloatW;I)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxCheckDistance
+  (JNIEnv *, jobject, jint, jint, jint, jobject, jint);
+
+/*
+ * Class:     remoteApi
  * Method:    simxGetFloatingParameter
  * Signature: (ILFloatW;I)I
  */
@@ -1872,6 +1880,14 @@ JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetCollectionHandle
  */
 JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxReadCollision
   (JNIEnv *, jobject, jint, jint, jobject, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxCheckCollision
+ * Signature: (ILBoolW;I)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxCheckCollision
+  (JNIEnv *, jobject, jint, jint, jint, jobject, jint);
 
 /*
  * Class:     remoteApi

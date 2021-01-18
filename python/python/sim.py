@@ -88,6 +88,8 @@ c_GetDistanceHandle         = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.
 c_GetCollectionHandle       = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.c_char), ct.POINTER(ct.c_int32), ct.c_int32)(("simxGetCollectionHandle", libsimx))
 c_ReadCollision             = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.POINTER(ct.c_ubyte), ct.c_int32)(("simxReadCollision", libsimx))
 c_ReadDistance              = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.POINTER(ct.c_float), ct.c_int32)(("simxReadDistance", libsimx))
+c_CheckCollision            = ct.CFUNCTYPE(ct.c_int32,ct.c_int32,ct.c_int32, ct.c_int32, ct.POINTER(ct.c_ubyte), ct.c_int32)(("simxCheckCollision", libsimx))
+c_CheckDistance             = ct.CFUNCTYPE(ct.c_int32,ct.c_int32,ct.c_int32, ct.c_int32, ct.POINTER(ct.c_float), ct.c_int32)(("simxCheckDistance", libsimx))
 c_RemoveObject              = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_int32)(("simxRemoveObject", libsimx))
 c_RemoveModel               = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_int32)(("simxRemoveModel", libsimx))
 c_RemoveUI                  = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_int32)(("simxRemoveUI", libsimx))
@@ -759,6 +761,21 @@ def simxReadDistance(clientID, distanceObjectHandle, operationMode):
 
     minimumDistance = ct.c_float()
     return c_ReadDistance(clientID, distanceObjectHandle, ct.byref(minimumDistance), operationMode), minimumDistance.value
+
+def simxCheckCollision(clientID, entity1,entity2, operationMode):
+    '''
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
+    '''
+    collisionState = ct.c_ubyte()
+    return c_CheckCollision(clientID, entity1,entity2, ct.byref(collisionState), operationMode), bool(collisionState.value!=0)
+
+def simxCheckDistance(clientID, entity1,entity2, operationMode):
+    '''
+    Please have a look at the function description/documentation in the CoppeliaSim user manual
+    '''
+
+    minimumDistance = ct.c_float()
+    return c_CheckDistance(clientID, entity1,entity2, ct.byref(minimumDistance), operationMode), minimumDistance.value
 
 def simxRemoveObject(clientID, objectHandle, operationMode):
     '''

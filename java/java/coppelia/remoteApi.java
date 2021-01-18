@@ -63,6 +63,7 @@ public class remoteApi
     public native int simxCloseScene(int clientID,int operationMode);
     public native int simxEndDialog(int clientID,int dialogHandle,int operationMode);
     public native int simxReadDistance(int clientID,int distanceObjectHandle,FloatW minimumDistance,int operationMode);
+    public native int simxCheckDistance(int clientID,int entity1,int entity2,FloatW minimumDistance,int operationMode);
     public native int simxGetFloatingParameter(int clientID,int paramIdentifier,FloatW paramValue,int operationMode);
     public native int simxSetObjectOrientation(int clientID,int objectHandle,int relativeToObjectHandle,FloatWA eulerAngles,int operationMode);
     public native int simxSetObjectQuaternion(int clientID,int objectHandle,int relativeToObjectHandle,FloatWA quaternion,int operationMode);
@@ -83,6 +84,7 @@ public class remoteApi
     public native int simxGetDistanceHandle(int clientID,final String distanceObjectName,IntW handle,int operationMode);
     public native int simxGetCollectionHandle(int clientID,final String collectionName,IntW handle,int operationMode);
     public native int simxReadCollision(int clientID,int collisionObjectHandle,BoolW collisionState,int operationMode);
+    public native int simxCheckCollision(int clientID,int entity1,int entity2,BoolW collisionState,int operationMode);
     public native int simxGetObjects(int clientID,int objectType,IntWA objectHandles,int operationMode);
     public native int simxDisplayDialog(int clientID,final String titleText,final String mainText,int dialogType,final String initialText,FloatWA titleColors,FloatWA dialogColors,IntW dialogHandle,IntW uiHandle,int operationMode);
     public native int simxGetDialogInput(int clientID,int dialogHandle,StringW inputText,int operationMode);

@@ -148,6 +148,10 @@ fcns.name{fcnNum}='simxGetCollectionHandle'; fcns.calltype{fcnNum}='cdecl'; fcns
 fcns.name{fcnNum}='simxReadCollision'; fcns.calltype{fcnNum}='cdecl'; fcns.LHS{fcnNum}='int32'; fcns.RHS{fcnNum}={'int32', 'int32', 'uint8Ptr', 'int32'};fcnNum=fcnNum+1;
 % extern  simxInt simxReadDistance ( simxInt clientID , simxInt distanceObjectHandle , simxFloat * minimumDistance , simxInt operationMode );
 fcns.name{fcnNum}='simxReadDistance'; fcns.calltype{fcnNum}='cdecl'; fcns.LHS{fcnNum}='int32'; fcns.RHS{fcnNum}={'int32', 'int32', 'singlePtr', 'int32'};fcnNum=fcnNum+1;
+% extern  simxInt simxCheckCollision ( simxInt clientID , simxInt entity1, simxInt entity2 , simxUChar * collisionState , simxInt operationMode );
+fcns.name{fcnNum}='simxCheckCollision'; fcns.calltype{fcnNum}='cdecl'; fcns.LHS{fcnNum}='int32'; fcns.RHS{fcnNum}={'int32', 'int32', 'int32', 'uint8Ptr', 'int32'};fcnNum=fcnNum+1;
+% extern  simxInt simxCheckDistance ( simxInt clientID , simxInt entity1, simxInt entity2 , simxFloat * minimumDistance , simxInt operationMode );
+fcns.name{fcnNum}='simxCheckDistance'; fcns.calltype{fcnNum}='cdecl'; fcns.LHS{fcnNum}='int32'; fcns.RHS{fcnNum}={'int32', 'int32', 'int32', 'singlePtr', 'int32'};fcnNum=fcnNum+1;
 % extern  simxInt simxRemoveObject ( simxInt clientID , simxInt objectHandle , simxInt operationMode );
 fcns.name{fcnNum}='simxRemoveObject'; fcns.calltype{fcnNum}='cdecl'; fcns.LHS{fcnNum}='int32'; fcns.RHS{fcnNum}={'int32', 'int32', 'int32'};fcnNum=fcnNum+1;
 % extern  simxInt simxRemoveModel ( simxInt clientID , simxInt objectHandle , simxInt operationMode );

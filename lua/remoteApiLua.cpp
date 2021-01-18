@@ -2187,6 +2187,58 @@ int LUA_READDISTANCE_CALLBACK(lua_State* L)
 // --------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------
+#define LUA_CHECKCOLLISION_COMMAND "simx.checkCollision"
+const int inArgs_CHECKCOLLISION[]={
+    4,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+};
+int LUA_CHECKCOLLISION_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_CHECKCOLLISION,inArgs_CHECKCOLLISION[0],LUA_CHECKCOLLISION_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        unsigned char collState;
+        int res=simxCheckCollision(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],&collState,inData->at(3).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+        if (res==0)
+            D.pushOutData(CLuaDataItem(collState!=0));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+#define LUA_CHECKDISTANCE_COMMAND "simx.checkDistance"
+const int inArgs_CHECKDISTANCE[]={
+    4,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+};
+int LUA_CHECKDISTANCE_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_CHECKDISTANCE,inArgs_CHECKDISTANCE[0],LUA_CHECKDISTANCE_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        float dist;
+        int res=simxCheckDistance(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],&dist,inData->at(3).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+        if (res==0)
+            D.pushOutData(CLuaDataItem(dist));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
 #define LUA_READFORCESENSOR_COMMAND "simx.readForceSensor"
 #define LUA_READFORCESENSOR_COMMANDOLD "simxReadForceSensor"
 const int inArgs_READFORCESENSOR[]={
@@ -3114,6 +3166,8 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     lua_registerN(L,LUA_QUERY_COMMAND,LUA_QUERY_CALLBACK);
     lua_registerN(L,LUA_READCOLLISION_COMMAND,LUA_READCOLLISION_CALLBACK);
     lua_registerN(L,LUA_READDISTANCE_COMMAND,LUA_READDISTANCE_CALLBACK);
+    lua_registerN(L,LUA_CHECKCOLLISION_COMMAND,LUA_CHECKCOLLISION_CALLBACK);
+    lua_registerN(L,LUA_CHECKDISTANCE_COMMAND,LUA_CHECKDISTANCE_CALLBACK);
     lua_registerN(L,LUA_READFORCESENSOR_COMMAND,LUA_READFORCESENSOR_CALLBACK);
     lua_registerN(L,LUA_READPROXIMITYSENSOR_COMMAND,LUA_READPROXIMITYSENSOR_CALLBACK);
     lua_registerN(L,LUA_READSTRINGSTREAM_COMMAND,LUA_READSTRINGSTREAM_CALLBACK);

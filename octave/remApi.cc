@@ -2118,6 +2118,56 @@ DEFUN_DLD (simxReadDistance,args,nargout,"simxReadDistance")
     return retVallist;
 }
 
+DEFUN_DLD (simxCheckCollision,args,nargout,"simxCheckCollision")
+{
+    const char* funcName="simxCheckCollision";
+// simxCheckCollision(simxInt clientID,simxInt entity1,simxInt entity2,simxUChar* collisionState,simxInt operationMode)
+    octave_value_list retVallist;
+
+    simxInt retVal=simx_return_local_error_flag;
+     if (!checkInputArgs(funcName,args,4,1,1,1,1))
+    {
+        retVallist(1) = 0;
+        retVallist(0) = retVal;
+        return retVallist;
+    }
+
+    simxInt clientID = args(0).int_value();
+    simxInt entity1 = args(1).int_value();
+    simxInt entity2 = args(2).int_value();
+    simxUChar collisionState;
+    simxInt operationMode = args(3).int_value();
+    retVal = simxCheckCollision ( clientID, entity1,entity2, &collisionState, operationMode);
+    retVallist(1) = collisionState;
+    retVallist(0) = retVal;
+    return retVallist;
+}
+
+DEFUN_DLD (simxCheckDistance,args,nargout,"simxCheckDistance")
+{
+// simxCheckDistance(simxInt clientID,simxInt entity1,simxInt entity2,simxFloat* minimumDistance,simxInt operationMode)
+    const char* funcName="simxCheckDistance";
+    octave_value_list retVallist;
+
+    simxInt retVal=simx_return_local_error_flag;
+     if (!checkInputArgs(funcName,args,4,1,1,1,1))
+    {
+        retVallist(1) = 0.0f;
+        retVallist(0) = retVal;
+        return retVallist;
+    }
+
+    simxInt clientID = args(0).int_value();
+    simxInt entity1 = args(1).int_value();
+    simxInt entity2 = args(2).int_value();
+    simxFloat minimumDistance;
+    simxInt operationMode = args(3).int_value();
+    retVal = simxCheckDistance ( clientID, entity1,entity2, &minimumDistance, operationMode);
+    retVallist(1) = minimumDistance;
+    retVallist(0) = retVal;
+    return retVallist;
+}
+
 DEFUN_DLD (simxReadForceSensor,args,nargout,"simxReadForceSensor")
 {
     const char* funcName="simxReadForceSensor";

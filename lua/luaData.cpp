@@ -67,7 +67,7 @@ bool CLuaData::readDataFromLua(lua_State* L,const int* expectedArguments,int req
                     return(false);
                 }
                 dataType=(dataType|sim_lua_arg_table|SIM_LUA_ARG_NIL_ALLOWED)-(sim_lua_arg_table|SIM_LUA_ARG_NIL_ALLOWED);
-                int tableSize=int(lua_objlen(L,i+1));
+                int tableSize=int(lua_rawlen(L,i+1));
                 if (tableSize<expectedArguments[1+i*2+1])
                 {
                     printf("%s: argument %i (a table) does not contain enough elements.\n",functionName,i+1);

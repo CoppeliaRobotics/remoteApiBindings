@@ -3060,18 +3060,20 @@ void lua_registerN(lua_State* L,char const* funcName,lua_CFunction functionCallb
     {
         name.erase(name.begin(),name.begin()+5);
 
-        lua_getfield(L,LUA_GLOBALSINDEX,"simx");
+        lua_rawgeti(L,LUA_REGISTRYINDEX,LUA_RIDX_GLOBALS); // table of globals
+        lua_getfield(L,-1,"simx");
         if (!lua_istable(L,-1))
         { // we first need to create the table
             lua_createtable(L,0,1);
-            lua_setfield(L,LUA_GLOBALSINDEX,"simx");
+            lua_setfield(L,-3,"simx");
             lua_pop(L,1);
-            lua_getfield(L,LUA_GLOBALSINDEX,"simx");
+            lua_getfield(L,-1,"simx");
         }
         lua_pushstring(L,name.c_str());
         lua_pushcfunction(L,functionCallback);
         lua_settable(L,-3);
         lua_pop(L,1);
+        lua_pop(L,1); // pop table of globals
     }
     else
         lua_register(L,funcName,functionCallback);
@@ -3702,7 +3704,7 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
 
     registerVariableN(L,"sim.jointmode_passive",(boost::lexical_cast<std::string>(int(sim_jointmode_passive))).c_str());
     registerVariableN(L,"sim.jointmode_motion",(boost::lexical_cast<std::string>(int(sim_jointmode_motion_deprecated))).c_str());
-    registerVariableN(L,"sim.jointmode_ik",(boost::lexical_cast<std::string>(int(sim_jointmode_ik))).c_str());
+    registerVariableN(L,"sim.jointmode_ik",(boost::lexical_cast<std::string>(int(sim_jointmode_ik_deprecated))).c_str());
     registerVariableN(L,"sim.jointmode_dependent",(boost::lexical_cast<std::string>(int(sim_jointmode_dependent))).c_str());
     registerVariableN(L,"sim.jointmode_force",(boost::lexical_cast<std::string>(int(sim_jointmode_force))).c_str());
 
@@ -4134,7 +4136,7 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
 
     registerVariable(L,"sim_jointmode_passive",(boost::lexical_cast<std::string>(int(sim_jointmode_passive))).c_str());
     registerVariable(L,"sim_jointmode_motion",(boost::lexical_cast<std::string>(int(sim_jointmode_motion_deprecated))).c_str());
-    registerVariable(L,"sim_jointmode_ik",(boost::lexical_cast<std::string>(int(sim_jointmode_ik))).c_str());
+    registerVariable(L,"sim_jointmode_ik",(boost::lexical_cast<std::string>(int(sim_jointmode_ik_deprecated))).c_str());
     registerVariable(L,"sim_jointmode_dependent",(boost::lexical_cast<std::string>(int(sim_jointmode_dependent))).c_str());
     registerVariable(L,"sim_jointmode_force",(boost::lexical_cast<std::string>(int(sim_jointmode_force))).c_str());
 

@@ -11,7 +11,7 @@ DEFINES += QT_COMPIL
 DEFINES += NON_MATLAB_PARSING
 DEFINES += MAX_EXT_API_CONNECTIONS=255
 
-CONFIG += shared
+CONFIG += shared plugin
 INCLUDEPATH += "../../include"
 INCLUDEPATH += "../../remoteApi"
 

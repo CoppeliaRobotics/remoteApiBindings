@@ -12,7 +12,7 @@ DEFINES += NON_MATLAB_PARSING
 DEFINES += MAX_EXT_API_CONNECTIONS=255
 DEFINES += _Included_extApiJava
 
-CONFIG += shared
+CONFIG += shared plugin
 INCLUDEPATH += "../../include"
 INCLUDEPATH += "../../remoteApi"
 

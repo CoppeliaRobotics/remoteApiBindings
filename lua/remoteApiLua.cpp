@@ -481,7 +481,30 @@ int LUA_SETBOOLEANPARAMETER_CALLBACK(lua_State* L)
     {
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
-        int res=simxSetBooleanParameter(_clientId,inData->at(1).intData[0],inData->at(2).boolData[0],inData->at(3).intData[0]);
+        int res=simxSetBoolParam(_clientId,inData->at(1).intData[0],inData->at(2).boolData[0],inData->at(3).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+#define LUA_SETBOOLPARAM_COMMAND "simx.setBoolParam"
+const int inArgs_SETBOOLPARAM[]={
+    4,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_bool,0,
+    sim_lua_arg_int,0,
+};
+int LUA_SETBOOLPARAM_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_SETBOOLPARAM,inArgs_SETBOOLPARAM[0],LUA_SETBOOLPARAM_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        int res=simxSetBoolParam(_clientId,inData->at(1).intData[0],inData->at(2).boolData[0],inData->at(3).intData[0]);
         D.pushOutData(CLuaDataItem(res));
     }
     return(D.writeDataToLua(L));
@@ -549,7 +572,30 @@ int LUA_SETFLOATINGPARAMETER_CALLBACK(lua_State* L)
     {
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
-        int res=simxSetFloatingParameter(_clientId,inData->at(1).intData[0],inData->at(2).floatData[0],inData->at(3).intData[0]);
+        int res=simxSetFloatParam(_clientId,inData->at(1).intData[0],inData->at(2).floatData[0],inData->at(3).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+#define LUA_SETFLOATPARAM_COMMAND "simx.setFloatParam"
+const int inArgs_SETFLOATPARAM[]={
+    4,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_float,0,
+    sim_lua_arg_int,0,
+};
+int LUA_SETFLOATPARAM_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_SETFLOATPARAM,inArgs_SETFLOATPARAM[0],LUA_SETFLOATPARAM_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        int res=simxSetFloatParam(_clientId,inData->at(1).intData[0],inData->at(2).floatData[0],inData->at(3).intData[0]);
         D.pushOutData(CLuaDataItem(res));
     }
     return(D.writeDataToLua(L));
@@ -573,7 +619,30 @@ int LUA_SETINTEGERPARAMETER_CALLBACK(lua_State* L)
     {
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
-        int res=simxSetIntegerParameter(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],inData->at(3).intData[0]);
+        int res=simxSetInt32Param(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],inData->at(3).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+#define LUA_SETINT32PARAM_COMMAND "simx.setInt32Param"
+const int inArgs_SETINT32PARAM[]={
+    4,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+};
+int LUA_SETINT32PARAM_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_SETINT32PARAM,inArgs_SETINT32PARAM[0],LUA_SETINT32PARAM_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        int res=simxSetInt32Param(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],inData->at(3).intData[0]);
         D.pushOutData(CLuaDataItem(res));
     }
     return(D.writeDataToLua(L));
@@ -597,7 +666,30 @@ int LUA_SETARRAYPARAMETER_CALLBACK(lua_State* L)
     {
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
-        int res=simxSetArrayParameter(_clientId,inData->at(1).intData[0],&inData->at(2).floatData[0],inData->at(3).intData[0]);
+        int res=simxSetArrayParam(_clientId,inData->at(1).intData[0],&inData->at(2).floatData[0],inData->at(3).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+#define LUA_SETARRAYPARAM_COMMAND "simx.setArrayParam"
+const int inArgs_SETARRAYPARAM[]={
+    4,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_float|sim_lua_arg_table,3,
+    sim_lua_arg_int,0,
+};
+int LUA_SETARRAYPARAM_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_SETARRAYPARAM,inArgs_SETARRAYPARAM[0],LUA_SETARRAYPARAM_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        int res=simxSetArrayParam(_clientId,inData->at(1).intData[0],&inData->at(2).floatData[0],inData->at(3).intData[0]);
         D.pushOutData(CLuaDataItem(res));
     }
     return(D.writeDataToLua(L));
@@ -621,7 +713,32 @@ int LUA_GETBOOLEANPARAMETER_CALLBACK(lua_State* L)
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
         unsigned char p;
-        int res=simxGetBooleanParameter(_clientId,inData->at(1).intData[0],&p,inData->at(2).intData[0]);
+        int res=simxGetBoolParam(_clientId,inData->at(1).intData[0],&p,inData->at(2).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+        if (res==0)
+            D.pushOutData(CLuaDataItem(p!=0));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+#define LUA_GETBOOLPARAM_COMMAND "simx.getBoolParam"
+const int inArgs_GETBOOLPARAM[]={
+    3,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+};
+int LUA_GETBOOLPARAM_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_GETBOOLPARAM,inArgs_GETBOOLPARAM[0],LUA_GETBOOLPARAM_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        unsigned char p;
+        int res=simxGetBoolParam(_clientId,inData->at(1).intData[0],&p,inData->at(2).intData[0]);
         D.pushOutData(CLuaDataItem(res));
         if (res==0)
             D.pushOutData(CLuaDataItem(p!=0));
@@ -647,7 +764,32 @@ int LUA_GETFLOATINGPARAMETER_CALLBACK(lua_State* L)
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
         float p;
-        int res=simxGetFloatingParameter(_clientId,inData->at(1).intData[0],&p,inData->at(2).intData[0]);
+        int res=simxGetFloatParam(_clientId,inData->at(1).intData[0],&p,inData->at(2).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+        if (res==0)
+            D.pushOutData(CLuaDataItem(p));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+#define LUA_GETFLOATPARAM_COMMAND "simx.getFloatParam"
+const int inArgs_GETFLOATPARAM[]={
+    3,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+};
+int LUA_GETFLOATPARAM_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_GETFLOATPARAM,inArgs_GETFLOATPARAM[0],LUA_GETFLOATPARAM_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        float p;
+        int res=simxGetFloatParam(_clientId,inData->at(1).intData[0],&p,inData->at(2).intData[0]);
         D.pushOutData(CLuaDataItem(res));
         if (res==0)
             D.pushOutData(CLuaDataItem(p));
@@ -673,7 +815,32 @@ int LUA_GETINTEGERPARAMETER_CALLBACK(lua_State* L)
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
         int p;
-        int res=simxGetIntegerParameter(_clientId,inData->at(1).intData[0],&p,inData->at(2).intData[0]);
+        int res=simxGetInt32Param(_clientId,inData->at(1).intData[0],&p,inData->at(2).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+        if (res==0)
+            D.pushOutData(CLuaDataItem(p));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+#define LUA_GETINT32PARAM_COMMAND "simx.getInt32Param"
+const int inArgs_GETINT32PARAM[]={
+    3,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+};
+int LUA_GETINT32PARAM_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_GETINT32PARAM,inArgs_GETINT32PARAM[0],LUA_GETINT32PARAM_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        int p;
+        int res=simxGetInt32Param(_clientId,inData->at(1).intData[0],&p,inData->at(2).intData[0]);
         D.pushOutData(CLuaDataItem(res));
         if (res==0)
             D.pushOutData(CLuaDataItem(p));
@@ -699,7 +866,32 @@ int LUA_GETARRAYPARAMETER_CALLBACK(lua_State* L)
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
         std::vector<float> p(3,0.0f);
-        int res=simxGetArrayParameter(_clientId,inData->at(1).intData[0],&p[0],inData->at(2).intData[0]);
+        int res=simxGetArrayParam(_clientId,inData->at(1).intData[0],&p[0],inData->at(2).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+        if (res==0)
+            D.pushOutData(CLuaDataItem(p));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+#define LUA_GETARRAYPARAM_COMMAND "simx.getArrayParam"
+const int inArgs_GETARRAYPARAM[]={
+    3,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+};
+int LUA_GETARRAYPARAM_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_GETARRAYPARAM,inArgs_GETARRAYPARAM[0],LUA_GETARRAYPARAM_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        std::vector<float> p(3,0.0f);
+        int res=simxGetArrayParam(_clientId,inData->at(1).intData[0],&p[0],inData->at(2).intData[0]);
         D.pushOutData(CLuaDataItem(res));
         if (res==0)
             D.pushOutData(CLuaDataItem(p));
@@ -725,7 +917,32 @@ int LUA_GETSTRINGPARAMETER_CALLBACK(lua_State* L)
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
         char* p;
-        int res=simxGetStringParameter(_clientId,inData->at(1).intData[0],&p,inData->at(2).intData[0]);
+        int res=simxGetStringParam(_clientId,inData->at(1).intData[0],&p,inData->at(2).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+        if (res==0)
+            D.pushOutData(CLuaDataItem(std::string(p)));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+#define LUA_GETSTRINGPARAM_COMMAND "simx.getStringParam"
+const int inArgs_GETSTRINGPARAM[]={
+    3,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+};
+int LUA_GETSTRINGPARAM_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_GETSTRINGPARAM,inArgs_GETSTRINGPARAM[0],LUA_GETSTRINGPARAM_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        char* p;
+        int res=simxGetStringParam(_clientId,inData->at(1).intData[0],&p,inData->at(2).intData[0]);
         D.pushOutData(CLuaDataItem(res));
         if (res==0)
             D.pushOutData(CLuaDataItem(std::string(p)));
@@ -1448,7 +1665,33 @@ int LUA_GETOBJECTFLOATPARAMETER_CALLBACK(lua_State* L)
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
         float param;
-        int res=simxGetObjectFloatParameter(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],&param,inData->at(3).intData[0]);
+        int res=simxGetObjectFloatParam(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],&param,inData->at(3).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+        if (res==0)
+            D.pushOutData(CLuaDataItem(param));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+#define LUA_GETOBJECTFLOATPARAM_COMMAND "simx.getObjectFloatParam"
+const int inArgs_GETOBJECTFLOATPARAM[]={
+    4,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+};
+int LUA_GETOBJECTFLOATPARAM_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_GETOBJECTFLOATPARAM,inArgs_GETOBJECTFLOATPARAM[0],LUA_GETOBJECTFLOATPARAM_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        float param;
+        int res=simxGetObjectFloatParam(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],&param,inData->at(3).intData[0]);
         D.pushOutData(CLuaDataItem(res));
         if (res==0)
             D.pushOutData(CLuaDataItem(param));
@@ -1475,7 +1718,33 @@ int LUA_GETOBJECTINTPARAMETER_CALLBACK(lua_State* L)
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
         int param;
-        int res=simxGetObjectIntParameter(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],&param,inData->at(3).intData[0]);
+        int res=simxGetObjectInt32Param(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],&param,inData->at(3).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+        if (res==0)
+            D.pushOutData(CLuaDataItem(param));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+#define LUA_GETOBJECTINT32PARAM_COMMAND "simx.getObjectInt32Param"
+const int inArgs_GETOBJECTINT32PARAM[]={
+    4,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+};
+int LUA_GETOBJECTINT32PARAM_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_GETOBJECTINT32PARAM,inArgs_GETOBJECTINT32PARAM[0],LUA_GETOBJECTINT32PARAM_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        int param;
+        int res=simxGetObjectInt32Param(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],&param,inData->at(3).intData[0]);
         D.pushOutData(CLuaDataItem(res));
         if (res==0)
             D.pushOutData(CLuaDataItem(param));
@@ -3007,7 +3276,31 @@ int LUA_SETOBJECTFLOATPARAMETER_CALLBACK(lua_State* L)
     {
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
-        int res=simxSetObjectFloatParameter(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],inData->at(3).floatData[0],inData->at(4).intData[0]);
+        int res=simxSetObjectFloatParam(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],inData->at(3).floatData[0],inData->at(4).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+#define LUA_SETOBJECTFLOATPARAM_COMMAND "simx.setObjectFloatParam"
+const int inArgs_SETOBJECTFLOATPARAM[]={
+    5,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_float,0,
+    sim_lua_arg_int,0,
+};
+int LUA_SETOBJECTFLOATPARAM_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_SETOBJECTFLOATPARAM,inArgs_SETOBJECTFLOATPARAM[0],LUA_SETOBJECTFLOATPARAM_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        int res=simxSetObjectFloatParam(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],inData->at(3).floatData[0],inData->at(4).intData[0]);
         D.pushOutData(CLuaDataItem(res));
     }
     return(D.writeDataToLua(L));
@@ -3032,7 +3325,31 @@ int LUA_SETOBJECTINTPARAMETER_CALLBACK(lua_State* L)
     {
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
-        int res=simxSetObjectIntParameter(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],inData->at(3).intData[0],inData->at(4).intData[0]);
+        int res=simxSetObjectInt32Param(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],inData->at(3).intData[0],inData->at(4).intData[0]);
+        D.pushOutData(CLuaDataItem(res));
+    }
+    return(D.writeDataToLua(L));
+}
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+#define LUA_SETOBJECTINT32PARAM_COMMAND "simx.setObjectInt32Param"
+const int inArgs_SETOBJECTINT32PARAM[]={
+    5,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+    sim_lua_arg_int,0,
+};
+int LUA_SETOBJECTINT32PARAM_CALLBACK(lua_State* L)
+{
+    CLuaData D;
+    if (D.readDataFromLua(L,inArgs_SETOBJECTINT32PARAM,inArgs_SETOBJECTINT32PARAM[0],LUA_SETOBJECTINT32PARAM_COMMAND))
+    {
+        std::vector<CLuaDataItem>* inData=D.getInDataPtr();
+        int _clientId=inData->at(0).intData[0];
+        int res=simxSetObjectInt32Param(_clientId,inData->at(1).intData[0],inData->at(2).intData[0],inData->at(3).intData[0],inData->at(4).intData[0]);
         D.pushOutData(CLuaDataItem(res));
     }
     return(D.writeDataToLua(L));
@@ -3107,17 +3424,17 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     lua_registerN(L,LUA_LOADSCENE_COMMAND,LUA_LOADSCENE_CALLBACK);
     lua_registerN(L,LUA_LOADMODEL_COMMAND,LUA_LOADMODEL_CALLBACK);
     lua_registerN(L,LUA_LOADUI_COMMAND,LUA_LOADUI_CALLBACK);
-    lua_registerN(L,LUA_SETBOOLEANPARAMETER_COMMAND,LUA_SETBOOLEANPARAMETER_CALLBACK);
+    lua_registerN(L,LUA_SETBOOLPARAM_COMMAND,LUA_SETBOOLPARAM_CALLBACK);
     lua_registerN(L,LUA_STARTSIMULATION_COMMAND,LUA_STARTSIMULATION_CALLBACK);
     lua_registerN(L,LUA_STOPSIMULATION_COMMAND,LUA_STOPSIMULATION_CALLBACK);
-    lua_registerN(L,LUA_SETFLOATINGPARAMETER_COMMAND,LUA_SETFLOATINGPARAMETER_CALLBACK);
-    lua_registerN(L,LUA_SETINTEGERPARAMETER_COMMAND,LUA_SETINTEGERPARAMETER_CALLBACK);
-    lua_registerN(L,LUA_SETARRAYPARAMETER_COMMAND,LUA_SETARRAYPARAMETER_CALLBACK);
-    lua_registerN(L,LUA_GETBOOLEANPARAMETER_COMMAND,LUA_GETBOOLEANPARAMETER_CALLBACK);
-    lua_registerN(L,LUA_GETFLOATINGPARAMETER_COMMAND,LUA_GETFLOATINGPARAMETER_CALLBACK);
-    lua_registerN(L,LUA_GETINTEGERPARAMETER_COMMAND,LUA_GETINTEGERPARAMETER_CALLBACK);
-    lua_registerN(L,LUA_GETARRAYPARAMETER_COMMAND,LUA_GETARRAYPARAMETER_CALLBACK);
-    lua_registerN(L,LUA_GETSTRINGPARAMETER_COMMAND,LUA_GETSTRINGPARAMETER_CALLBACK);
+    lua_registerN(L,LUA_SETFLOATPARAM_COMMAND,LUA_SETFLOATPARAM_CALLBACK);
+    lua_registerN(L,LUA_SETINT32PARAM_COMMAND,LUA_SETINT32PARAM_CALLBACK);
+    lua_registerN(L,LUA_SETARRAYPARAM_COMMAND,LUA_SETARRAYPARAM_CALLBACK);
+    lua_registerN(L,LUA_GETBOOLPARAM_COMMAND,LUA_GETBOOLPARAM_CALLBACK);
+    lua_registerN(L,LUA_GETFLOATPARAM_COMMAND,LUA_GETFLOATPARAM_CALLBACK);
+    lua_registerN(L,LUA_GETINT32PARAM_COMMAND,LUA_GETINT32PARAM_CALLBACK);
+    lua_registerN(L,LUA_GETARRAYPARAM_COMMAND,LUA_GETARRAYPARAM_CALLBACK);
+    lua_registerN(L,LUA_GETSTRINGPARAM_COMMAND,LUA_GETSTRINGPARAM_CALLBACK);
     lua_registerN(L,LUA_SETFLOATSIGNAL_COMMAND,LUA_SETFLOATSIGNAL_CALLBACK);
     lua_registerN(L,LUA_SETINTEGERSIGNAL_COMMAND,LUA_SETINTEGERSIGNAL_CALLBACK);
     lua_registerN(L,LUA_SETSTRINGSIGNAL_COMMAND,LUA_SETSTRINGSIGNAL_CALLBACK);
@@ -3144,8 +3461,8 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     lua_registerN(L,LUA_GETLASTERRORS_COMMAND,LUA_GETLASTERRORS_CALLBACK);
     lua_registerN(L,LUA_GETMODELPROPERTY_COMMAND,LUA_GETMODELPROPERTY_CALLBACK);
     lua_registerN(L,LUA_GETOBJECTCHILD_COMMAND,LUA_GETOBJECTCHILD_CALLBACK);
-    lua_registerN(L,LUA_GETOBJECTFLOATPARAMETER_COMMAND,LUA_GETOBJECTFLOATPARAMETER_CALLBACK);
-    lua_registerN(L,LUA_GETOBJECTINTPARAMETER_COMMAND,LUA_GETOBJECTINTPARAMETER_CALLBACK);
+    lua_registerN(L,LUA_GETOBJECTFLOATPARAM_COMMAND,LUA_GETOBJECTFLOATPARAM_CALLBACK);
+    lua_registerN(L,LUA_GETOBJECTINT32PARAM_COMMAND,LUA_GETOBJECTINT32PARAM_CALLBACK);
     lua_registerN(L,LUA_GETOBJECTGROUPDATA_COMMAND,LUA_GETOBJECTGROUPDATA_CALLBACK);
     lua_registerN(L,LUA_CALLSCRIPTFUNCTION_COMMAND,LUA_CALLSCRIPTFUNCTION_CALLBACK);
     lua_registerN(L,LUA_GETOBJECTORIENTATION_COMMAND,LUA_GETOBJECTORIENTATION_CALLBACK);
@@ -3196,14 +3513,27 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     lua_registerN(L,LUA_SYNCHRONOUS_COMMAND,LUA_SYNCHRONOUS_CALLBACK);
     lua_registerN(L,LUA_SYNCHRONOUSTRIGGER_COMMAND,LUA_SYNCHRONOUSTRIGGER_CALLBACK);
     lua_registerN(L,LUA_TRANSFERFILE_COMMAND,LUA_TRANSFERFILE_CALLBACK);
-    lua_registerN(L,LUA_SETOBJECTFLOATPARAMETER_COMMAND,LUA_SETOBJECTFLOATPARAMETER_CALLBACK);
-    lua_registerN(L,LUA_SETOBJECTINTPARAMETER_COMMAND,LUA_SETOBJECTINTPARAMETER_CALLBACK);
+    lua_registerN(L,LUA_SETOBJECTFLOATPARAM_COMMAND,LUA_SETOBJECTFLOATPARAM_CALLBACK);
+    lua_registerN(L,LUA_SETOBJECTINT32PARAM_COMMAND,LUA_SETOBJECTINT32PARAM_CALLBACK);
     lua_registerN(L,LUA_PACKINTS_COMMAND,LUA_PACKINTS_CALLBACK);
     lua_registerN(L,LUA_PACKFLOATS_COMMAND,LUA_PACKFLOATS_CALLBACK);
     lua_registerN(L,LUA_UNPACKINTS_COMMAND,LUA_UNPACKINTS_CALLBACK);
     lua_registerN(L,LUA_UNPACKFLOATS_COMMAND,LUA_UNPACKFLOATS_CALLBACK);
 
     // For backward compatibility:
+    lua_registerN(L,LUA_SETBOOLEANPARAMETER_COMMAND,LUA_SETBOOLEANPARAMETER_CALLBACK);
+    lua_registerN(L,LUA_SETFLOATINGPARAMETER_COMMAND,LUA_SETFLOATINGPARAMETER_CALLBACK);
+    lua_registerN(L,LUA_SETINTEGERPARAMETER_COMMAND,LUA_SETINTEGERPARAMETER_CALLBACK);
+    lua_registerN(L,LUA_SETARRAYPARAMETER_COMMAND,LUA_SETARRAYPARAMETER_CALLBACK);
+    lua_registerN(L,LUA_GETBOOLEANPARAMETER_COMMAND,LUA_GETBOOLEANPARAMETER_CALLBACK);
+    lua_registerN(L,LUA_GETFLOATINGPARAMETER_COMMAND,LUA_GETFLOATINGPARAMETER_CALLBACK);
+    lua_registerN(L,LUA_GETINTEGERPARAMETER_COMMAND,LUA_GETINTEGERPARAMETER_CALLBACK);
+    lua_registerN(L,LUA_GETARRAYPARAMETER_COMMAND,LUA_GETARRAYPARAMETER_CALLBACK);
+    lua_registerN(L,LUA_GETSTRINGPARAMETER_COMMAND,LUA_GETSTRINGPARAMETER_CALLBACK);
+    lua_registerN(L,LUA_GETOBJECTFLOATPARAMETER_COMMAND,LUA_GETOBJECTFLOATPARAMETER_CALLBACK);
+    lua_registerN(L,LUA_GETOBJECTINTPARAMETER_COMMAND,LUA_GETOBJECTINTPARAMETER_CALLBACK);
+    lua_registerN(L,LUA_SETOBJECTFLOATPARAMETER_COMMAND,LUA_SETOBJECTFLOATPARAMETER_CALLBACK);
+    lua_registerN(L,LUA_SETOBJECTINTPARAMETER_COMMAND,LUA_SETOBJECTINTPARAMETER_CALLBACK);
     lua_register(L,LUA_START_COMMANDOLD,LUA_START_CALLBACK);
     lua_register(L,LUA_FINISH_COMMANDOLD,LUA_FINISH_CALLBACK);
     lua_register(L,LUA_ADDSTATUSBARMESSAGE_COMMANDOLD,LUA_ADDSTATUSBARMESSAGE_CALLBACK);

@@ -1475,6 +1475,38 @@ JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxSetObjectIntParameter
 
 /*
  * Class:     remoteApi
+ * Method:    simxGetObjectFloatParam
+ * Signature: (IILFloatW;I)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetObjectFloatParam
+  (JNIEnv *, jobject, jint, jint, jint, jobject, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxSetObjectFloatParam
+ * Signature: (IIFI)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxSetObjectFloatParam
+  (JNIEnv *, jobject, jint, jint, jint, jfloat, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxGetObjectInt32Param
+ * Signature: (IILIntW;I)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetObjectInt32Param
+  (JNIEnv *, jobject, jint, jint, jint, jobject, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxSetObjectInt32Param
+ * Signature: (IIII)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxSetObjectInt32Param
+  (JNIEnv *, jobject, jint, jint, jint, jint, jint);
+
+/*
+ * Class:     remoteApi
  * Method:    simxGetModelProperty
  * Signature: (ILIntW;I)I
  */
@@ -1659,19 +1691,67 @@ JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetBooleanParameter
 
 /*
  * Class:     remoteApi
- * Method:    simxGetDialogResult
- * Signature: (ILIntW;I)I
- */
-JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetDialogResult
-  (JNIEnv *, jobject, jint, jint, jobject, jint);
-
-/*
- * Class:     remoteApi
  * Method:    simxSetFloatingParameter
  * Signature: (IFI)I
  */
 JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxSetFloatingParameter
   (JNIEnv *, jobject, jint, jint, jfloat, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxGetArrayParam
+ * Signature: (ILFloatWA;I)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetArrayParam
+  (JNIEnv *, jobject, jint, jint, jobject, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxSetArrayParam
+ * Signature: (ILFloatWA;I)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxSetArrayParam
+  (JNIEnv *, jobject, jint, jint, jobject, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxGetInt32Param
+ * Signature: (ILIntW;I)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetInt32Param
+  (JNIEnv *, jobject, jint, jint, jobject, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxSetInt32Param
+ * Signature: (III)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxSetInt32Param
+  (JNIEnv *, jobject, jint, jint, jint, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxGetBoolParam
+ * Signature: (ILBoolW;I)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetBoolParam
+  (JNIEnv *, jobject, jint, jint, jobject, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxSetFloatParam
+ * Signature: (IFI)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxSetFloatParam
+  (JNIEnv *, jobject, jint, jint, jfloat, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxGetDialogResult
+ * Signature: (ILIntW;I)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetDialogResult
+  (JNIEnv *, jobject, jint, jint, jobject, jint);
 
 /*
  * Class:     remoteApi
@@ -1735,6 +1815,14 @@ JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxCheckDistance
  * Signature: (ILFloatW;I)I
  */
 JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetFloatingParameter
+  (JNIEnv *, jobject, jint, jint, jobject, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxGetFloatParam
+ * Signature: (ILFloatW;I)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetFloatParam
   (JNIEnv *, jobject, jint, jint, jobject, jint);
 
 /*
@@ -1847,6 +1935,22 @@ JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxSetBooleanParameter
  * Signature: (ILStringW;I)I
  */
 JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetStringParameter
+  (JNIEnv *, jobject, jint, jint, jobject, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxSetBoolParam
+ * Signature: (IZI)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxSetBoolParam
+  (JNIEnv *, jobject, jint, jint, jboolean, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxGetStringParamr
+ * Signature: (ILStringW;I)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetStringParam
   (JNIEnv *, jobject, jint, jint, jobject, jint);
 
 /*

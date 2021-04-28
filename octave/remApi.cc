@@ -597,8 +597,7 @@ DEFUN_DLD (simxReadStringStream,args,nargout,"simxReadStringStream")
 
 DEFUN_DLD (simxGetArrayParameter,args,nargout,"simxGetArrayParameter")
 {
-    const char* funcName="simxGetArrayParameter";
-// simxGetArrayParameter(simxInt clientID,simxInt paramIdentifier,simxFloat* paramValues,simxInt operationMode)
+    const char* funcName="simxGetArrayParam";
     octave_value_list retVallist;
     simxInt retVal=simx_return_local_error_flag;
     FloatNDArray pv;
@@ -614,7 +613,39 @@ DEFUN_DLD (simxGetArrayParameter,args,nargout,"simxGetArrayParameter")
     simxInt paramIdentifier = args(1).int_value();
     simxFloat paramValues[3];
     simxInt operationMode = args(2).int_value();
-    retVal = simxGetArrayParameter ( clientID, paramIdentifier, paramValues, operationMode);
+    retVal = simxGetArrayParam ( clientID, paramIdentifier, paramValues, operationMode);
+    if (retVal == 0)
+    {
+        pv.resize(dim_vector(3,1));
+        pv(0) = paramValues[0];
+        pv(1) = paramValues[1];
+        pv(2) = paramValues[2];
+
+    }
+    retVallist(1) = pv;
+    retVallist(0) = retVal;
+    return retVallist;
+}
+
+DEFUN_DLD (simxGetArrayParam,args,nargout,"simxGetArrayParam")
+{
+    const char* funcName="simxGetArrayParam";
+    octave_value_list retVallist;
+    simxInt retVal=simx_return_local_error_flag;
+    FloatNDArray pv;
+
+     if (!checkInputArgs(funcName,args,3,1,1,1))
+    {
+        retVallist(1) = pv;
+        retVallist(0) = retVal;
+        return retVallist;
+    }
+
+    simxInt clientID = args(0).int_value();
+    simxInt paramIdentifier = args(1).int_value();
+    simxFloat paramValues[3];
+    simxInt operationMode = args(2).int_value();
+    retVal = simxGetArrayParam ( clientID, paramIdentifier, paramValues, operationMode);
     if (retVal == 0)
     {
         pv.resize(dim_vector(3,1));
@@ -630,8 +661,7 @@ DEFUN_DLD (simxGetArrayParameter,args,nargout,"simxGetArrayParameter")
 
 DEFUN_DLD (simxGetBooleanParameter,args,nargout,"simxGetBooleanParameter")
 {
-    const char* funcName="simxGetBooleanParameter";
-// simxGetBooleanParameter(simxInt clientID,simxInt paramIdentifier,simxUChar* paramValue,simxInt operationMode)
+    const char* funcName="simxGetBoolParam";
     octave_value_list retVallist;
     simxInt retVal=simx_return_local_error_flag;
 
@@ -645,7 +675,31 @@ DEFUN_DLD (simxGetBooleanParameter,args,nargout,"simxGetBooleanParameter")
     simxInt paramIdentifier = args(1).int_value();
     simxUChar paramValue;
     simxInt operationMode = args(2).int_value();
-    retVal = simxGetBooleanParameter ( clientID, paramIdentifier, &paramValue, operationMode);
+    retVal = simxGetBoolParam ( clientID, paramIdentifier, &paramValue, operationMode);
+    retVallist(1) = false;
+    if (retVal == 0)
+        retVallist(1)=(paramValue != 0);
+    retVallist(0) = retVal;
+    return retVallist;
+}
+
+DEFUN_DLD (simxGetBoolParam,args,nargout,"simxGetBoolParam")
+{
+    const char* funcName="simxGetBoolParam";
+    octave_value_list retVallist;
+    simxInt retVal=simx_return_local_error_flag;
+
+     if (!checkInputArgs(funcName,args,3,1,1,1))
+    {
+        retVallist(1) = false;
+        retVallist(0) = retVal;
+        return retVallist;
+    }
+    simxInt clientID = args(0).int_value();
+    simxInt paramIdentifier = args(1).int_value();
+    simxUChar paramValue;
+    simxInt operationMode = args(2).int_value();
+    retVal = simxGetBoolParam ( clientID, paramIdentifier, &paramValue, operationMode);
     retVallist(1) = false;
     if (retVal == 0)
         retVallist(1)=(paramValue != 0);
@@ -793,8 +847,7 @@ DEFUN_DLD (simxGetDistanceHandle,args,nargout,"simxGetDistanceHandle")
 
 DEFUN_DLD (simxGetFloatingParameter,args,nargout,"simxGetFloatingParameter")
 {
-    const char* funcName="simxGetFloatingParameter";
-// simxGetFloatingParameter(simxInt clientID,simxInt paramIdentifier,simxFloat* paramValue,simxInt operationMode)
+    const char* funcName="simxGetFloatParam";
     octave_value_list retVallist;
     simxInt retVal=simx_return_local_error_flag;
 
@@ -808,7 +861,29 @@ DEFUN_DLD (simxGetFloatingParameter,args,nargout,"simxGetFloatingParameter")
     simxInt paramIdentifier = args(1).int_value();
     simxFloat paramValue=0.0f;
     simxInt operationMode = args(2).int_value();
-    retVal = simxGetFloatingParameter ( clientID, paramIdentifier, &paramValue, operationMode);
+    retVal = simxGetFloatParam ( clientID, paramIdentifier, &paramValue, operationMode);
+    retVallist(1) = paramValue;
+    retVallist(0) = retVal;
+    return retVallist;
+}
+
+DEFUN_DLD (simxGetFloatParam,args,nargout,"simxGetFloatParam")
+{
+    const char* funcName="simxGetFloatParam";
+    octave_value_list retVallist;
+    simxInt retVal=simx_return_local_error_flag;
+
+     if (!checkInputArgs(funcName,args,3,1,1,1))
+    {
+        retVallist(1) = 0.0f;
+        retVallist(0) = retVal;
+        return retVallist;
+    }
+    simxInt clientID = args(0).int_value();
+    simxInt paramIdentifier = args(1).int_value();
+    simxFloat paramValue=0.0f;
+    simxInt operationMode = args(2).int_value();
+    retVal = simxGetFloatParam ( clientID, paramIdentifier, &paramValue, operationMode);
     retVallist(1) = paramValue;
     retVallist(0) = retVal;
     return retVallist;
@@ -862,8 +937,7 @@ DEFUN_DLD (simxGetInMessageInfo,args,nargout,"simxGetInMessageInfo")
 
 DEFUN_DLD (simxGetIntegerParameter,args,nargout,"simxGetIntegerParameter")
 {
-    const char* funcName="simxGetIntegerParameter";
-// simxGetIntegerParameter(simxInt clientID,simxInt paramIdentifier,simxInt* paramValue,simxInt operationMode)
+    const char* funcName="simxGetInt32Param";
     octave_value_list retVallist;
     simxInt retVal=simx_return_local_error_flag;
 
@@ -877,7 +951,29 @@ DEFUN_DLD (simxGetIntegerParameter,args,nargout,"simxGetIntegerParameter")
     simxInt paramIdentifier = args(1).int_value();
     simxInt paramValue=0;
     simxInt operationMode = args(2).int_value();
-    retVal = simxGetIntegerParameter ( clientID, paramIdentifier, &paramValue, operationMode);
+    retVal = simxGetInt32Param ( clientID, paramIdentifier, &paramValue, operationMode);
+    retVallist(1) = paramValue;
+    retVallist(0) = retVal;
+    return retVallist;
+}
+
+DEFUN_DLD (simxGetInt32Param,args,nargout,"simxGetInt32Param")
+{
+    const char* funcName="simxGetInt32Param";
+    octave_value_list retVallist;
+    simxInt retVal=simx_return_local_error_flag;
+
+     if (!checkInputArgs(funcName,args,3,1,1,1))
+    {
+        retVallist(1) = -1;
+        retVallist(0) = retVal;
+        return retVallist;
+    }
+    simxInt clientID = args(0).int_value();
+    simxInt paramIdentifier = args(1).int_value();
+    simxInt paramValue=0;
+    simxInt operationMode = args(2).int_value();
+    retVal = simxGetInt32Param ( clientID, paramIdentifier, &paramValue, operationMode);
     retVallist(1) = paramValue;
     retVallist(0) = retVal;
     return retVallist;
@@ -1061,8 +1157,7 @@ DEFUN_DLD (simxGetObjectChild,args,nargout,"simxGetObjectChild")
 
 DEFUN_DLD (simxGetObjectFloatParameter,args,nargout,"simxGetObjectFloatParameter")
 {
-    const char* funcName="simxGetObjectFloatParameter";
-// simxGetObjectFloatParameter(simxInt clientID,simxInt objectHandle,simxInt parameterID,simxFloat* parameterValue,simxInt operationMode)
+    const char* funcName="simxGetObjectFloatParam";
     octave_value_list retVallist;
     simxInt retVal=simx_return_local_error_flag;
 
@@ -1077,7 +1172,30 @@ DEFUN_DLD (simxGetObjectFloatParameter,args,nargout,"simxGetObjectFloatParameter
     simxInt parameterID = args(2).int_value();
     simxFloat parameterValue=0.0f;
     simxInt operationMode = args(3).int_value();
-    retVal = simxGetObjectFloatParameter ( clientID, objectHandle, parameterID, &parameterValue, operationMode);
+    retVal = simxGetObjectFloatParam ( clientID, objectHandle, parameterID, &parameterValue, operationMode);
+    retVallist(1) = parameterValue;
+    retVallist(0) = retVal;
+    return retVallist;
+}
+
+DEFUN_DLD (simxGetObjectFloatParam,args,nargout,"simxGetObjectFloatParam")
+{
+    const char* funcName="simxGetObjectFloatParam";
+    octave_value_list retVallist;
+    simxInt retVal=simx_return_local_error_flag;
+
+     if (!checkInputArgs(funcName,args,4,1,1,1,1))
+    {
+        retVallist(1) = 0.0f;
+        retVallist(0) = retVal;
+        return retVallist;
+    }
+    simxInt clientID = args(0).int_value();
+    simxInt objectHandle = args(1).int_value();
+    simxInt parameterID = args(2).int_value();
+    simxFloat parameterValue=0.0f;
+    simxInt operationMode = args(3).int_value();
+    retVal = simxGetObjectFloatParam ( clientID, objectHandle, parameterID, &parameterValue, operationMode);
     retVallist(1) = parameterValue;
     retVallist(0) = retVal;
     return retVallist;
@@ -1276,8 +1394,7 @@ DEFUN_DLD (simxGetObjectHandle,args,nargout,"simxGetObjectHandle")
 
 DEFUN_DLD (simxGetObjectIntParameter,args,nargout,"simxGetObjectIntParameter")
 {
-    const char* funcName="simxGetObjectIntParameter";
-// simxGetObjectIntParameter(simxInt clientID,simxInt objectHandle,simxInt parameterID,simxInt* parameterValue,simxInt operationMode)
+    const char* funcName="simxGetObjectInt32Param";
     octave_value_list retVallist;
     simxInt retVal=simx_return_local_error_flag;
 
@@ -1292,7 +1409,30 @@ DEFUN_DLD (simxGetObjectIntParameter,args,nargout,"simxGetObjectIntParameter")
     simxInt parameterID = args(2).int_value();
     simxInt parameterValue=-1;
     simxInt operationMode = args(3).int_value();
-    retVal = simxGetObjectIntParameter ( clientID, objectHandle, parameterID, &parameterValue, operationMode);
+    retVal = simxGetObjectInt32Param ( clientID, objectHandle, parameterID, &parameterValue, operationMode);
+    retVallist(1) = parameterValue;
+    retVallist(0) = retVal;
+    return retVallist;
+}
+
+DEFUN_DLD (simxGetObjectInt32Param,args,nargout,"simxGetObjectInt32Param")
+{
+    const char* funcName="simxGetObjectInt32Param";
+    octave_value_list retVallist;
+    simxInt retVal=simx_return_local_error_flag;
+
+     if (!checkInputArgs(funcName,args,4,1,1,1,1))
+    {
+        retVallist(1) = 0;
+        retVallist(0) = retVal;
+        return retVallist;
+    }
+    simxInt clientID = args(0).int_value();
+    simxInt objectHandle = args(1).int_value();
+    simxInt parameterID = args(2).int_value();
+    simxInt parameterValue=-1;
+    simxInt operationMode = args(3).int_value();
+    retVal = simxGetObjectInt32Param ( clientID, objectHandle, parameterID, &parameterValue, operationMode);
     retVallist(1) = parameterValue;
     retVallist(0) = retVal;
     return retVallist;
@@ -1575,8 +1715,7 @@ DEFUN_DLD (simxGetPingTime,args,nargout,"simxGetPingTime")
 
 DEFUN_DLD (simxGetStringParameter,args,nargout,"simxGetStringParameter")
 {
-    const char* funcName="simxGetStringParameter";
-// simxGetStringParameter(simxInt clientID,simxInt paramIdentifier,simxChar** paramValue,simxInt operationMode)
+    const char* funcName="simxGetStringParam";
     octave_value_list retVallist;
     simxInt retVal=simx_return_local_error_flag;
     charNDArray pval;
@@ -1592,7 +1731,34 @@ DEFUN_DLD (simxGetStringParameter,args,nargout,"simxGetStringParameter")
     simxInt paramIdentifier = args(1).int_value();
     simxChar* paramValue;
     simxInt operationMode = args(2).int_value();
-    retVal = simxGetStringParameter ( clientID, paramIdentifier, &paramValue, operationMode);
+    retVal = simxGetStringParam ( clientID, paramIdentifier, &paramValue, operationMode);
+    if (retVal == 0)
+        pval = paramValue;
+
+    retVallist(1) = pval;
+    retVallist(0) = retVal;
+    return retVallist;
+}
+
+DEFUN_DLD (simxGetStringParam,args,nargout,"simxGetStringParam")
+{
+    const char* funcName="simxGetStringParam";
+    octave_value_list retVallist;
+    simxInt retVal=simx_return_local_error_flag;
+    charNDArray pval;
+
+     if (!checkInputArgs(funcName,args,3,1,1,1))
+    {
+        retVallist(1) = pval;
+        retVallist(0) = retVal;
+        return retVallist;
+    }
+
+    simxInt clientID = args(0).int_value();
+    simxInt paramIdentifier = args(1).int_value();
+    simxChar* paramValue;
+    simxInt operationMode = args(2).int_value();
+    retVal = simxGetStringParam ( clientID, paramIdentifier, &paramValue, operationMode);
     if (retVal == 0)
         pval = paramValue;
 
@@ -2352,8 +2518,7 @@ DEFUN_DLD (simxRemoveUI,args,nargout,"simxRemoveUI")
 
 DEFUN_DLD (simxSetArrayParameter,args,nargout,"simxSetArrayParameter")
 {
-    const char* funcName="simxSetArrayParameter";
-// simxSetArrayParameter(simxInt clientID,simxInt paramIdentifier,const simxFloat* paramValues,simxInt operationMode)
+    const char* funcName="simxSetArrayParam";
 
     octave_value retVal=simx_return_local_error_flag;
      if (!checkInputArgs(funcName,args,4,1,1,3,1))
@@ -2368,14 +2533,34 @@ DEFUN_DLD (simxSetArrayParameter,args,nargout,"simxSetArrayParameter")
     paramValues[1] = pv(1);
     paramValues[2] = pv(2);
     simxInt operationMode = args(3).int_value();
-    retVal = simxSetArrayParameter ( clientID, paramIdentifier, paramValues, operationMode);
+    retVal = simxSetArrayParam ( clientID, paramIdentifier, paramValues, operationMode);
+    return retVal;
+}
+
+DEFUN_DLD (simxSetArrayParam,args,nargout,"simxSetArrayParam")
+{
+    const char* funcName="simxSetArrayParam";
+
+    octave_value retVal=simx_return_local_error_flag;
+     if (!checkInputArgs(funcName,args,4,1,1,3,1))
+        return retVal;
+
+    simxInt clientID = args(0).int_value();
+    simxInt paramIdentifier = args(1).int_value();
+    simxFloat paramValues[3];
+
+    FloatNDArray pv = args(2).float_array_value();
+    paramValues[0] = pv(0);
+    paramValues[1] = pv(1);
+    paramValues[2] = pv(2);
+    simxInt operationMode = args(3).int_value();
+    retVal = simxSetArrayParam ( clientID, paramIdentifier, paramValues, operationMode);
     return retVal;
 }
 
 DEFUN_DLD (simxSetBooleanParameter,args,nargout,"simxSetBooleanParameter")
 {
-    const char* funcName="simxSetBooleanParameter";
-// simxSetBooleanParameter(simxInt clientID,simxInt paramIdentifier,simxUChar paramValue,simxInt operationMode)
+    const char* funcName="simxSetBoolParam";
 
     octave_value retVal=simx_return_local_error_flag;
      if (!checkInputArgs(funcName,args,4,1,1,1,1))
@@ -2385,14 +2570,29 @@ DEFUN_DLD (simxSetBooleanParameter,args,nargout,"simxSetBooleanParameter")
     simxInt paramIdentifier = args(1).int_value();
     simxUChar paramValue = args(2).bool_value();
     simxInt operationMode = args(3).int_value();
-    retVal = simxSetBooleanParameter ( clientID, paramIdentifier, paramValue, operationMode);
+    retVal = simxSetBoolParam ( clientID, paramIdentifier, paramValue, operationMode);
+    return retVal;
+}
+
+DEFUN_DLD (simxSetBoolParam,args,nargout,"simxSetBoolParam")
+{
+    const char* funcName="simxSetBoolParam";
+
+    octave_value retVal=simx_return_local_error_flag;
+     if (!checkInputArgs(funcName,args,4,1,1,1,1))
+        return retVal;
+
+    simxInt clientID = args(0).int_value();
+    simxInt paramIdentifier = args(1).int_value();
+    simxUChar paramValue = args(2).bool_value();
+    simxInt operationMode = args(3).int_value();
+    retVal = simxSetBoolParam ( clientID, paramIdentifier, paramValue, operationMode);
     return retVal;
 }
 
 DEFUN_DLD (simxSetFloatingParameter,args,nargout,"simxSetFloatingParameter")
 {
-    const char* funcName="simxSetFloatingParameter";
-// simxSetFloatingParameter(simxInt clientID,simxInt paramIdentifier,simxFloat paramValue,simxInt operationMode)
+    const char* funcName="simxSetFloatParam";
 
     octave_value retVal=simx_return_local_error_flag;
      if (!checkInputArgs(funcName,args,4,1,1,1,1))
@@ -2402,7 +2602,23 @@ DEFUN_DLD (simxSetFloatingParameter,args,nargout,"simxSetFloatingParameter")
     simxInt paramIdentifier = args(1).int_value();
     simxFloat paramValue = args(2).float_scalar_value();
     simxInt operationMode = args(3).int_value();
-    retVal = simxSetFloatingParameter ( clientID, paramIdentifier, paramValue, operationMode);
+    retVal = simxSetFloatParam ( clientID, paramIdentifier, paramValue, operationMode);
+    return retVal;
+}
+
+DEFUN_DLD (simxSetFloatParam,args,nargout,"simxSetFloatParam")
+{
+    const char* funcName="simxSetFloatParam";
+
+    octave_value retVal=simx_return_local_error_flag;
+     if (!checkInputArgs(funcName,args,4,1,1,1,1))
+        return retVal;
+
+    simxInt clientID = args(0).int_value();
+    simxInt paramIdentifier = args(1).int_value();
+    simxFloat paramValue = args(2).float_scalar_value();
+    simxInt operationMode = args(3).int_value();
+    retVal = simxSetFloatParam ( clientID, paramIdentifier, paramValue, operationMode);
     return retVal;
 }
 
@@ -2426,8 +2642,7 @@ DEFUN_DLD (simxSetFloatSignal,args,nargout,"simxSetFloatSignal")
 
 DEFUN_DLD (simxSetIntegerParameter,args,nargout,"simxSetIntegerParameter")
 {
-    const char* funcName="simxSetIntegerParameter";
-//simxSetIntegerParameter(simxInt clientID,simxInt paramIdentifier,simxInt paramValue,simxInt operationMode)
+    const char* funcName="simxSetInt32Param";
     octave_value_list retVallist;
 
     octave_value retVal=simx_return_local_error_flag;
@@ -2442,7 +2657,31 @@ DEFUN_DLD (simxSetIntegerParameter,args,nargout,"simxSetIntegerParameter")
     simxInt paramValue = args(2).int_value();
     simxInt operationMode = args(3).int_value();
 
-    retVal = simxSetIntegerParameter(clientID,paramIdentifier,paramValue,operationMode);
+    retVal = simxSetInt32Param(clientID,paramIdentifier,paramValue,operationMode);
+
+    retVallist(0) = retVal;
+
+    return retVallist;
+}
+
+DEFUN_DLD (simxSetInt32Param,args,nargout,"simxSetInt32Param")
+{
+    const char* funcName="simxSetInt32Param";
+    octave_value_list retVallist;
+
+    octave_value retVal=simx_return_local_error_flag;
+     if (!checkInputArgs(funcName,args,4,1,1,1,1))
+    {
+        retVallist(0) = retVal;
+        return retVallist;
+    }
+
+    simxInt clientID = args(0).int_value() ;
+    simxInt paramIdentifier = args(1).int_value();
+    simxInt paramValue = args(2).int_value();
+    simxInt operationMode = args(3).int_value();
+
+    retVal = simxSetInt32Param(clientID,paramIdentifier,paramValue,operationMode);
 
     retVallist(0) = retVal;
 
@@ -2627,8 +2866,7 @@ DEFUN_DLD (simxSetModelProperty,args,nargout,"simxSetModelProperty")
 
 DEFUN_DLD (simxSetObjectFloatParameter,args,nargout,"simxSetObjectFloatParameter")
 {
-    const char* funcName="simxSetObjectFloatParameter";
-//simxSetObjectFloatParameter(simxInt clientID,simxInt objectHandle,simxInt parameterID,simxFloat parameterValue,simxInt operationMode)
+    const char* funcName="simxSetObjectFloatParam";
     octave_value_list retVallist;
 
     octave_value retVal=simx_return_local_error_flag;
@@ -2644,7 +2882,32 @@ DEFUN_DLD (simxSetObjectFloatParameter,args,nargout,"simxSetObjectFloatParameter
     simxFloat parameterValue = args(3).float_value();
     simxInt operationMode = args(4).int_value();
 
-    retVal = simxSetObjectFloatParameter(clientID,objectHandle,parameterID,parameterValue,operationMode);
+    retVal = simxSetObjectFloatParam(clientID,objectHandle,parameterID,parameterValue,operationMode);
+
+    retVallist(0) = retVal;
+
+    return retVallist;
+}
+
+DEFUN_DLD (simxSetObjectFloatParam,args,nargout,"simxSetObjectFloatParam")
+{
+    const char* funcName="simxSetObjectFloatParam";
+    octave_value_list retVallist;
+
+    octave_value retVal=simx_return_local_error_flag;
+     if (!checkInputArgs(funcName,args,5,1,1,1,1,1))
+    {
+        retVallist(0) = retVal;
+        return retVallist;
+    }
+
+    simxInt clientID = args(0).int_value() ;
+    simxInt objectHandle = args(1).int_value();
+    simxInt parameterID = args(2).int_value();
+    simxFloat parameterValue = args(3).float_value();
+    simxInt operationMode = args(4).int_value();
+
+    retVal = simxSetObjectFloatParam(clientID,objectHandle,parameterID,parameterValue,operationMode);
 
     retVallist(0) = retVal;
 
@@ -2653,8 +2916,7 @@ DEFUN_DLD (simxSetObjectFloatParameter,args,nargout,"simxSetObjectFloatParameter
 
 DEFUN_DLD (simxSetObjectIntParameter,args,nargout,"simxSetObjectIntParameter")
 {
-    const char* funcName="simxSetObjectIntParameter";
-//simxSetObjectIntParameter(simxInt clientID,simxInt objectHandle,simxInt parameterID,simxInt parameterValue,simxInt operationMode)
+    const char* funcName="simxSetObjectInt32Param";
     octave_value_list retVallist;
 
     octave_value retVal=simx_return_local_error_flag;
@@ -2670,7 +2932,32 @@ DEFUN_DLD (simxSetObjectIntParameter,args,nargout,"simxSetObjectIntParameter")
     simxInt parameterValue = args(3).int_value();
     simxInt operationMode = args(4).int_value();
 
-    retVal = simxSetObjectIntParameter(clientID,objectHandle,parameterID,parameterValue,operationMode);
+    retVal = simxSetObjectInt32Param(clientID,objectHandle,parameterID,parameterValue,operationMode);
+
+    retVallist(0) = retVal;
+
+    return retVallist;
+}
+
+DEFUN_DLD (simxSetObjectInt32Param,args,nargout,"simxSetObjectInt32Param")
+{
+    const char* funcName="simxSetObjectInt32Param";
+    octave_value_list retVallist;
+
+    octave_value retVal=simx_return_local_error_flag;
+     if (!checkInputArgs(funcName,args,5,1,1,1,1,1))
+    {
+        retVallist(0) = retVal;
+        return retVallist;
+    }
+
+    simxInt clientID = args(0).int_value() ;
+    simxInt objectHandle = args(1).int_value();
+    simxInt parameterID = args(2).int_value();
+    simxInt parameterValue = args(3).int_value();
+    simxInt operationMode = args(4).int_value();
+
+    retVal = simxSetObjectInt32Param(clientID,objectHandle,parameterID,parameterValue,operationMode);
 
     retVallist(0) = retVal;
 

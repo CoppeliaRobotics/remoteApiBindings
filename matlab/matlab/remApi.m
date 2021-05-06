@@ -835,9 +835,16 @@ classdef remApi
             signalName_ = libpointer('int8Ptr',[int8(signalName) 0]);
             operationMode_ = int32(operationMode);
 
-            rtn = calllib(obj.libName,'simxClearIntegerSignal',clientID,signalName_,operationMode_);
+            rtn = calllib(obj.libName,'simxClearInt32Signal',clientID,signalName_,operationMode_);
         end
 
+        function rtn = simxClearInt32Signal(obj,clientID,signalName,operationMode)
+            signalName_ = libpointer('int8Ptr',[int8(signalName) 0]);
+            operationMode_ = int32(operationMode);
+
+            rtn = calllib(obj.libName,'simxClearInt32Signal',clientID,signalName_,operationMode_);
+        end
+        
         function rtn = simxClearStringSignal(obj,clientID,signalName,operationMode)
             signalName_ = libpointer('int8Ptr',[int8(signalName) 0]);
             operationMode_ = int32(operationMode);
@@ -1034,7 +1041,15 @@ classdef remApi
             signalValue = libpointer('int32Ptr',int32(0));
             operationMode_ = int32(operationMode);
 
-            [rtn signalName signalValue] = calllib(obj.libName,'simxGetIntegerSignal',clientID,signalName_,signalValue,operationMode_);
+            [rtn signalName signalValue] = calllib(obj.libName,'simxGetInt32Signal',clientID,signalName_,signalValue,operationMode_);
+        end
+
+        function [rtn signalValue]= simxGetInt32Signal(obj,clientID,signalName,operationMode)
+            signalName_ = libpointer('int8Ptr',[int8(signalName) 0]);
+            signalValue = libpointer('int32Ptr',int32(0));
+            operationMode_ = int32(operationMode);
+
+            [rtn signalName signalValue] = calllib(obj.libName,'simxGetInt32Signal',clientID,signalName_,signalValue,operationMode_);
         end
 
         function [rtn matrix] = simxGetJointMatrix(obj,clientID,jointHandle,operationMode)
@@ -1681,7 +1696,15 @@ classdef remApi
             signalValue_ = int32(signalValue);
             operationMode_ = int32(operationMode);
 
-            [rtn signalName_ ] = calllib(obj.libName,'simxSetIntegerSignal',clientID,signalName_,signalValue_,operationMode_);
+            [rtn signalName_ ] = calllib(obj.libName,'simxSetInt32Signal',clientID,signalName_,signalValue_,operationMode_);
+        end
+
+        function [rtn ]= simxSetInt32Signal(obj,clientID,signalName,signalValue,operationMode)
+            signalName_ = libpointer('int8Ptr',[int8(signalName) 0]);
+            signalValue_ = int32(signalValue);
+            operationMode_ = int32(operationMode);
+
+            [rtn signalName_ ] = calllib(obj.libName,'simxSetInt32Signal',clientID,signalName_,signalValue_,operationMode_);
         end
 
         function [rtn ]= simxSetModelProperty(obj,clientID,objectHandle,prop,operationMode)

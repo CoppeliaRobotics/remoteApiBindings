@@ -338,8 +338,7 @@ DEFUN_DLD (simxClearFloatSignal,args,nargout,"simxClearFloatSignal")
 
 DEFUN_DLD (simxClearIntegerSignal,args,nargout,"simxClearIntegerSignal")
 {
-    const char* funcName="simxClearIntegerSignal";
-// simxClearIntegerSignal(simxInt clientID,const simxChar* signalName,simxInt operationMode)
+    const char* funcName="simxClearInt32Signal";
 
     octave_value retVal=simx_return_local_error_flag;
     if (!checkInputArgs(funcName,args,3,1,stringArg,1))
@@ -349,7 +348,23 @@ DEFUN_DLD (simxClearIntegerSignal,args,nargout,"simxClearIntegerSignal")
     std::string tmp = args(1).string_value();
     const simxChar* signalName = tmp.c_str();
     simxInt operationMode = args(2).int_value();
-    retVal = simxClearIntegerSignal ( clientID, signalName, operationMode);
+    retVal = simxClearInt32Signal ( clientID, signalName, operationMode);
+    return retVal;
+}
+
+DEFUN_DLD (simxClearInt32Signal,args,nargout,"simxClearInt32Signal")
+{
+    const char* funcName="simxClearInt32Signal";
+
+    octave_value retVal=simx_return_local_error_flag;
+    if (!checkInputArgs(funcName,args,3,1,stringArg,1))
+        return(retVal);
+
+    simxInt clientID = args(0).int_value() ;
+    std::string tmp = args(1).string_value();
+    const simxChar* signalName = tmp.c_str();
+    simxInt operationMode = args(2).int_value();
+    retVal = simxClearInt32Signal ( clientID, signalName, operationMode);
     return retVal;
 }
 
@@ -981,8 +996,7 @@ DEFUN_DLD (simxGetInt32Param,args,nargout,"simxGetInt32Param")
 
 DEFUN_DLD (simxGetIntegerSignal,args,nargout,"simxGetIntegerSignal")
 {
-    const char* funcName="simxGetIntegerSignal";
-// simxGetIntegerSignal(simxInt clientID,const simxChar* signalName,simxInt* signalValue,simxInt operationMode)
+    const char* funcName="simxGetInt32Signal";
     octave_value_list retVallist;
     simxInt retVal=simx_return_local_error_flag;
 
@@ -998,7 +1012,31 @@ DEFUN_DLD (simxGetIntegerSignal,args,nargout,"simxGetIntegerSignal")
     const simxChar* signalName = signalName_.c_str();
     simxInt signalValue=0;
     simxInt operationMode = args(2).int_value();
-    retVal = simxGetIntegerSignal ( clientID, signalName, &signalValue, operationMode);
+    retVal = simxGetInt32Signal ( clientID, signalName, &signalValue, operationMode);
+    retVallist(1) = signalValue;
+    retVallist(0) = retVal;
+    return retVallist;
+}
+
+DEFUN_DLD (simxGetInt32Signal,args,nargout,"simxGetInt32Signal")
+{
+    const char* funcName="simxGetInt32Signal";
+    octave_value_list retVallist;
+    simxInt retVal=simx_return_local_error_flag;
+
+     if (!checkInputArgs(funcName,args,3,1,stringArg,1))
+    {
+        retVallist(1) = -1;
+        retVallist(0) = retVal;
+        return retVallist;
+    }
+
+    simxInt clientID = args(0).int_value();
+    std::string signalName_ = args(1).string_value();
+    const simxChar* signalName = signalName_.c_str();
+    simxInt signalValue=0;
+    simxInt operationMode = args(2).int_value();
+    retVal = simxGetInt32Signal ( clientID, signalName, &signalValue, operationMode);
     retVallist(1) = signalValue;
     retVallist(0) = retVal;
     return retVallist;
@@ -2690,8 +2728,7 @@ DEFUN_DLD (simxSetInt32Param,args,nargout,"simxSetInt32Param")
 
 DEFUN_DLD (simxSetIntegerSignal,args,nargout,"simxSetIntegerSignal")
 {
-    const char* funcName="simxSetIntegerSignal";
-// simxSetIntegerSignal(simxInt clientID,const simxChar* signalName,simxInt signalValue,simxInt operationMode)
+    const char* funcName="simxSetInt32Signal";
     octave_value_list retVallist;
 
     octave_value retVal=simx_return_local_error_flag;
@@ -2707,7 +2744,32 @@ DEFUN_DLD (simxSetIntegerSignal,args,nargout,"simxSetIntegerSignal")
     simxInt signalValue = args(2).int_value();
     simxInt operationMode = args(3).int_value();
 
-    retVal = simxSetIntegerSignal(clientID,signalName,signalValue,operationMode);
+    retVal = simxSetInt32Signal(clientID,signalName,signalValue,operationMode);
+
+    retVallist(0) = retVal;
+
+    return retVallist;
+}
+
+DEFUN_DLD (simxSetInt32Signal,args,nargout,"simxSetInt32Signal")
+{
+    const char* funcName="simxSetInt32Signal";
+    octave_value_list retVallist;
+
+    octave_value retVal=simx_return_local_error_flag;
+     if (!checkInputArgs(funcName,args,4,1,stringArg,1,1))
+    {
+        retVallist(0) = retVal;
+        return retVallist;
+    }
+
+    simxInt clientID = args(0).int_value() ;
+    std::string signalName_ = args(1).string_value();
+    const simxChar* signalName = signalName_.c_str();
+    simxInt signalValue = args(2).int_value();
+    simxInt operationMode = args(3).int_value();
+
+    retVal = simxSetInt32Signal(clientID,signalName,signalValue,operationMode);
 
     retVallist(0) = retVal;
 

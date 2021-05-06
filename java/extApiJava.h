@@ -2067,6 +2067,14 @@ JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxClearIntegerSignal
 
 /*
  * Class:     remoteApi
+ * Method:    simxClearInt32Signal
+ * Signature: (Ljava/lang/String;I)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxClearInt32Signal
+  (JNIEnv *, jobject, jint, jstring, jint);
+
+/*
+ * Class:     remoteApi
  * Method:    simxGetFloatSignal
  * Signature: (Ljava/lang/String;LFloatW;I)I
  */
@@ -2079,6 +2087,14 @@ JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetFloatSignal
  * Signature: (Ljava/lang/String;LIntW;I)I
  */
 JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetIntegerSignal
+  (JNIEnv *, jobject, jint, jstring, jobject, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxGetInt32Signal
+ * Signature: (Ljava/lang/String;LIntW;I)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxGetInt32Signal
   (JNIEnv *, jobject, jint, jstring, jobject, jint);
 
 /*
@@ -2111,6 +2127,14 @@ JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxSetFloatSignal
  * Signature: (Ljava/lang/String;II)I
  */
 JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxSetIntegerSignal
+  (JNIEnv *, jobject, jint, jstring, jint, jint);
+
+/*
+ * Class:     remoteApi
+ * Method:    simxSetInt32Signal
+ * Signature: (Ljava/lang/String;II)I
+ */
+JNIEXPORT jint JNICALL Java_coppelia_remoteApi_simxSetInt32Signal
   (JNIEnv *, jobject, jint, jstring, jint, jint);
 
 /*

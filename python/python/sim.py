@@ -103,13 +103,13 @@ c_CopyPasteObjects          = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.
 c_GetObjectSelection        = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.POINTER(ct.c_int32)), ct.POINTER(ct.c_int32), ct.c_int32)(("simxGetObjectSelection", libsimx))
 c_SetObjectSelection        = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.c_int32), ct.c_int32, ct.c_int32)(("simxSetObjectSelection", libsimx))
 c_ClearFloatSignal          = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.c_char), ct.c_int32)(("simxClearFloatSignal", libsimx))
-c_ClearIntegerSignal        = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.c_char), ct.c_int32)(("simxClearIntegerSignal", libsimx))
+c_ClearInt32Signal          = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.c_char), ct.c_int32)(("simxClearInt32Signal", libsimx))
 c_ClearStringSignal         = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.c_char), ct.c_int32)(("simxClearStringSignal", libsimx))
 c_GetFloatSignal            = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.c_char), ct.POINTER(ct.c_float), ct.c_int32)(("simxGetFloatSignal", libsimx))
-c_GetIntegerSignal          = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.c_char), ct.POINTER(ct.c_int32), ct.c_int32)(("simxGetIntegerSignal", libsimx))
+c_GetInt32Signal            = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.c_char), ct.POINTER(ct.c_int32), ct.c_int32)(("simxGetInt32Signal", libsimx))
 c_GetStringSignal           = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.c_char), ct.POINTER(ct.POINTER(ct.c_ubyte)), ct.POINTER(ct.c_int32), ct.c_int32)(("simxGetStringSignal", libsimx))
 c_SetFloatSignal            = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.c_char), ct.c_float, ct.c_int32)(("simxSetFloatSignal", libsimx))
-c_SetIntegerSignal          = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.c_char), ct.c_int32, ct.c_int32)(("simxSetIntegerSignal", libsimx))
+c_SetInt32Signal            = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.c_char), ct.c_int32, ct.c_int32)(("simxSetInt32Signal", libsimx))
 c_SetStringSignal           = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.c_char), ct.POINTER(ct.c_ubyte), ct.c_int32, ct.c_int32)(("simxSetStringSignal", libsimx))
 c_AppendStringSignal        = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.c_char), ct.POINTER(ct.c_ubyte), ct.c_int32, ct.c_int32)(("simxAppendStringSignal", libsimx))
 c_WriteStringStream         = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.POINTER(ct.c_char), ct.POINTER(ct.c_ubyte), ct.c_int32, ct.c_int32)(("simxWriteStringStream", libsimx))
@@ -964,13 +964,16 @@ def simxClearFloatSignal(clientID, signalName, operationMode):
     return c_ClearFloatSignal(clientID, signalName, operationMode)
 
 def simxClearIntegerSignal(clientID, signalName, operationMode):
+    simxClearInt32Signal(clientID, signalName, operationMode)
+
+def simxClearInt32Signal(clientID, signalName, operationMode):
     '''
     Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     if (sys.version_info[0] == 3) and (type(signalName) is str):
         signalName=signalName.encode('utf-8')
-    return c_ClearIntegerSignal(clientID, signalName, operationMode)
+    return c_ClearInt32Signal(clientID, signalName, operationMode)
 
 def simxClearStringSignal(clientID, signalName, operationMode):
     '''
@@ -992,6 +995,9 @@ def simxGetFloatSignal(clientID, signalName, operationMode):
     return c_GetFloatSignal(clientID, signalName, ct.byref(signalValue), operationMode), signalValue.value
 
 def simxGetIntegerSignal(clientID, signalName, operationMode):
+    simxGetInt32Signal(clientID, signalName, operationMode)
+    
+def simxGetInt32Signal(clientID, signalName, operationMode):
     '''
     Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
@@ -999,7 +1005,7 @@ def simxGetIntegerSignal(clientID, signalName, operationMode):
     signalValue = ct.c_int()
     if (sys.version_info[0] == 3) and (type(signalName) is str):
         signalName=signalName.encode('utf-8')
-    return c_GetIntegerSignal(clientID, signalName, ct.byref(signalValue), operationMode), signalValue.value
+    return c_GetInt32Signal(clientID, signalName, ct.byref(signalValue), operationMode), signalValue.value
 
 def simxGetStringSignal(clientID, signalName, operationMode):
     '''
@@ -1071,13 +1077,16 @@ def simxSetFloatSignal(clientID, signalName, signalValue, operationMode):
     return c_SetFloatSignal(clientID, signalName, signalValue, operationMode)
 
 def simxSetIntegerSignal(clientID, signalName, signalValue, operationMode):
+    simxSetInt32Signal(clientID, signalName, signalValue, operationMode)
+    
+def simxSetInt32Signal(clientID, signalName, signalValue, operationMode):
     '''
     Please have a look at the function description/documentation in the CoppeliaSim user manual
     '''
 
     if (sys.version_info[0] == 3) and (type(signalName) is str):
         signalName=signalName.encode('utf-8')
-    return c_SetIntegerSignal(clientID, signalName, signalValue, operationMode)
+    return c_SetInt32Signal(clientID, signalName, signalValue, operationMode)
 
 def simxSetStringSignal(clientID, signalName, signalValue, operationMode):
     '''

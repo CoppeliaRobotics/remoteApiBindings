@@ -252,8 +252,8 @@ int LUA_CLEARFLOATSIGNAL_CALLBACK(lua_State* L)
 // --------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------
-#define LUA_CLEARINTEGERSIGNAL_COMMAND "simx.clearIntegerSignal"
-#define LUA_CLEARINTEGERSIGNAL_COMMANDOLD "simxClearIntegerSignal"
+#define LUA_CLEARINTEGERSIGNAL_COMMAND "simx.clearInt32Signal"
+#define LUA_CLEARINTEGERSIGNAL_COMMANDOLD "simxClearInt32Signal"
 const int inArgs_CLEARINTEGERSIGNAL[]={
     3,
     sim_lua_arg_int,0,
@@ -267,7 +267,7 @@ int LUA_CLEARINTEGERSIGNAL_CALLBACK(lua_State* L)
     {
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
-        int res=simxClearIntegerSignal(_clientId,inData->at(1).stringData[0].c_str(),inData->at(2).intData[0]);
+        int res=simxClearInt32Signal(_clientId,inData->at(1).stringData[0].c_str(),inData->at(2).intData[0]);
         D.pushOutData(CLuaDataItem(res));
     }
     return(D.writeDataToLua(L));
@@ -976,8 +976,8 @@ int LUA_SETFLOATSIGNAL_CALLBACK(lua_State* L)
 // --------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------
-#define LUA_SETINTEGERSIGNAL_COMMAND "simx.setIntegerSignal"
-#define LUA_SETINTEGERSIGNAL_COMMANDOLD "simxSetIntegerSignal"
+#define LUA_SETINTEGERSIGNAL_COMMAND "simx.setInt32Signal"
+#define LUA_SETINTEGERSIGNAL_COMMANDOLD "simxSetInt32Signal"
 const int inArgs_SETINTEGERSIGNAL[]={
     4,
     sim_lua_arg_int,0,
@@ -992,7 +992,7 @@ int LUA_SETINTEGERSIGNAL_CALLBACK(lua_State* L)
     {
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
-        int res=simxSetIntegerSignal(_clientId,inData->at(1).stringData[0].c_str(),inData->at(2).intData[0],inData->at(3).intData[0]);
+        int res=simxSetInt32Signal(_clientId,inData->at(1).stringData[0].c_str(),inData->at(2).intData[0],inData->at(3).intData[0]);
         D.pushOutData(CLuaDataItem(res));
     }
     return(D.writeDataToLua(L));
@@ -1050,8 +1050,8 @@ int LUA_GETFLOATSIGNAL_CALLBACK(lua_State* L)
 // --------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------
-#define LUA_GETINTEGERSIGNAL_COMMAND "simx.getIntegerSignal"
-#define LUA_GETINTEGERSIGNAL_COMMANDOLD "simxGetIntegerSignal"
+#define LUA_GETINTEGERSIGNAL_COMMAND "simx.getInt32Signal"
+#define LUA_GETINTEGERSIGNAL_COMMANDOLD "simxGetInt32Signal"
 const int inArgs_GETINTEGERSIGNAL[]={
     3,
     sim_lua_arg_int,0,
@@ -1066,7 +1066,7 @@ int LUA_GETINTEGERSIGNAL_CALLBACK(lua_State* L)
         std::vector<CLuaDataItem>* inData=D.getInDataPtr();
         int _clientId=inData->at(0).intData[0];
         int signalValue;
-        int res=simxGetIntegerSignal(_clientId,inData->at(1).stringData[0].c_str(),&signalValue,inData->at(2).intData[0]);
+        int res=simxGetInt32Signal(_clientId,inData->at(1).stringData[0].c_str(),&signalValue,inData->at(2).intData[0]);
         D.pushOutData(CLuaDataItem(res));
         if (res==0)
             D.pushOutData(CLuaDataItem(signalValue));
@@ -3406,7 +3406,6 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     luaL_dostring(L,"simx={}");
     luaL_dostring(L,"sim={}");
 
-
     lua_registerN(L,LUA_START_COMMAND,LUA_START_CALLBACK);
     lua_registerN(L,LUA_FINISH_COMMAND,LUA_FINISH_CALLBACK);
     lua_registerN(L,LUA_ADDSTATUSBARMESSAGE_COMMAND,LUA_ADDSTATUSBARMESSAGE_CALLBACK);
@@ -3642,6 +3641,9 @@ extern "C" int luaopen_remoteApiLua(lua_State *L) {
     lua_register(L,LUA_PACKFLOATS_COMMANDOLD,LUA_PACKFLOATS_CALLBACK);
     lua_register(L,LUA_UNPACKINTS_COMMANDOLD,LUA_UNPACKINTS_CALLBACK);
     lua_register(L,LUA_UNPACKFLOATS_COMMANDOLD,LUA_UNPACKFLOATS_CALLBACK);
+    lua_registerN(L,"simx.clearIntegerSignal",LUA_CLEARINTEGERSIGNAL_CALLBACK);
+    lua_registerN(L,"simx.setIntegerSignal",LUA_SETINTEGERSIGNAL_CALLBACK);
+    lua_registerN(L,"simx.getIntegerSignal",LUA_GETINTEGERSIGNAL_CALLBACK);
 
 
 

@@ -66,8 +66,8 @@ with Client() as client:
         # Start streaming client.intSignalName integer signal, that signals when a step is finished:
         sim.simxGetIntegerSignal(client.id,client.intSignalName,sim.simx_opmode_streaming)
         
-        res,client.visionSensorHandle=sim.simxGetObjectHandle(client.id,'VisionSensor',sim.simx_opmode_blocking)
-        res,client.passiveVisionSensorHandle=sim.simxGetObjectHandle(client.id,'PassiveVisionSensor',sim.simx_opmode_blocking)
+        res,client.visionSensorHandle=sim.simxGetObjectHandle(client.id,'/VisionSensor',sim.simx_opmode_blocking)
+        res,client.passiveVisionSensorHandle=sim.simxGetObjectHandle(client.id,'/PassiveVisionSensor',sim.simx_opmode_blocking)
         
         # Start streaming the vision sensor image:
         sim.simxGetVisionSensorImage(client.id,client.visionSensorHandle,0,sim.simx_opmode_streaming)

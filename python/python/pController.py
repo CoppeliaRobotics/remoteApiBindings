@@ -87,7 +87,7 @@ with Client() as client:
          # Start streaming client.intSignalName integer signal, that signals when a step is finished:
         sim.simxGetIntegerSignal(client.id,client.intSignalName,sim.simx_opmode_streaming)
         
-        res,client.jointHandle=sim.simxGetObjectHandle(client.id,'joint',sim.simx_opmode_blocking)
+        res,client.jointHandle=sim.simxGetObjectHandle(client.id,'/joint',sim.simx_opmode_blocking)
         sim.simxSetJointTargetVelocity(client.id,client.jointHandle,360*math.pi/180,sim.simx_opmode_oneshot)
         sim.simxGetJointPosition(client.id,client.jointHandle,sim.simx_opmode_streaming)
         

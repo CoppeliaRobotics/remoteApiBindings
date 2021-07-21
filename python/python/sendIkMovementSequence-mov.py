@@ -1,6 +1,6 @@
 # Make sure to have CoppeliaSim running, with followig scene loaded:
 #
-# scenes/messaging/movementViaRemoteApi.ttt
+# scenes/messaging/ikMovementViaRemoteApi.ttt
 #
 # Do not launch simulation, then run this script
 #
@@ -31,10 +31,7 @@ if clientID!=-1:
     print ('Connected to remote API server')
 
     executedMovId='notReady'
-
-    targetArm='/blueArm'
-    #targetArm='/redArm'
-
+    targetArm='/LBR4p'
     stringSignalName=targetArm+'_executedMovId'
 
     def waitForMovementExecuted(id):
@@ -51,11 +48,8 @@ if clientID!=-1:
     sim.simxGetStringSignal(clientID,stringSignalName,sim.simx_opmode_streaming)
 
     # Set-up some movement variables:
-    mVel=100*math.pi/180
-    mAccel=150*math.pi/180
-    maxVel=[mVel,mVel,mVel,mVel,mVel,mVel]
-    maxAccel=[mAccel,mAccel,mAccel,mAccel,mAccel,mAccel]
-    targetVel=[0,0,0,0,0,0]
+    maxVel=0.1
+    maxAccel=0.01
 
     # Start simulation:
     sim.simxStartSimulation(clientID,sim.simx_opmode_blocking)
@@ -63,9 +57,14 @@ if clientID!=-1:
     # Wait until ready:
     waitForMovementExecuted('ready') 
 
+    # Get initial pose:
+    r=sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRapiGetPoseAndConfig',[],[],[],'',sim.simx_opmode_blocking)
+    initialPoseAndConfig=r[2]
+    initialPose=initialPoseAndConfig[:7]
+
     # Send first movement sequence:
-    targetConfig=[90*math.pi/180,90*math.pi/180,-90*math.pi/180,90*math.pi/180,90*math.pi/180,90*math.pi/180]
-    movementData={"id":"movSeq1","type":"mov","targetConfig":targetConfig,"targetVel":targetVel,"maxVel":maxVel,"maxAccel":maxAccel}
+    targetPose=[0,0,0.85,0,0,0,1]
+    movementData={"id":"movSeq1","type":"mov","targetPose":targetPose,"maxVel":maxVel,"maxAccel":maxAccel}
     packedMovementData=msgpack.packb(movementData)
     sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRapiMovementDataFunction',[],[],[],packedMovementData,sim.simx_opmode_oneshot)
 
@@ -76,14 +75,11 @@ if clientID!=-1:
     waitForMovementExecuted('movSeq1')
 
     # Send second and third movement sequence, where third one should execute immediately after the second one:
-    targetConfig=[-90*math.pi/180,45*math.pi/180,90*math.pi/180,135*math.pi/180,90*math.pi/180,90*math.pi/180]
-    targetVel=[-60*math.pi/180,-20*math.pi/180,0,0,0,0]
-    movementData={"id":"movSeq2","type":"mov","targetConfig":targetConfig,"targetVel":targetVel,"maxVel":maxVel,"maxAccel":maxAccel}
+    targetPose=[0,0,0.85,-0.7071068883, -6.252754758e-08, -8.940695295e-08, -0.7071067691]
+    movementData={"id":"movSeq2","type":"mov","targetPose":targetPose,"maxVel":maxVel,"maxAccel":maxAccel}
     packedMovementData=msgpack.packb(movementData)
     sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRapiMovementDataFunction',[],[],[],packedMovementData,sim.simx_opmode_oneshot)
-    targetConfig=[0,0,0,0,0,0]
-    targetVel=[0,0,0,0,0,0]
-    movementData={"id":"movSeq3","type":"mov","targetConfig":targetConfig,"targetVel":targetVel,"maxVel":maxVel,"maxAccel":maxAccel}
+    movementData={"id":"movSeq3","type":"mov","targetPose":initialPose,"maxVel":maxVel,"maxAccel":maxAccel}
     packedMovementData=msgpack.packb(movementData)
     sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRapiMovementDataFunction',[],[],[],packedMovementData,sim.simx_opmode_oneshot)
 

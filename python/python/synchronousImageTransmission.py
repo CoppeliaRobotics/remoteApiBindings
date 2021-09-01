@@ -1,4 +1,4 @@
-# Make sure to have CoppeliaSim running, with followig scene loaded:
+# Make sure to have CoppeliaSim running, with following scene loaded:
 #
 # scenes/messaging/synchronousImageTransmissionViaRemoteApi.ttt
 #

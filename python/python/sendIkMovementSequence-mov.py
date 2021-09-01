@@ -58,7 +58,7 @@ if clientID!=-1:
     waitForMovementExecuted('ready') 
 
     # Get initial pose:
-    r=sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRapiGetPoseAndConfig',[],[],[],'',sim.simx_opmode_blocking)
+    r=sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRemoteApi_getPoseAndConfig',[],[],[],'',sim.simx_opmode_blocking)
     initialPoseAndConfig=r[2]
     initialPose=initialPoseAndConfig[:7]
 
@@ -66,10 +66,10 @@ if clientID!=-1:
     targetPose=[0,0,0.85,0,0,0,1]
     movementData={"id":"movSeq1","type":"mov","targetPose":targetPose,"maxVel":maxVel,"maxAccel":maxAccel}
     packedMovementData=msgpack.packb(movementData)
-    sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRapiMovementDataFunction',[],[],[],packedMovementData,sim.simx_opmode_oneshot)
+    sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRemoteApi_movementDataFunction',[],[],[],packedMovementData,sim.simx_opmode_oneshot)
 
     # Execute first movement sequence:
-    sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRapiExecuteMovement',[],[],[],'movSeq1',sim.simx_opmode_oneshot)
+    sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRemoteApi_executeMovement',[],[],[],'movSeq1',sim.simx_opmode_oneshot)
     
     # Wait until above movement sequence finished executing:
     waitForMovementExecuted('movSeq1')
@@ -78,14 +78,14 @@ if clientID!=-1:
     targetPose=[0,0,0.85,-0.7071068883, -6.252754758e-08, -8.940695295e-08, -0.7071067691]
     movementData={"id":"movSeq2","type":"mov","targetPose":targetPose,"maxVel":maxVel,"maxAccel":maxAccel}
     packedMovementData=msgpack.packb(movementData)
-    sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRapiMovementDataFunction',[],[],[],packedMovementData,sim.simx_opmode_oneshot)
+    sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRemoteApi_movementDataFunction',[],[],[],packedMovementData,sim.simx_opmode_oneshot)
     movementData={"id":"movSeq3","type":"mov","targetPose":initialPose,"maxVel":maxVel,"maxAccel":maxAccel}
     packedMovementData=msgpack.packb(movementData)
-    sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRapiMovementDataFunction',[],[],[],packedMovementData,sim.simx_opmode_oneshot)
+    sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRemoteApi_movementDataFunction',[],[],[],packedMovementData,sim.simx_opmode_oneshot)
 
     # Execute second and third movement sequence:
-    sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRapiExecuteMovement',[],[],[],'movSeq2',sim.simx_opmode_oneshot)
-    sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRapiExecuteMovement',[],[],[],'movSeq3',sim.simx_opmode_oneshot)
+    sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRemoteApi_executeMovement',[],[],[],'movSeq2',sim.simx_opmode_oneshot)
+    sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRemoteApi_executeMovement',[],[],[],'movSeq3',sim.simx_opmode_oneshot)
     
     # Wait until above 2 movement sequences finished executing:
     waitForMovementExecuted('movSeq3')

@@ -56,13 +56,12 @@ with Client() as client:
             return jointA
         
         def moveToAngle(targetAngle):
-            jointAngle=getCurrentJointAngle()
-            while abs(jointAngle-targetAngle)>0.1*math.pi/180:
-                stepSimulation()
-                jointAngle=getCurrentJointAngle()
-                vel=computeTargetVelocity(jointAngle,targetAngle)
+            while abs(client.jointAngle-targetAngle)>0.1*math.pi/180:
+                vel=computeTargetVelocity(client.jointAngle,targetAngle)
                 sim.simxSetJointTargetVelocity(client.id,client.jointHandle,vel,sim.simx_opmode_oneshot)
                 sim.simxSetJointMaxForce(client.id,client.jointHandle,client.maxForce,sim.simx_opmode_oneshot)
+                stepSimulation()
+                client.jointAngle=getCurrentJointAngle()
 
         def computeTargetVelocity(jointAngle,targetAngle):
             dynStepSize=0.005
@@ -87,7 +86,8 @@ with Client() as client:
          # Start streaming client.intSignalName integer signal, that signals when a step is finished:
         sim.simxGetIntegerSignal(client.id,client.intSignalName,sim.simx_opmode_streaming)
         
-        res,client.jointHandle=sim.simxGetObjectHandle(client.id,'/joint',sim.simx_opmode_blocking)
+        res,client.jointHandle=sim.simxGetObjectHandle(client.id,'/Cuboid[0]/joint',sim.simx_opmode_blocking)
+        res,client.jointAngle=sim.simxGetJointPosition(client.id,client.jointHandle,sim.simx_opmode_blocking)
         sim.simxSetJointTargetVelocity(client.id,client.jointHandle,360*math.pi/180,sim.simx_opmode_oneshot)
         sim.simxGetJointPosition(client.id,client.jointHandle,sim.simx_opmode_streaming)
         

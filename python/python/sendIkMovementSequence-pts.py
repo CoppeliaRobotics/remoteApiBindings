@@ -75,10 +75,10 @@ if clientID!=-1:
     # Send the movement sequence:
     movementData={"id":"movSeq1","type":"pts","times":times,"x":x,"y":y,"z":z,"qx":qx,"qy":qy,"qz":qz,"qw":qw}
     packedMovementData=msgpack.packb(movementData)
-    sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRapiMovementDataFunction',[],[],[],packedMovementData,sim.simx_opmode_oneshot)
+    sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRemoteApi_movementDataFunction',[],[],[],packedMovementData,sim.simx_opmode_oneshot)
 
     # Execute movement sequence:
-    sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRapiExecuteMovement',[],[],[],'movSeq1',sim.simx_opmode_oneshot)
+    sim.simxCallScriptFunction(clientID,targetArm,sim.sim_scripttype_childscript,'legacyRemoteApi_executeMovement',[],[],[],'movSeq1',sim.simx_opmode_oneshot)
     
     # Wait until above movement sequence finished executing:
     waitForMovementExecuted('movSeq1')

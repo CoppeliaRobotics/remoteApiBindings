@@ -13,7 +13,7 @@ DEFINES += MAX_EXT_API_CONNECTIONS=255
 DEFINES += _Included_extApiJava
 
 CONFIG += shared plugin
-INCLUDEPATH += "../../include"
+INCLUDEPATH += "../../../include"
 INCLUDEPATH += "../../remoteApi"
 
 INCLUDEPATH += $$JDK_INCLUDEPATH
@@ -59,14 +59,14 @@ unix:!macx {
 SOURCES += \
     extApiJavaQt.cpp \
     ../../remoteApi/extApiPlatform.c \
-    ../../common/shared_memory.c \
+    ../../../common/shared_memory.c \
 
 HEADERS += \
     extApiJava.h \
     ../../remoteApi/extApi.h \
     ../../remoteApi/extApiPlatform.h \
     ../../remoteApi/extApiInternal.h \
-    ../../include/shared_memory.h \
+    ../../../include/shared_memory.h \
 
 unix:!symbian {
     maemo5 {

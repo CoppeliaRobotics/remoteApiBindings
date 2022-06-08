@@ -3,7 +3,7 @@
 disp("The compiler expects to have all source files in one directory.")
 disp("So copy and paste following files:")
 disp("")
-disp("- remote API source files (programming/remoteApi/*)")
+disp("- remote API source files (programming/legacyRemoteApi/remoteApi/*)")
 disp("- include files (programming/include/*)")
 disp("")
 disp("Then do something like:")

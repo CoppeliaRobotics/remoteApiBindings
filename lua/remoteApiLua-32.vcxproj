@@ -42,7 +42,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;REMOTEAPISHAREDLIB_EXPORTS;NON_MATLAB_PARSING;MAX_EXT_API_CONNECTIONS=255;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\remoteApi;..\..\include;D:\lua-5.1.5\src;C:\local\boost_1_62_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\remoteApi;..\..\..\include;D:\lua-5.1.5\src;C:\local\boost_1_62_0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -54,7 +54,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\common\shared_memory.c" />
+    <ClCompile Include="..\..\..\common\shared_memory.c" />
     <ClCompile Include="..\..\remoteApi\extApi.c" />
     <ClCompile Include="..\..\remoteApi\extApiPlatform.c" />
     <ClCompile Include="luaData.cpp" />
@@ -62,7 +62,7 @@
     <ClCompile Include="remoteApiLua.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\shared_memory.h" />
+    <ClInclude Include="..\..\..\include\shared_memory.h" />
     <ClInclude Include="..\..\remoteApi\extApi.h" />
     <ClInclude Include="..\..\remoteApi\extApiInternal.h" />
     <ClInclude Include="..\..\remoteApi\extApiPlatform.h" />

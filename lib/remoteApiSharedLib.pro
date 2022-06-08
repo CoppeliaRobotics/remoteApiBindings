@@ -10,7 +10,7 @@ DEFINES += NON_MATLAB_PARSING
 DEFINES += MAX_EXT_API_CONNECTIONS=255
 
 CONFIG += shared plugin
-INCLUDEPATH += "../../include"
+INCLUDEPATH += "../../../include"
 INCLUDEPATH += "../../remoteApi"
 
 *-msvc* {
@@ -55,13 +55,13 @@ unix:!macx {
 SOURCES += \
     ../../remoteApi/extApi.c \
     ../../remoteApi/extApiPlatform.c \
-    ../../common/shared_memory.c \
+    ../../../common/shared_memory.c \
 
 HEADERS +=\
     ../../remoteApi/extApi.h \
     ../../remoteApi/extApiPlatform.h \
     ../../remoteApi/extApiInternal.h \
-    ../../include/shared_memory.h \
+    ../../../include/shared_memory.h \
 
 unix:!symbian {
     maemo5 {

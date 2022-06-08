@@ -12,7 +12,7 @@ disp("http://octave.1599824.n4.nabble.com/missing-mkoctfile-3-6-3-on-OS-X-td4647
 disp("http://www.weescribble.com/technology-menu/138-fixing-fontconfig-warning-for-octave-on-osx")
 disp("")
 disp("The compiler expects to have all source files in this directory. So copy and paste following files:")
-disp("- remote API source files (programming/remoteApi/*)")
+disp("- remote API source files (programming/legacyRemoteApi/remoteApi/*)")
 disp("- include files (programming/include/*)")
 disp("")
 disp('Then, in this directory, from the octave console, type "buildMac"')
